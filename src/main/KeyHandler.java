@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed2, downPressed2, leftPressed2, rightPressed2;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -35,16 +36,16 @@ public class KeyHandler implements KeyListener {
         //Spieler 2
 
         if(code == KeyEvent.VK_UP) {
-            upPressed = true;
+            upPressed2 = true;
         }
         if(code == KeyEvent.VK_DOWN) {
-            downPressed = true;
+            downPressed2 = true;
         }
         if(code == KeyEvent.VK_LEFT) {
-            leftPressed = true;
+            leftPressed2 = true;
         }
         if(code == KeyEvent.VK_RIGHT) {
-            rightPressed = true;
+            rightPressed2 = true;
         }
 
     }
@@ -68,16 +69,16 @@ public class KeyHandler implements KeyListener {
         }
 
         if(code == KeyEvent.VK_UP) {
-            upPressed = false;
+            upPressed2 = false;
         }
         if(code == KeyEvent.VK_DOWN) {
-            downPressed = false;
+            downPressed2 = false;
         }
         if(code == KeyEvent.VK_LEFT) {
-            leftPressed = false;
+            leftPressed2 = false;
         }
         if(code == KeyEvent.VK_RIGHT) {
-            rightPressed = false;
+            rightPressed2 = false;
         }
 
     }

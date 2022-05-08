@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements Runnable{
     int playerSpeed = 4;
 
     //Set player 2 default position
-    int player2X = 150;
-    int player2Y = 150;
+    int player2X = 400;
+    int player2Y = 400;
 
     public GamePanel() {
 
@@ -88,16 +88,16 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         //Player 2
-        if(keyH.upPressed == true) {
+        if(keyH.upPressed2 == true) {
             player2Y -= playerSpeed;
         }
-        else if(keyH.downPressed == true) {
+        else if(keyH.downPressed2 == true) {
             player2Y += playerSpeed;
         }
-        else if(keyH.leftPressed == true) {
+        else if(keyH.leftPressed2 == true) {
             player2X -= playerSpeed;
         }
-        else if(keyH.rightPressed == true) {
+        else if(keyH.rightPressed2 == true) {
             player2X += playerSpeed;
         }
 
@@ -114,11 +114,11 @@ public class GamePanel extends JPanel implements Runnable{
 
         g2.fillRect(player1X, player1Y, tileSize, tileSize);
 
-        g2.dispose();
-
         g3.setColor(Color.white);
 
         g3.fillRect(player2X, player2Y, tileSize, tileSize);
+
+        g2.dispose();
 
         g3.dispose();
     }
