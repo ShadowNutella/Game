@@ -1,5 +1,6 @@
 package entity;
 
+import main.AnimatedBufferedImage;
 import main.GamePanel;
 import main.KeyHandler;
 
