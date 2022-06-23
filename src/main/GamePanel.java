@@ -1,9 +1,14 @@
 package main;
 
-import entity.Player;
+import entity.*;
+import tile.TileManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -12,27 +17,30 @@ public class GamePanel extends JPanel implements Runnable{
     final int scale = 2;
 
     public final int tileSize = originalTileSize * scale; //64x64 tile
-    final int maxScreenCol = 20;
-    final int maxScreenRow = 12;
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
+    public final int maxScreenCol = 20;
+    public final int maxScreenRow = 12;
+    public final int screenWidth = tileSize * maxScreenCol;
+    public final int screenHeight = tileSize * maxScreenRow;
+
+    //World Settings
+    public final int maxWorldCol = 80;
+    public final int maxWorldRow = 30;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize * maxWorldRow;
 
     //FPS
     int FPS = 60;
-
+    TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    Player playerOne = new Player(this, keyH);
 
-    //Set player 1 default position
-    int player1X = 100;
-    int player1Y = 100;
-    int playerSpeed = 4;
+    public Player playerOne, playerTwo;
 
-    //Set player 2 default position
-    int player2X = 400;
-    int player2Y = 400;
+    // Create list with Entity objects
+    public ArrayList<Entity> entities = new ArrayList<Entity>();
 
+
+    PatrolEnemy patroler;
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -41,6 +49,38 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
+        Camera.instance.gp = this;
+        Camera.setLimits(screenWidth / 2, worldWidth - screenWidth / 2, screenHeight / 2, worldHeight - screenHeight / 2);
+
+
+        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 500, 300);
+        playerOne.drawPriority = 100;
+        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 200, 300);
+        playerTwo.drawPriority = 99;
+
+
+        //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
+        //entities.add(enemy);
+
+        Enemy guardian_blue_left = new Enemy("/enemies/enemy_blau_left", 410, 105);
+        guardian_blue_left.image.animationSpeed = 35;
+        guardian_blue_left.setSize(1.5);
+        Enemy guardian_blue_right = new Enemy("/enemies/enemy_blau_right", 525, 112);
+        guardian_blue_right.image.animationSpeed = 25;
+        guardian_blue_right.setSize(1.4);
+        entities.add(guardian_blue_left);
+        entities.add(guardian_blue_right);
+
+        entities.add(playerOne);
+        entities.add(playerTwo);
+
+
+        patroler = new PatrolEnemy("/enemies/patrol/patrol_blau_", 400, 250);
+        patroler.patrolSpeed = 2;
+        patroler.imageLeft.animationSpeed = 24;
+        patroler.imageRight.animationSpeed = 24;
+        patroler.setSize(1.7);
+        entities.add(patroler);
     }
 
     public void startGameThread() {
@@ -73,25 +113,29 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
     }
-
     public void update() {
 
-        playerOne.update();
+        playerOne.setAnimationSpeed(12);
+        playerOne.updatePlayerOne();
+        playerTwo.setAnimationSpeed(10);
+        playerTwo.updatePlayerTwo();
 
-        //Player 2
-        if(keyH.upPressed2 == true) {
-            player2Y -= playerSpeed;
-        }
-        else if(keyH.downPressed2 == true) {
-            player2Y += playerSpeed;
-        }
-        else if(keyH.leftPressed2 == true) {
-            player2X -= playerSpeed;
-        }
-        else if(keyH.rightPressed2 == true) {
-            player2X += playerSpeed;
+        if (patroler.x > 1500)
+            patroler.moveLeft = true;
+        if (patroler.x < 300)
+            patroler.moveLeft = false;
+        patroler.move();
+
+
+        for(Entity e : entities) {
+            e.update();
         }
 
+        int cameraX, cameraY;
+        // Calculate cameraX and cameraY as point in the center between playerOne and playerTwo
+        cameraX = (playerOne.x + playerTwo.x) / 2;
+        cameraY = (playerOne.y + playerTwo.y) / 2;
+        Camera.setPos(cameraX, cameraY);
     }
 
     public void paintComponent(Graphics g) {
@@ -99,17 +143,29 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
-        Graphics2D g3 = (Graphics2D)g;
 
-        playerOne.draw();
+        tileM.drawWorldTiles(g2);
 
-        g3.setColor(Color.white);
+        sortEntitiesByPriority();
+        //Loop through entities
+        for(Entity e : entities) {
+            e.draw(g2);
+        }
 
-        g3.fillRect(player2X, player2Y, tileSize, tileSize);
 
         g2.dispose();
+    }
 
-        g3.dispose();
+    private void sortEntitiesByPriority() {
+        for(int i = 0; i < entities.size(); i++) {
+            for(int j = 0; j < entities.size() - 1; j++) {
+                if(entities.get(j).drawPriority > entities.get(j + 1).drawPriority) {
+                    Entity temp = entities.get(j);
+                    entities.set(j, entities.get(j + 1));
+                    entities.set(j + 1, temp);
+                }
+            }
+        }
     }
 
 

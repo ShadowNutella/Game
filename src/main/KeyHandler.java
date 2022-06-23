@@ -18,7 +18,7 @@ public class KeyHandler implements KeyListener {
 
         int code = e.getKeyCode();
 
-        //Spieler 1
+        //Spieler 1 Steuerung
 
         if(code == KeyEvent.VK_W) {
             upPressed = true;
@@ -33,7 +33,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
 
-        //Spieler 2
+        //Spieler 2 Steuerung
 
         if(code == KeyEvent.VK_UP) {
             upPressed2 = true;
