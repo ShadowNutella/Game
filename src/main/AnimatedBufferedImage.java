@@ -38,10 +38,12 @@ public class AnimatedBufferedImage {
     }
 
     public int getCurrentIndex() {
+
         return currentIndex;
     }
 
     public int getLength() {
+
         return images.length;
     }
 

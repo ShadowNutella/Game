@@ -24,7 +24,7 @@ public class TileManager {
         tile = new Tile[66];
         mapTileNum = new int[gp.maxWorldCol] [gp.maxWorldRow];
 
-        getTileImage("Blau", "blau");
+        getTileImage("Rosa", "rosa");
         loadMap("/maps/worldblau.txt");
     }
 
@@ -37,9 +37,11 @@ public class TileManager {
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/water_" + farbe2 + ".png"));
+            tile[1].collision = true;
 
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/bush_" + farbe2 + ".png"));
+            tile[2].collision = true;
 
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/fluss_ecke_links_unten_" + farbe2 + ".png"));
@@ -82,21 +84,27 @@ public class TileManager {
 
             tile[16] = new Tile();
             tile[16].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/mauer_" + farbe2 + ".png"));
+            tile[16].collision = true;
 
             tile[17] = new Tile();
             tile[17].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/mauer_" + farbe2 + "_gras.png"));
+            tile[17].collision = true;
 
             tile[18] = new Tile();
             tile[18].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/mauer_tor_" + farbe2 + "_unten_links.png"));
+            tile[18].collision = true;
 
             tile[19] = new Tile();
             tile[19].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/mauer_tor_" + farbe2 + "_unten_rechts.png"));
+            tile[19].collision = true;
 
             tile[20] = new Tile();
             tile[20].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/mauer_tor_" + farbe2 + "_oben_links.png"));
+            tile[20].collision = true;
 
             tile[21] = new Tile();
             tile[21].image = ImageIO.read(getClass().getResourceAsStream("/tiles" + farbe1 + "/mauer_tor_" + farbe2 + "_oben_rechts.png"));
+            tile[21].collision = true;
 
 
 

@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
+    public CollisionChecker cChecker = new CollisionChecker(this);
 
     public Player playerOne, playerTwo;
 
@@ -53,9 +54,9 @@ public class GamePanel extends JPanel implements Runnable{
         Camera.setLimits(screenWidth / 2, worldWidth - screenWidth / 2, screenHeight / 2, worldHeight - screenHeight / 2);
 
 
-        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 500, 300);
+        playerOne = new Player(this, keyH, "/characterOne/char1_", 500, 300);
         playerOne.drawPriority = 100;
-        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 200, 300);
+        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 200, 300);
         playerTwo.drawPriority = 99;
 
 

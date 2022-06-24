@@ -1,6 +1,7 @@
 package entity;
 
 import main.AnimatedBufferedImage;
+import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,6 +13,9 @@ public class Entity{
     public AnimatedBufferedImage image = new AnimatedBufferedImage();
     public double sizeX = 1.0, sizeY = 1.0;
     public int drawPriority = 1;
+    public Rectangle solidPart;
+    public boolean collisionOn = false;
+
     public Entity()
     {
 
@@ -19,6 +23,7 @@ public class Entity{
 
     public void setAnimationSpeed(int animationSpeed)
     {
+
         image.animationSpeed = animationSpeed;
     }
 

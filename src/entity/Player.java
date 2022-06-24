@@ -14,20 +14,21 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     String resourcePath;
-    public int speed;
+    public int speed = 5;
     public AnimatedBufferedImage front, back, left, right;
     public String direction;
 
 
-    public Player(GamePanel gp, KeyHandler keyH, String resourcePath, int speed, int x, int y) {
+    public Player(GamePanel gp, KeyHandler keyH, String resourcePath, int x, int y) {
 
         this.gp = gp;
         this.keyH = keyH;
-
         this.x = x;
         this.y = y;
-        this.speed = speed;
         this.resourcePath = resourcePath;
+
+        solidPart = new Rectangle(6 , 34, 58, 30);
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -41,6 +42,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
+
         direction = "right";
     }
 
@@ -81,6 +83,9 @@ public class Player extends Entity {
                 x += speed;
             }
 
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
             /*spriteCounter++;
             if (spriteCounter > 12) {
                 if (spriteNum == 1) {
@@ -104,17 +109,20 @@ public class Player extends Entity {
             //Player 2
             if (keyH.upPressed2) {
                 direction = "back";
-                y -= speed;
+                y -= (speed + 1);
             } else if (keyH.downPressed2) {
                 direction = "front";
-                y += speed;
+                y += (speed + 1);
             } else if (keyH.leftPressed2) {
                 direction = "left";
-                x -= speed;
+                x -= (speed + 1);
             } else if (keyH.rightPressed2) {
                 direction = "right";
-                x += speed;
+                x += (speed + 1);
             }
+
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
 
             /*spriteCounter++;
             if (spriteCounter > 12) {
