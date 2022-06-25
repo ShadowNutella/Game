@@ -1,6 +1,6 @@
 package main;
 
-import entity.Entity;
+import entity.Player;
 
 public class CollisionChecker {
 
@@ -12,12 +12,12 @@ public class CollisionChecker {
 
     }
 
-    public void checkTile(Entity entity) {
+    public void checkTile(Player player) {
 
-        int entityLeftWorldX = entity.x + entity.solidPart.x;
-        int entityRightWorldX = entity.y + entity.solidPart.x + entity.solidPart.width;
-        int entityTopWorldY = entity.y + entity.solidPart.y;
-        int entityBottomWorldY = entity.y + entity.solidPart.y + entity.solidPart.height;
+        int entityLeftWorldX = player.x + player.solidPart.x;
+        int entityRightWorldX = player.y + player.solidPart.x + player.solidPart.width;
+        int entityTopWorldY = player.y + player.solidPart.y;
+        int entityBottomWorldY = player.y + player.solidPart.y + player.solidPart.height;
 
         int entityLeftCol = entityLeftWorldX/gp.tileSize;
         int entityRightCol = entityRightWorldX/gp.tileSize;
@@ -28,7 +28,14 @@ public class CollisionChecker {
 
         switch(player.direction) {
             case "up":
-                entityTopRow = (entityTopWorldY - player.speed);
+                entityTopRow = (entityTopWorldY - player.speed)/gp.tileSize;
+                tileNum1 = gp.tileM.mapTileNum[entityLeftCol] [entityTopRow];
+                tileNum2 = gp.tileM.mapTileNum[entityRightCol] [entityTopRow];
+                if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+
+                    player.collisionOn = true;
+
+                }
                 break;
             case"down":
                 break;

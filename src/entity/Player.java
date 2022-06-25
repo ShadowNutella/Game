@@ -71,7 +71,7 @@ public class Player extends Entity {
             //Player 1
             if (keyH.upPressed) {
                 direction = "back";
-                y -= speed;
+
             } else if (keyH.downPressed) {
                 direction = "front";
                 y += speed;
@@ -83,8 +83,26 @@ public class Player extends Entity {
                 x += speed;
             }
 
+            //Check Tile collision
             collisionOn = false;
             gp.cChecker.checkTile(this);
+
+            //If collision is false, player can move
+            if (collisionOn == false) {
+
+                switch (direction) {
+                    case "up":
+                        y -= speed;
+                        break;
+                    case "down":
+                        break;
+                    case "left":
+                        break;
+                    case "right":
+                        break;
+                }
+
+            }
 
             /*spriteCounter++;
             if (spriteCounter > 12) {
