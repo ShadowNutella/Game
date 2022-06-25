@@ -1,15 +1,13 @@
 package main;
 
 import tile.Tile;
-import object.Object;
+import object.Item;
 
 
 public class AssetSetter {
 
     public Tile[] tile;
     public int[][] mapTileNum;
-
-    public java.lang.Object obj[] = new java.lang.Object[10];
 
     GamePanel gp;
 
@@ -18,11 +16,11 @@ public class AssetSetter {
 
     }
 
-    public void setObject() {
+    public void createItems() {
 
-        gp.obj[0] = new Object("key", 550, 350, "blau");
+        gp.items[0] = new Item("key", 550, 350, "blau");
 
-        gp.obj[1] = new Object("key", 400, 200, "blau");
+        gp.items[1] = new Item("key", 400, 200, "blau");
 
     }
 

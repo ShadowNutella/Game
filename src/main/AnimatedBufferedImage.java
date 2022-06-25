@@ -26,6 +26,14 @@ public class AnimatedBufferedImage {
             try {
                 images.add(ImageIO.read(getClass().getResourceAsStream(path + i + ".png")));
             } catch (IllegalArgumentException e) {
+                if (images.size() == 0) {
+                    try {
+                        images.add(ImageIO.read(getClass().getResourceAsStream(path + ".png")));
+                    } catch (IOException ex) {
+                        System.out.println("No images found in " + path);
+                        e.printStackTrace();
+                    }
+                }
                 break;
             } catch (IOException e) {
                 e.printStackTrace();

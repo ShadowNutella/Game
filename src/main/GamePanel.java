@@ -1,6 +1,7 @@
 package main;
 
 import entity.*;
+import object.Item;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -34,12 +35,11 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter setter1 = new AssetSetter(this);
 
-
+    public Item[] items = new Item[10];
     public Player playerOne, playerTwo;
 
     // Create list with Entity objects
     public ArrayList<Entity> entities = new ArrayList<Entity>();
-
 
     PatrolEnemy patroler;
 
@@ -54,6 +54,12 @@ public class GamePanel extends JPanel implements Runnable {
         Camera.instance.gp = this;
         Camera.setLimits(screenWidth / 2, worldWidth - screenWidth / 2, screenHeight / 2, worldHeight - screenHeight / 2);
 
+        setUpGame();
+
+    }
+
+    public void setUpGame() {
+        setter1.createItems();
 
         playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 500, 300);
         playerOne.drawPriority = 100;
@@ -83,14 +89,6 @@ public class GamePanel extends JPanel implements Runnable {
         patroler.imageRight.animationSpeed = 24;
         patroler.setSize(1.7);
         entities.add(patroler);
-
-
-    }
-
-    public void setUpGame() {
-
-        setter1.setObject();
-
     }
 
     public void startGameThread() {
@@ -158,22 +156,19 @@ public class GamePanel extends JPanel implements Runnable {
         //Draws the Tiles of the current world map
         tileM.drawWorldTiles(g2);
 
-        //Draws the objects on the map
-        //*key.drawObjects(g2);
-        for(int i = 0; i < obj.length; i++) {
-            if (obj[i] != null) {
-                obj[i].drawObjects(g2, this);
-            }
-
-
-        }
-
         //sorts the entities by their priority to decide which one will be drawn first and which one covers the others by running over them
         sortEntitiesByPriority();
 
         //Loop through entities and draws them
         for (Entity e : entities) {
             e.draw(g2);
+        }
+
+        //Draws the items on the map
+        for (Item i : items) {
+            if (i != null) {
+                i.draw(g2);
+            }
         }
 
 
