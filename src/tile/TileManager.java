@@ -24,7 +24,7 @@ public class TileManager {
         tile = new Tile[66];
         mapTileNum = new int[gp.maxWorldCol] [gp.maxWorldRow];
 
-        getTileImage("Rosa", "rosa");
+        getTileImage("Lila", "lila");
         loadMap("/maps/worldblau.txt");
     }
 

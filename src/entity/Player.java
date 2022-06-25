@@ -75,13 +75,13 @@ public class Player extends Entity {
 
             } else if (keyH.downPressed) {
                 direction = "front";
-                y += speed;
+
             } else if (keyH.leftPressed) {
                 direction = "left";
-                x -= speed;
+
             } else if (keyH.rightPressed) {
                 direction = "right";
-                x += speed;
+
             }
 
             //Check Tile collision
@@ -92,14 +92,17 @@ public class Player extends Entity {
             if (collisionOn == false) {
 
                 switch (direction) {
-                    case "up":
+                    case "back":
                         y -= speed;
                         break;
-                    case "down":
+                    case "front":
+                        y += speed;
                         break;
                     case "left":
+                        x -= speed;
                         break;
                     case "right":
+                        x += speed;
                         break;
                 }
 
@@ -128,20 +131,40 @@ public class Player extends Entity {
             //Player 2
             if (keyH.upPressed2) {
                 direction = "back";
-                y -= speed;
+
             } else if (keyH.downPressed2) {
                 direction = "front";
-                y += speed;
+
             } else if (keyH.leftPressed2) {
                 direction = "left";
-                x -= speed;
+
             } else if (keyH.rightPressed2) {
                 direction = "right";
-                x += speed;
+
             }
 
             collisionOn = false;
             gp.cChecker.checkTile(this);
+
+            //If collision is false, player can move
+            if (collisionOn == false) {
+
+                switch (direction) {
+                    case "back":
+                        y -= speed;
+                        break;
+                    case "front":
+                        y += speed;
+                        break;
+                    case "left":
+                        x -= speed;
+                        break;
+                    case "right":
+                        x += speed;
+                        break;
+                }
+
+            }
 
             /*spriteCounter++;
             if (spriteCounter > 12) {
