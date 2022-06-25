@@ -1,8 +1,6 @@
 package object;
 
 import entity.Camera;
-import main.GamePanel;
-import tile.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,17 +10,22 @@ import java.io.IOException;
 public class Objects {
 
     public BufferedImage image;
+    public int objX;
+    public int objY;
 
 
 
 
+    public Objects(String name, int objX, int objY, String farbe) {
 
-    public Objects(String name, int objX, int objY, String farbe, tile.collision) {
+        this.objX = objX;
+        this.objY = objY;
 
 
         try {
             image = ImageIO.read(getClass().getResourceAsStream("/objects/" + name + "_" + farbe + ".png"));
         }catch(IOException e) {
+
             e.printStackTrace();
         }
 
@@ -30,11 +33,11 @@ public class Objects {
 
     public void drawObjects(Graphics2D o) {
 
-        int finalSizeX = (int) ((double) Camera.instance.gp.tileSize * sizeX);
-        int finalSizeY = (int) ((double) Camera.instance.gp.tileSize * sizeY);
+        int finalSizeX = (int) ((double) Camera.instance.gp.tileSize);
+        int finalSizeY = (int) ((double) Camera.instance.gp.tileSize);
 
         if (image != null) {
-                o.drawImage(image.getImage(), objX - Camera.getAbsoluteX(), objY - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null);
+                o.drawImage(image, objX - Camera.getAbsoluteX(), objY - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null);
         }
     }
 
