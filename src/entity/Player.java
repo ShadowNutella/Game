@@ -14,17 +14,18 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     String resourcePath;
-    public int speed = 5;
+    public int speed;
     public AnimatedBufferedImage front, back, left, right;
     public String direction;
 
 
-    public Player(GamePanel gp, KeyHandler keyH, String resourcePath, int x, int y) {
+    public Player(GamePanel gp, KeyHandler keyH, String resourcePath, int speed, int x, int y) {
 
         this.gp = gp;
         this.keyH = keyH;
         this.x = x;
         this.y = y;
+        this.speed = speed;
         this.resourcePath = resourcePath;
 
         solidPart = new Rectangle(6 , 34, 58, 30);

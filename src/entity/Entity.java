@@ -29,6 +29,7 @@ public class Entity{
 
     public void update()
     {
+
         image.advance();
     }
 
@@ -39,10 +40,12 @@ public class Entity{
     }
 
     public void setSizeX(double sizeX) {
+
         this.sizeX = sizeX;
     }
 
     public void setSizeY(double sizeY) {
+
         this.sizeY = sizeY;
     }
 
@@ -53,6 +56,7 @@ public class Entity{
 
     public void setSize(double size)
     {
+
         setSize(size, size);
     }
 
