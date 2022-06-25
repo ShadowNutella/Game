@@ -27,10 +27,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     //FPS
     int FPS = 60;
+
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter setter1 = new AssetSetter(this);
+    public Object obj[] = new Object[10];
 
     public Player playerOne, playerTwo;
 
@@ -80,6 +83,12 @@ public class GamePanel extends JPanel implements Runnable {
         patroler.imageRight.animationSpeed = 24;
         patroler.setSize(1.7);
         entities.add(patroler);
+    }
+
+    public void setUpGame() {
+
+        setter1.setObject();
+
     }
 
     public void startGameThread() {
@@ -144,10 +153,16 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
+        //Draws the Tiles of the current world map
         tileM.drawWorldTiles(g2);
 
+        //Draws the objects on the map
+
+
+        //sorts the entities by their priority to decide which one will be drawn first and which one covers the others by running over them
         sortEntitiesByPriority();
-        //Loop through entities
+
+        //Loop through entities and draws them
         for (Entity e : entities) {
             e.draw(g2);
         }
