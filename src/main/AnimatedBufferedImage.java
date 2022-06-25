@@ -15,8 +15,7 @@ public class AnimatedBufferedImage {
         this.images = images;
     }
 
-    public AnimatedBufferedImage()
-    {
+    public AnimatedBufferedImage() {
 
     }
 
@@ -24,8 +23,7 @@ public class AnimatedBufferedImage {
         ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
         int i = 1;
         while (true) {
-            try
-            {
+            try {
                 images.add(ImageIO.read(getClass().getResourceAsStream(path + i + ".png")));
             } catch (IllegalArgumentException e) {
                 break;

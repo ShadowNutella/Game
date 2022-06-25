@@ -22,7 +22,7 @@ public class TileManager {
         this.gp = gp;
 
         tile = new Tile[66];
-        mapTileNum = new int[gp.maxWorldCol] [gp.maxWorldRow];
+        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage("Lila", "lila");
         loadMap("/maps/worldblau.txt");
@@ -107,7 +107,6 @@ public class TileManager {
             tile[21].collision = true;
 
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,15 +119,13 @@ public class TileManager {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            for(int row = 0; row < gp.maxWorldRow; row++)
-            {
+            for (int row = 0; row < gp.maxWorldRow; row++) {
                 String line = br.readLine();
                 String[] numbers = line.split(" ");
 
-                for(int col = 0; col < gp.maxWorldCol; col++)
-                {
+                for (int col = 0; col < gp.maxWorldCol; col++) {
                     int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[col] [row] = num;
+                    mapTileNum[col][row] = num;
                 }
             }
             br.close();
@@ -140,11 +137,9 @@ public class TileManager {
 
     public void drawWorldTiles(Graphics2D w1) {
 
-        for(int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++)
-        {
-            for(int worldRow = 0; worldRow < gp.maxWorldRow; worldRow++)
-            {
-                int tileNum = mapTileNum[worldCol] [worldRow];
+        for (int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++) {
+            for (int worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
+                int tileNum = mapTileNum[worldCol][worldRow];
 
                 int worldX = worldCol * gp.tileSize;
                 int worldY = worldRow * gp.tileSize;

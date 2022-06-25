@@ -4,59 +4,39 @@ import main.AnimatedBufferedImage;
 import main.GamePanel;
 import main.KeyHandler;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Player extends Entity {
 
     GamePanel gp;
     KeyHandler keyH;
-    String resourcePath;
     public int speed;
     public AnimatedBufferedImage front, back, left, right;
     public String direction;
 
 
     public Player(GamePanel gp, KeyHandler keyH, String resourcePath, int speed, int x, int y) {
-
+        super(resourcePath, x, y);
+        direction = "right";
         this.gp = gp;
         this.keyH = keyH;
-        this.x = x;
-        this.y = y;
         this.speed = speed;
-        this.resourcePath = resourcePath;
-
-        solidPart = new Rectangle(6 , 34, 58, 30);
-
-        setDefaultValues();
-        getPlayerImage();
+        solidPart = new Rectangle(6, 34, 58, 30);
     }
 
-    public void setAnimationSpeed(int animationSpeed)
-    {
+    public void setAnimationSpeed(int animationSpeed) {
         front.animationSpeed = animationSpeed;
         back.animationSpeed = animationSpeed;
         left.animationSpeed = animationSpeed;
         right.animationSpeed = animationSpeed;
     }
 
-    public void setDefaultValues() {
-
-        direction = "right";
-    }
-
-    public void getPlayerImage() {
-
-
-        // wir brauchen hier dieses große zeug gleich nicht mehr, hehe :))
+    public void loadImages() {
         front = new AnimatedBufferedImage(resourcePath + "front");
         back = new AnimatedBufferedImage(resourcePath + "back");
         left = new AnimatedBufferedImage(resourcePath + "left");
         right = new AnimatedBufferedImage(resourcePath + "right");
-
-
     }
 
     public void update() {
@@ -89,37 +69,17 @@ public class Player extends Entity {
             gp.cChecker.checkTile(this);
 
             //If collision is false, player can move
-            if (collisionOn == false) {
+            if (!collisionOn) {
 
                 switch (direction) {
-                    case "back":
-                        y -= speed;
-                        break;
-                    case "front":
-                        y += speed;
-                        break;
-                    case "left":
-                        x -= speed;
-                        break;
-                    case "right":
-                        x += speed;
-                        break;
+                    case "back" -> y -= speed;
+                    case "front" -> y += speed;
+                    case "left" -> x -= speed;
+                    case "right" -> x += speed;
                 }
 
             }
-
-            /*spriteCounter++;
-            if (spriteCounter > 12) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
-            }*/
-        }
-        else
-        {
+        } else {
             setAnimationSpeed(0);
         }
 
@@ -147,83 +107,31 @@ public class Player extends Entity {
             gp.cChecker.checkTile(this);
 
             //If collision is false, player can move
-            if (collisionOn == false) {
+            if (!collisionOn) {
 
                 switch (direction) {
-                    case "back":
-                        y -= speed;
-                        break;
-                    case "front":
-                        y += speed;
-                        break;
-                    case "left":
-                        x -= speed;
-                        break;
-                    case "right":
-                        x += speed;
-                        break;
+                    case "back" -> y -= speed;
+                    case "front" -> y += speed;
+                    case "left" -> x -= speed;
+                    case "right" -> x += speed;
                 }
 
             }
-
-            /*spriteCounter++;
-            if (spriteCounter > 12) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
-            }*/
-        }
-        else
-        {
+        } else {
             setAnimationSpeed(0);
         }
     }
 
     public void draw(Graphics2D p) {
 
-        BufferedImage image = null;
+        BufferedImage image = switch (direction) {
+            case "back" -> back.getImage();
+            case "front" -> front.getImage();
+            case "left" -> left.getImage();
+            case "right" -> right.getImage();
+            default -> null;
+        };
 
-        switch (direction) {
-            case "back":
-                /*if (spriteNum == 1) {
-                    image = back1;
-                }
-                if (spriteNum == 2) {
-                    image = back2;
-                }*/
-                image = back.getImage();
-                break;
-            case "front":
-                /*if (spriteNum == 1) {
-                    image = front1;
-                }
-                if (spriteNum == 2) {
-                    image = front2;
-                }*/
-                image = front.getImage();
-                break;
-            case "left":
-                /*if (spriteNum == 1) {
-                    image = left1;
-                }
-                if (spriteNum == 2) {
-                    image = left2;
-                }*/
-                image = left.getImage();
-                break;
-            case "right":
-                /*if (spriteNum == 1) {
-                    image = right1;
-                }
-                if (spriteNum == 2) {
-                    image = right2;
-                }*/
-                image = right.getImage();
-                break;
-        }
         int finalSizeX = (int) (Camera.instance.gp.tileSize * sizeX);
         int finalSizeY = (int) (Camera.instance.gp.tileSize * sizeY);
         p.drawImage(image, x - Camera.getAbsoluteX(), y - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null); //* "Malt" den Charakter an Stelle XY plus dessen "Animation"

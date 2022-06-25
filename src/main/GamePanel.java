@@ -3,14 +3,11 @@ package main;
 import entity.*;
 import tile.TileManager;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable {
 
     //SCREEN SETTINGS
     final int originalTileSize = 32; //32x32 tile
@@ -42,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 
     PatrolEnemy patroler;
+
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -54,9 +52,9 @@ public class GamePanel extends JPanel implements Runnable{
         Camera.setLimits(screenWidth / 2, worldWidth - screenWidth / 2, screenHeight / 2, worldHeight - screenHeight / 2);
 
 
-        playerOne = new Player(this, keyH, "/characterOne/char1_", 5,500, 300);
+        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 500, 300);
         playerOne.drawPriority = 100;
-        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6,200, 300);
+        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 200, 300);
         playerTwo.drawPriority = 99;
 
 
@@ -93,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void run() {
 
-        double drawInterval = 1000000000/FPS;
+        double drawInterval = 1000000000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -106,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable{
 
             lastTime = currentTime;
 
-            if(delta >= 1) {
+            if (delta >= 1) {
                 update();
                 repaint();
                 delta--;
@@ -114,6 +112,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
     }
+
     public void update() {
 
         playerOne.setAnimationSpeed(12);
@@ -128,7 +127,7 @@ public class GamePanel extends JPanel implements Runnable{
         patroler.move();
 
 
-        for(Entity e : entities) {
+        for (Entity e : entities) {
             e.update();
         }
 
@@ -143,13 +142,13 @@ public class GamePanel extends JPanel implements Runnable{
 
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
         tileM.drawWorldTiles(g2);
 
         sortEntitiesByPriority();
         //Loop through entities
-        for(Entity e : entities) {
+        for (Entity e : entities) {
             e.draw(g2);
         }
 
@@ -158,9 +157,9 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     private void sortEntitiesByPriority() {
-        for(int i = 0; i < entities.size(); i++) {
-            for(int j = 0; j < entities.size() - 1; j++) {
-                if(entities.get(j).drawPriority > entities.get(j + 1).drawPriority) {
+        for (int i = 0; i < entities.size(); i++) {
+            for (int j = 0; j < entities.size() - 1; j++) {
+                if (entities.get(j).drawPriority > entities.get(j + 1).drawPriority) {
                     Entity temp = entities.get(j);
                     entities.set(j, entities.get(j + 1));
                     entities.set(j + 1, temp);

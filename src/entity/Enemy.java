@@ -1,30 +1,13 @@
 package entity;
 
-import main.AnimatedBufferedImage;
-import main.GamePanel;
-import main.KeyHandler;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
+// Base class for enemies
 public class Enemy extends Entity {
-    String resourcePath;
 
-    public Enemy()
-    {
-
+    public Enemy() {
+        super();
     }
+
     public Enemy(String resourcePath, int x, int y) {
-
-        this.x = x;
-        this.y = y;
-        this.resourcePath = resourcePath;
-        getPlayerImage();
-    }
-
-    public void getPlayerImage() {
-        image = new AnimatedBufferedImage(resourcePath);
+        super(resourcePath, x, y);
     }
 }
