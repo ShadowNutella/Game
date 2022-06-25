@@ -128,16 +128,16 @@ public class Player extends Entity {
             //Player 2
             if (keyH.upPressed2) {
                 direction = "back";
-                y -= (speed + 1);
+                y -= speed;
             } else if (keyH.downPressed2) {
                 direction = "front";
-                y += (speed + 1);
+                y += speed;
             } else if (keyH.leftPressed2) {
                 direction = "left";
-                x -= (speed + 1);
+                x -= speed;
             } else if (keyH.rightPressed2) {
                 direction = "right";
-                x += (speed + 1);
+                x += speed;
             }
 
             collisionOn = false;
