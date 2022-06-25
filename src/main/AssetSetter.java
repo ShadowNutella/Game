@@ -1,20 +1,15 @@
 package main;
 
 import tile.Tile;
-import entity.Camera;
-import object.Objects;
-
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
+import object.Object;
 
 
 public class AssetSetter {
 
     public Tile[] tile;
     public int[][] mapTileNum;
+
+    public java.lang.Object obj[] = new java.lang.Object[10];
 
     GamePanel gp;
 
@@ -25,10 +20,12 @@ public class AssetSetter {
 
     public void setObject() {
 
-        gp.obj[0] = new Objects("key", 550, 350, "blau");
+        gp.obj[0] = new Object("key", 550, 350, "blau");
 
-        gp.obj[1] = new Objects("key", 400, 200, "blau");
+        gp.obj[1] = new Object("key", 400, 200, "blau");
 
     }
+
+
 
 }

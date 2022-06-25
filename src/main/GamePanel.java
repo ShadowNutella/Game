@@ -1,7 +1,6 @@
 package main;
 
 import entity.*;
-import object.Objects;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -34,10 +33,9 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter setter1 = new AssetSetter(this);
-    public Object obj[] = new Object[10];
+
 
     public Player playerOne, playerTwo;
-    public Objects key;
 
     // Create list with Entity objects
     public ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -86,7 +84,7 @@ public class GamePanel extends JPanel implements Runnable {
         patroler.setSize(1.7);
         entities.add(patroler);
 
-        Objects key = new Objects("key",300, 400, "blau");
+
     }
 
     public void setUpGame() {
@@ -161,7 +159,14 @@ public class GamePanel extends JPanel implements Runnable {
         tileM.drawWorldTiles(g2);
 
         //Draws the objects on the map
-        key.drawObjects(g2);
+        //*key.drawObjects(g2);
+        for(int i = 0; i < obj.length; i++) {
+            if (obj[i] != null) {
+                obj[i].drawObjects(g2, this);
+            }
+
+
+        }
 
         //sorts the entities by their priority to decide which one will be drawn first and which one covers the others by running over them
         sortEntitiesByPriority();

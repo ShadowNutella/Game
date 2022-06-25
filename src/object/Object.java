@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Objects {
+public class Object {
 
     public BufferedImage image;
     public int objX;
@@ -16,7 +16,7 @@ public class Objects {
 
 
 
-    public Objects(String name, int objX, int objY, String farbe) {
+    public Object(String name, int objX, int objY, String farbe) {
 
         this.objX = objX;
         this.objY = objY;
@@ -31,13 +31,13 @@ public class Objects {
 
     }
 
-    public void drawObjects(Graphics2D o) {
+    public void drawObjects(Graphics2D g2) {
 
         int finalSizeX = (int) ((double) Camera.instance.gp.tileSize);
         int finalSizeY = (int) ((double) Camera.instance.gp.tileSize);
 
         if (image != null) {
-                o.drawImage(image, objX - Camera.getAbsoluteX(), objY - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null);
+                g2.drawImage(image, objX - Camera.getAbsoluteX(), objY - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null);
         }
     }
 
