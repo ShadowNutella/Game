@@ -12,12 +12,15 @@ public class AnimatedBufferedImage {
     public int animationSpeed = 10;
 
     public AnimatedBufferedImage(BufferedImage[] images) {
+
         this.images = images;
     }
+
 
     public AnimatedBufferedImage() {
 
     }
+
 
     public AnimatedBufferedImage(String path) {
         ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
@@ -43,15 +46,18 @@ public class AnimatedBufferedImage {
         this.images = images.toArray(new BufferedImage[images.size()]);
     }
 
+
     public int getCurrentIndex() {
 
         return currentIndex;
     }
 
+
     public int getLength() {
 
         return images.length;
     }
+
 
     public void advance() {
         if (images == null || animationSpeed == 0)
@@ -66,9 +72,12 @@ public class AnimatedBufferedImage {
         }
     }
 
+
     public BufferedImage getImage() {
+
         return images[currentIndex];
     }
+
 
     public BufferedImage getNext() {
         if (images.length == 0) {

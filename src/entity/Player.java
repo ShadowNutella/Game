@@ -120,6 +120,15 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            //Check Object collision -> Returns array with all colliding objects
+
+            Item[] collisions = gp.cChecker.checkObjects(this);
+            for (int i = 0; i < collisions.length; i++) {
+                collisions[i].pickUp(this);
+
+                gp.items.remove(collisions[i]);
+            }
+
             //If collision is false, player can move
             if (!collisionOn) {
 

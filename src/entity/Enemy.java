@@ -9,6 +9,7 @@ public class Enemy extends Entity {
     }
 
     public Enemy(String resourcePath, int x, int y) {
+
         super(resourcePath, x, y);
     }
 }

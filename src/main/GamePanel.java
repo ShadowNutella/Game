@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter setter1 = new AssetSetter(this);
+    public UI ui = new UI(this);
 
     public ArrayList<Item> items = new ArrayList<Item>();
     public Player playerOne, playerTwo;
@@ -55,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
         Camera.setLimits(screenWidth / 2, worldWidth - screenWidth / 2, screenHeight / 2, worldHeight - screenHeight / 2);
 
         setUpGame();
+
 
     }
 
@@ -171,6 +173,9 @@ public class GamePanel extends JPanel implements Runnable {
         for (Entity e : entities) {
             e.draw(g2);
         }
+
+        //UI
+        ui.drawUI(g2);
 
 
         g2.dispose();

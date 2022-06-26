@@ -36,14 +36,17 @@ public class Entity {
 
     // Loads all needed images from resource path
     public void loadImages() {
+
         image = new AnimatedBufferedImage(resourcePath);
     }
 
     public void setAnimationSpeed(int animationSpeed) {
+
         image.animationSpeed = animationSpeed;
     }
 
     public void update() {
+
         image.advance();
     }
 

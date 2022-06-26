@@ -1,12 +1,10 @@
 package main;
 
-import entity.Entity;
 import entity.Item;
 import entity.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.concurrent.RecursiveAction;
 
 public class CollisionChecker {
 
@@ -91,28 +89,24 @@ public class CollisionChecker {
                     case "back" -> {
                         playerHitbox.y -= player.speed;
                         if (playerHitbox.intersects(itemHitbox)) {
-                            System.out.println("up collision");
                             colliding.add(item);
                         }
                     }
                     case "front" -> {
                         playerHitbox.y += player.speed;
                         if (playerHitbox.intersects(itemHitbox)) {
-                            System.out.println("down collision");
                             colliding.add(item);
                         }
                     }
                     case "left" -> {
                         playerHitbox.x -= player.speed;
                         if (playerHitbox.intersects(itemHitbox)) {
-                            System.out.println("left collision");
                             colliding.add(item);
                         }
                     }
                     case "right" -> {
                         playerHitbox.x += player.speed;
                         if (playerHitbox.intersects(itemHitbox)) {
-                            System.out.println("right collision");
                             colliding.add(item);
                         }
                     }
