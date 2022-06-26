@@ -1,6 +1,5 @@
 package main;
 
-import entity.Entity;
 import entity.Player;
 
 public class CollisionChecker {
@@ -85,11 +84,11 @@ public class CollisionChecker {
 
             if(gp.items[i] != null) {
 
-                //Get entity's solid Part position
+                //Get player's solid Part position
                 player.solidPart.x = player.x + player.solidPart.x;
                 player.solidPart.y = player.y + player.solidPart.y;
 
-                //Get the object's solid's part position
+                //Get the object's solid part position
                 gp.items[i].solidPart.x = gp.items[i].x + gp.items[i].solidPart.x;
                 gp.items[i].solidPart.y = gp.items [i].y + gp.items[i].solidPart.y;
 

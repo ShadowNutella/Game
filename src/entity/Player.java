@@ -24,8 +24,6 @@ public class Player extends Entity {
         this.speed = speed;
 
         solidPart = new Rectangle(6, 34, 58, 30);
-        solidPartX = solidPart.x;
-        solidPartY = solidPart.y;
 
     }
 

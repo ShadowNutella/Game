@@ -15,7 +15,6 @@ public class Entity {
     public double sizeX = 1.0, sizeY = 1.0; // x and y size modifier
     public int drawPriority = 1; // Priority of drawing, the higher the priority the later it will be drawn (useful for stacking)
     public Rectangle solidPart;// Hitbox of entity, measured on top left corner
-    public int solidPartX, solidPartY;
     public boolean collisionOn = false;
 
     public Entity() {
