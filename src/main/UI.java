@@ -1,7 +1,5 @@
 package main;
 
-
-
 import entity.InteractiveItem;
 
 import java.awt.*;
@@ -23,9 +21,9 @@ public class UI {
 
     }
 
-    public void showMessage(InteractiveItem.) {
+    public void showMessage(Graphics2D m) {
 
-
+        m.drawString(String text, 50, 50);
 
     }
 
@@ -36,7 +34,6 @@ public class UI {
         u.setColor(Color.white);
         u.drawImage(keyImage.getImage(), 0, 0, gp.tileSize, gp.tileSize, null);
         u.drawString("x " + gp.playerOne.inventory.getKeyCount(), 65, 40);
-        u.drawString(message);
 
     }
 

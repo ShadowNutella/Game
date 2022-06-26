@@ -26,8 +26,6 @@ public class InteractiveItem extends Item {
 
             if (player.inventory.getKeyCount() < 10) {
 
-                ui.showMessage
-
         }
 
     }
