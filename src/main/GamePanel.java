@@ -44,6 +44,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     PatrolEnemy patroler;
 
+    private boolean gameStarted = false;
+
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -56,17 +58,17 @@ public class GamePanel extends JPanel implements Runnable {
         Camera.setLimits(screenWidth / 2, worldWidth - screenWidth / 2, screenHeight / 2, worldHeight - screenHeight / 2);
 
         setUpGame();
-
-
     }
 
     public void setUpGame() {
         setter1.createItems();
 
         ItemHolder playerInventory = new ItemHolder();
-        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 500, 300, playerInventory);
+        //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, tileSize * 69, tileSize * 24, playerInventory);
+        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
-        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 200, 300, playerInventory);
+        //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, tileSize * 71, tileSize * 24, playerInventory);
+        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
 
@@ -90,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable {
         patroler.patrolSpeed = 2;
         patroler.imageLeft.animationSpeed = 24;
         patroler.imageRight.animationSpeed = 24;
+        items.add(patroler.textItem);
         patroler.setSize(1.7);
         entities.add(patroler);
     }
@@ -107,6 +110,7 @@ public class GamePanel extends JPanel implements Runnable {
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
+
 
         while (gameThread != null) {
 
@@ -180,6 +184,12 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         g2.dispose();
+
+        if (!gameStarted)
+        {
+            UI.instance.startOpening(20);
+            gameStarted = true;
+        }
     }
 
     private void sortEntitiesByPriority() {

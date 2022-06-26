@@ -1,5 +1,7 @@
 package main;
 
+import entity.DoorGuardianItem;
+import entity.TextInteractionItem;
 import entity.Item;
 
 
@@ -53,6 +55,9 @@ public class AssetSetter {
 
         i = new Item("key", 5 * gp.tileSize, 10 * gp.tileSize, "blau");
         i.collisionOn = true;
+        gp.items.add(i);
+
+        i = new DoorGuardianItem(410, 175, gp.tileSize * 4, gp.tileSize);
         gp.items.add(i);
 
     }

@@ -78,9 +78,9 @@ public class Player extends Entity {
 
             Item[] collisions = gp.cChecker.checkObjects(this);
             for (int i = 0; i < collisions.length; i++) {
-                inventory.collectItem(collisions[i]);
-
-                gp.items.remove(collisions[i]);
+                boolean remove = collisions[i].pickUp(this);
+                if (remove)
+                    gp.items.remove(collisions[i]);
             }
 
             //If collision is false, player can move
@@ -124,9 +124,9 @@ public class Player extends Entity {
 
             Item[] collisions = gp.cChecker.checkObjects(this);
             for (int i = 0; i < collisions.length; i++) {
-                collisions[i].pickUp(this);
-
-                gp.items.remove(collisions[i]);
+                boolean remove = collisions[i].pickUp(this);
+                if (remove)
+                    gp.items.remove(collisions[i]);
             }
 
             //If collision is false, player can move

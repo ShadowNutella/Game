@@ -14,10 +14,10 @@ public class Item extends Entity {
     }
 
 
-    public void pickUp(Player player) {
+    public boolean pickUp(Player player) {
 
         player.inventory.collectItem(this);
-
+        return true;
     }
 
 }
