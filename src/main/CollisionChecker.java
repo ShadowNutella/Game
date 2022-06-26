@@ -1,6 +1,11 @@
 package main;
 
+import entity.Item;
 import entity.Player;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.concurrent.RecursiveAction;
 
 public class CollisionChecker {
 
@@ -27,8 +32,7 @@ public class CollisionChecker {
         int tileNum1, tileNum2;
 
         switch (player.direction) {
-
-            case "back":
+            case "back" -> {
                 entityTopRow = (topY - player.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
@@ -37,9 +41,8 @@ public class CollisionChecker {
                     player.collisionOn = true;
 
                 }
-                break;
-
-            case "front":
+            }
+            case "front" -> {
                 entityBotRow = (botY + player.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBotRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBotRow];
@@ -48,9 +51,8 @@ public class CollisionChecker {
                     player.collisionOn = true;
 
                 }
-                break;
-
-            case "left":
+            }
+            case "left" -> {
                 entityLeftCol = (leftX - player.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBotRow];
@@ -59,9 +61,8 @@ public class CollisionChecker {
                     player.collisionOn = true;
 
                 }
-                break;
-
-            case "right":
+            }
+            case "right" -> {
                 entityRightCol = (rightX + player.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBotRow];
@@ -70,63 +71,60 @@ public class CollisionChecker {
                     player.collisionOn = true;
 
                 }
-                break;
-
-
+            }
         }
     }
 
-    public int checkObject(Player player, boolean playerCollision) {
-
-        int index = 999;
-
+    public Item[] checkObjects(Player player) {
+        ArrayList<Item> colliding = new ArrayList<Item>();
         for (int i = 0; i < gp.items.length; i++) {
 
-            if(gp.items[i] != null) {
+            Item item = gp.items[i];
+            if(item != null) {
+                if (!item.collisionOn)
+                    continue;
+                // Create two hitboxes to compare them
+                Rectangle playerHitbox = new Rectangle(player.x + player.solidPart.x, player.y + player.solidPart.y, player.solidPart.width, player.solidPart.height);
+                Rectangle itemHitbox = new Rectangle(item.x + item.solidPart.x, item.y + item.solidPart.y, item.solidPart.width, item.solidPart.height);
 
-                //Get player's solid Part position
-                player.solidPart.x = player.x + player.solidPart.x;
-                player.solidPart.y = player.y + player.solidPart.y;
-
-                //Get the object's solid part position
-                gp.items[i].solidPart.x = gp.items[i].x + gp.items[i].solidPart.x;
-                gp.items[i].solidPart.y = gp.items [i].y + gp.items[i].solidPart.y;
-
-                switch(player.direction) {
-                    case"back":
-                        player.solidPart.y -= player.speed;
-                        if(player.solidPart.intersects(gp.items[i].solidPart)) {
+                // This switch pretends to move the player by moving the hitbox, therefore checking for collision
+                switch (player.direction) {
+                    case "back" -> {
+                        playerHitbox.y -= player.speed;
+                        if (playerHitbox.intersects(itemHitbox)) {
                             System.out.println("up collision");
+                            colliding.add(item);
                         }
-                        break;
-                    case"front":
-                        player.solidPart.y += player.speed;
-                        if(player.solidPart.intersects(gp.items[i].solidPart)) {
+                    }
+                    case "front" -> {
+                        playerHitbox.y += player.speed;
+                        if (playerHitbox.intersects(itemHitbox)) {
                             System.out.println("down collision");
+                            colliding.add(item);
                         }
-                        break;
-                    case"left":
-                        player.solidPart.x -= player.speed;
-                        if(player.solidPart.intersects(gp.items[i].solidPart)) {
+                    }
+                    case "left" -> {
+                        playerHitbox.x -= player.speed;
+                        if (playerHitbox.intersects(itemHitbox)) {
                             System.out.println("left collision");
+                            colliding.add(item);
                         }
-                        break;
-                    case"right":
-                        player.solidPart.x += player.speed;
-                        if(player.solidPart.intersects(gp.items[i].solidPart)) {
+                    }
+                    case "right" -> {
+                        playerHitbox.x += player.speed;
+                        if (playerHitbox.intersects(itemHitbox)) {
                             System.out.println("right collision");
+                            colliding.add(item);
                         }
-                        break;
+                    }
                 }
             }
-            player.solidPart.x = player.solidPartX;
-            player.solidPart.y = player.solidPartY;
-            gp.items[i].solidPart.x = gp.items[i].solidPartX;
-            gp.items[i].solidPart.y = gp.items[i].solidPartY;
         }
-
-        return index;
-
+        Item[] collidingArray = new Item[colliding.size()];
+        for (int i = 0; i < colliding.size(); i++) {
+            collidingArray[i] = colliding.get(i);
+        }
+        return collidingArray;
     }
 
 }

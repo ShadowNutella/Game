@@ -70,12 +70,12 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-            //Check Object collision
-            int objIndex = gp.cChecker.checkObject(this, true);
+            //Check Object collision -> Returns array with all colliding objects
+
+            Item[] collisions = gp.cChecker.checkObjects(this);
 
             //If collision is false, player can move
             if (!collisionOn) {
-
                 switch (direction) {
                     case "back" -> y -= speed;
                     case "front" -> y += speed;
