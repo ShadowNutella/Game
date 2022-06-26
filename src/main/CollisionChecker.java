@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.Player;
 
 public class CollisionChecker {
@@ -75,4 +76,58 @@ public class CollisionChecker {
 
         }
     }
+
+    public int checkObject(Player player, boolean playerCollision) {
+
+        int index = 999;
+
+        for (int i = 0; i < gp.items.length; i++) {
+
+            if(gp.items[i] != null) {
+
+                //Get entity's solid Part position
+                player.solidPart.x = player.x + player.solidPart.x;
+                player.solidPart.y = player.y + player.solidPart.y;
+
+                //Get the object's solid's part position
+                gp.items[i].solidPart.x = gp.items[i].x + gp.items[i].solidPart.x;
+                gp.items[i].solidPart.y = gp.items [i].y + gp.items[i].solidPart.y;
+
+                switch(player.direction) {
+                    case"back":
+                        player.solidPart.y -= player.speed;
+                        if(player.solidPart.intersects(gp.items[i].solidPart)) {
+                            System.out.println("up collision");
+                        }
+                        break;
+                    case"front":
+                        player.solidPart.y += player.speed;
+                        if(player.solidPart.intersects(gp.items[i].solidPart)) {
+                            System.out.println("down collision");
+                        }
+                        break;
+                    case"left":
+                        player.solidPart.x -= player.speed;
+                        if(player.solidPart.intersects(gp.items[i].solidPart)) {
+                            System.out.println("left collision");
+                        }
+                        break;
+                    case"right":
+                        player.solidPart.x += player.speed;
+                        if(player.solidPart.intersects(gp.items[i].solidPart)) {
+                            System.out.println("right collision");
+                        }
+                        break;
+                }
+            }
+            player.solidPart.x = player.solidPartX;
+            player.solidPart.y = player.solidPartY;
+            gp.items[i].solidPart.x = gp.items[i].solidPartX;
+            gp.items[i].solidPart.y = gp.items[i].solidPartY;
+        }
+
+        return index;
+
+    }
+
 }

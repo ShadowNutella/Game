@@ -22,7 +22,11 @@ public class Player extends Entity {
         this.gp = gp;
         this.keyH = keyH;
         this.speed = speed;
+
         solidPart = new Rectangle(6, 34, 58, 30);
+        solidPartX = solidPart.x;
+        solidPartY = solidPart.y;
+
     }
 
     public void setAnimationSpeed(int animationSpeed) {
@@ -67,6 +71,9 @@ public class Player extends Entity {
             //Check Tile collision
             collisionOn = false;
             gp.cChecker.checkTile(this);
+
+            //Check Object collision
+            int objIndex = gp.cChecker.checkObject(this, true);
 
             //If collision is false, player can move
             if (!collisionOn) {

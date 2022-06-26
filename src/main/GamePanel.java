@@ -1,7 +1,7 @@
 package main;
 
 import entity.*;
-import object.Item;
+import entity.Item;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -156,19 +156,19 @@ public class GamePanel extends JPanel implements Runnable {
         //Draws the Tiles of the current world map
         tileM.drawWorldTiles(g2);
 
+        //Draws the items on the map
+        for (Item i : items) {
+            if (i != null) {
+                i.draw(g2);
+            }
+        }
+
         //sorts the entities by their priority to decide which one will be drawn first and which one covers the others by running over them
         sortEntitiesByPriority();
 
         //Loop through entities and draws them
         for (Entity e : entities) {
             e.draw(g2);
-        }
-
-        //Draws the items on the map
-        for (Item i : items) {
-            if (i != null) {
-                i.draw(g2);
-            }
         }
 
 
