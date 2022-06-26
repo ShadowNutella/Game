@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter setter1 = new AssetSetter(this);
 
-    public Item[] items = new Item[10];
+    public ArrayList<Item> items = new ArrayList<Item>();
     public Player playerOne, playerTwo;
 
     // Create list with Entity objects
@@ -61,9 +61,10 @@ public class GamePanel extends JPanel implements Runnable {
     public void setUpGame() {
         setter1.createItems();
 
-        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 500, 300);
+        ItemHolder playerInventory = new ItemHolder();
+        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 500, 300, playerInventory);
         playerOne.drawPriority = 100;
-        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 200, 300);
+        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 200, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
 

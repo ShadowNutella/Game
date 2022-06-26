@@ -2,6 +2,7 @@ package entity;
 
 import main.AnimatedBufferedImage;
 import main.GamePanel;
+import main.ItemHolder;
 import main.KeyHandler;
 
 import java.awt.*;
@@ -15,13 +16,16 @@ public class Player extends Entity {
     public AnimatedBufferedImage front, back, left, right;
     public String direction;
 
+    public ItemHolder inventory;
 
-    public Player(GamePanel gp, KeyHandler keyH, String resourcePath, int speed, int x, int y) {
+
+    public Player(GamePanel gp, KeyHandler keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
         super(resourcePath, x, y);
         direction = "right";
         this.gp = gp;
         this.keyH = keyH;
         this.speed = speed;
+        this.inventory = inventory;
 
         solidPart = new Rectangle(6, 34, 58, 30);
 
@@ -73,6 +77,11 @@ public class Player extends Entity {
             //Check Object collision -> Returns array with all colliding objects
 
             Item[] collisions = gp.cChecker.checkObjects(this);
+            for (int i = 0; i < collisions.length; i++) {
+                inventory.collectItem(collisions[i]);
+
+                gp.items.remove(collisions[i]);
+            }
 
             //If collision is false, player can move
             if (!collisionOn) {

@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.Item;
 import entity.Player;
 
@@ -77,9 +78,7 @@ public class CollisionChecker {
 
     public Item[] checkObjects(Player player) {
         ArrayList<Item> colliding = new ArrayList<Item>();
-        for (int i = 0; i < gp.items.length; i++) {
-
-            Item item = gp.items[i];
+        for (Item item : gp.items) {
             if(item != null) {
                 if (!item.collisionOn)
                     continue;

@@ -14,35 +14,46 @@ public class AssetSetter {
 
     public void createItems() {
 
-        gp.items[0] = new Item("key", 12 * gp.tileSize, 10 * gp.tileSize, "blau");
-        gp.items[0].collisionOn = true;
+        Item i;
+        i = new Item("key", 12 * gp.tileSize, 10 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[1] = new Item("key",77 * gp.tileSize , 24 * gp.tileSize, "blau");
-        gp.items[1].collisionOn = true;
+        i = new Item("key",77 * gp.tileSize , 24 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[2] = new Item("key", 69 * gp.tileSize, 18 * gp.tileSize, "blau");
-        gp.items[2].collisionOn = true;
+        i = new Item("key", 69 * gp.tileSize, 18 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[3] = new Item("key", 78 * gp.tileSize, 4 * gp.tileSize, "blau");
-        gp.items[3].collisionOn = true;
+        i = new Item("key", 78 * gp.tileSize, 4 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[4] = new Item("key", 55 * gp.tileSize, 11 * gp.tileSize, "blau");
-        gp.items[4].collisionOn = true;
+        i = new Item("key", 55 * gp.tileSize, 11 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[5] = new Item("key", 53 * gp.tileSize, 4 * gp.tileSize, "blau");
-        gp.items[5].collisionOn = true;
+        i = new Item("key", 53 * gp.tileSize, 4 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[6] = new Item("key", 8 * gp.tileSize, 26 * gp.tileSize, "blau");
-        gp.items[6].collisionOn = true;
+        i = new Item("key", 8 * gp.tileSize, 26 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[7] = new Item("key", 29 * gp.tileSize, 22 * gp.tileSize, "blau");
-        gp.items[7].collisionOn = true;
+        i = new Item("key", 29 * gp.tileSize, 22 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[8] = new Item("key", 23 * gp.tileSize, 12 * gp.tileSize, "blau");
-        gp.items[8].collisionOn = true;
+        i = new Item("key", 23 * gp.tileSize, 12 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
-        gp.items[9] = new Item("key", 10 * gp.tileSize, 9 * gp.tileSize, "blau");
-        gp.items[9].collisionOn = true;
+        i = new Item("key", 10 * gp.tileSize, 9 * gp.tileSize, "blau");
+        i.collisionOn = true;
+        gp.items.add(i);
 
     }
 
