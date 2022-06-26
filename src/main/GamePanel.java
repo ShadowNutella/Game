@@ -155,6 +155,7 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+        ui.graphics = g2;
 
         //Draws the Tiles of the current world map
         tileM.drawWorldTiles(g2);
@@ -175,7 +176,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //UI
-        ui.drawUI(g2);
+        ui.drawUI();
 
 
         g2.dispose();

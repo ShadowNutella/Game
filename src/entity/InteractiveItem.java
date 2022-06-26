@@ -1,5 +1,7 @@
 package entity;
 
+import main.UI;
+
 import java.awt.*;
 
 public class InteractiveItem extends Item {
@@ -25,7 +27,7 @@ public class InteractiveItem extends Item {
     public void pickUp(Player player) {
 
             if (player.inventory.getKeyCount() < 10) {
-
+                UI.instance.showMessage("Du hast zu wenige Schlüssel", 240);
         }
 
     }
