@@ -1,6 +1,7 @@
 package tile;
 
 import entity.Camera;
+import main.FightScreenOne;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -13,22 +14,25 @@ import java.io.InputStreamReader;
 public class TileManager {
 
     GamePanel gp;
+    FightScreenOne fp;
     public Tile[] tile;
     public int[][] mapTileNum;
 
 
-    public TileManager(GamePanel gp) {
+    public TileManager(GamePanel gp, String farbe1, String farbe2, String filePath) {
 
         this.gp = gp;
 
-        tile = new Tile[66];
+        tile = new Tile[24];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
-        getTileImage("Lila", "lila");
-        loadMap("/maps/worldblau.txt");
+        getTileImage(farbe1, farbe2);
+        loadMap(filePath);
     }
 
+
     public void getTileImage(String farbe1, String farbe2) {
+
 
         try {
 

@@ -11,15 +11,20 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Journey Back Home");
 
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
+        //GamePanel gamePanel = new GamePanel();
+        FightScreenOne gamePanelFight = new FightScreenOne();
+        //MapLila gamePanel2 = new MapLila();
+        //window.add(gamePanel);
+        window.add(gamePanelFight);
+        //window.add(gamePanel2);
 
         window.pack();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        gamePanel.startGameThread();
+        //gamePanel.startGameThread();
+        gamePanelFight.startGameThread();
 
     }
 

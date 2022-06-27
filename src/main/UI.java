@@ -1,5 +1,7 @@
 package main;
 
+import tile.TileManager;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -23,8 +25,6 @@ public class UI {
     private int sceneChangeTimerTarget = 60;
 
 
-    AnimatedBufferedImage keyImage = new AnimatedBufferedImage("/objects/key_blau");
-
 
     public UI(GamePanel gp) {
 
@@ -43,14 +43,11 @@ public class UI {
     public void drawUI() {
         graphics.setFont(arial_30);
         graphics.setColor(Color.white);
-        graphics.drawImage(keyImage.getImage(), 0, 0, gp.tileSize, gp.tileSize, null);
-        graphics.drawString("x " + gp.playerOne.inventory.getKeyCount(), 65, 40);
 
         if (messageTimer <= 0)
             currentMessage = "";
         graphics.drawString(currentMessage, 20, 80);
         messageTimer--;
-
 
         if (closing)
         {
