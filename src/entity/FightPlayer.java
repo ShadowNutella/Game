@@ -45,7 +45,7 @@ public class FightPlayer extends Player {
     }
 
     public void updatePlayerOne() {
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+        if (keyH.leftPressed || keyH.rightPressed) {
 
             if (keyH.leftPressed) {
                 direction = "left";
@@ -61,13 +61,6 @@ public class FightPlayer extends Player {
 
             //Check Object collision -> Returns array with all colliding objects
 
-            Item[] collisions = gp.cChecker.checkObjects(this);
-            for (int i = 0; i < collisions.length; i++) {
-                boolean remove = collisions[i].pickUp(this);
-                if (remove)
-                    gp.items.remove(collisions[i]);
-            }
-
             //If collision is false, player can move
             if (!collisionOn) {
                 switch (direction) {
@@ -79,6 +72,16 @@ public class FightPlayer extends Player {
         } else {
             setAnimationSpeed(0);
         }
+
+        int tempSpeed = speed;
+        speed = 0;
+        Item[] collisions = gp.cChecker.checkObjects(this);
+        for (int i = 0; i < collisions.length; i++) {
+            boolean remove = collisions[i].pickUp(this);
+            if (remove)
+                gp.items.remove(collisions[i]);
+        }
+        speed = tempSpeed;
 
     }
 
@@ -98,12 +101,6 @@ public class FightPlayer extends Player {
 
             //Check Object collision -> Returns array with all colliding objects
 
-            Item[] collisions = gp.cChecker.checkObjects(this);
-            for (int i = 0; i < collisions.length; i++) {
-                boolean remove = collisions[i].pickUp(this);
-                if (remove)
-                    gp.items.remove(collisions[i]);
-            }
 
             //If collision is false, player can move
             if (!collisionOn) {
@@ -117,6 +114,16 @@ public class FightPlayer extends Player {
         } else {
             setAnimationSpeed(0);
         }
+
+        int tempSpeed = speed;
+        speed = 0;
+        Item[] collisions = gp.cChecker.checkObjects(this);
+        for (int i = 0; i < collisions.length; i++) {
+            boolean remove = collisions[i].pickUp(this);
+            if (remove)
+                gp.items.remove(collisions[i]);
+        }
+        speed = tempSpeed;
     }
 
     public void draw(Graphics2D p) {

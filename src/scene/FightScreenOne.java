@@ -128,20 +128,28 @@ public class FightScreenOne extends Scene {
         playerTwo.updatePlayerTwo();
 
         shootTimer++;
-        shootTimer %= 120;
-        if (shootTimer == 60)
+        shootTimer %= 240;
+        if (shootTimer == 120)
         {
-            entities.add(guardian_blue_left.shoot());
+            items.add(guardian_blue_left.shoot());
         }
-        if(shootTimer == 119)
+        if(shootTimer == 180)
         {
-            entities.add(guardian_blue_right.shoot());
+            items.add(guardian_blue_right.shoot());
         }
+
+
 
 
         for (Entity e : entities) {
             if (e.alive)
                 e.update();
+        }
+
+        for (Item i : items)
+        {
+            if(i.alive)
+                i.update();
         }
     }
 

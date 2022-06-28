@@ -9,6 +9,10 @@ import java.awt.*;
 public class Item extends Entity {
 
 
+    public Item(String resourcePath, int x, int y) {
+        super(resourcePath, x, y);
+    }
+
     public Item(String name, int x, int y, String farbe) {
 
         super("/objects/" + name + "_" + farbe, x, y);

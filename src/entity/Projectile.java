@@ -1,6 +1,11 @@
 package entity;
 
-public class Projectile extends Entity {
+import entity.item.Item;
+import ui.UI;
+
+import java.awt.*;
+
+public class Projectile extends Item {
 
     public int targetX, targetY;
     public double speed;
@@ -9,10 +14,15 @@ public class Projectile extends Entity {
         this.targetX = targetX;
         this.targetY = targetY;
         this.speed = speed;
-
+        solidPart = new Rectangle(0, 0, 64, 64);
+        collisionOn = true;
     }
 
 
+    public boolean pickUp(Player player) {
+        UI.instance.showMessage("You got hit, idiot", 30);
+        return true;
+    }
 
     public void update() {
         super.update();

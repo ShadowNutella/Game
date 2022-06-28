@@ -171,6 +171,12 @@ public class Scene extends JPanel implements Runnable {
                 e.update();
         }
 
+        for (Item i : items)
+        {
+            if(i.alive)
+                i.update();
+        }
+
         int cameraX, cameraY;
         // Calculate cameraX and cameraY as point in the center between playerOne and playerTwo
         cameraX = (playerOne.x + playerTwo.x) / 2;
@@ -189,13 +195,6 @@ public class Scene extends JPanel implements Runnable {
         //Draws the Tiles of the current world map
         tileM.drawWorldTiles(g2);
 
-        //Draws the items on the map
-        for (Item i : items) {
-            if (i != null) {
-                i.draw(g2);
-            }
-        }
-
         //sorts the entities by their priority to decide which one will be drawn first and which one covers the others by running over them
         sortEntitiesByPriority();
 
@@ -203,6 +202,13 @@ public class Scene extends JPanel implements Runnable {
         for (Entity e : entities) {
             if (e.alive)
                 e.draw(g2);
+        }
+
+        //Draws the items on the map
+        for (Item i : items) {
+            if (i != null && i.alive) {
+                i.draw(g2);
+            }
         }
 
         //UI

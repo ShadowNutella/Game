@@ -15,7 +15,8 @@ public class FightEnemy extends Enemy {
 
     public Projectile shoot()
     {
-        Projectile projectile = new Projectile("/objects/projectile/flame_blau_", x, y, target.x, target.y, 3);
+        Projectile projectile = new Projectile("/objects/projectile/flame_blau_", x, y, target.x, target.y, 10);
+        projectile.drawPriority = 105;
         projectile.setSize(0.8);
         return projectile;
     }
