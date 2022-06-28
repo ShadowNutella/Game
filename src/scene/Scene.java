@@ -5,7 +5,7 @@ import entity.item.Item;
 import main.Camera;
 import main.CollisionChecker;
 import main.ItemHolder;
-import entity.item.KeyHandler;
+import entity.keyhandler.KeyHandler;
 import tile.TileManager;
 import ui.UI;
 
@@ -167,7 +167,8 @@ public class Scene extends JPanel implements Runnable {
     public void update() {
 
         for (Entity e : entities) {
-            e.update();
+            if (e.alive)
+                e.update();
         }
 
         int cameraX, cameraY;
@@ -200,7 +201,8 @@ public class Scene extends JPanel implements Runnable {
 
         //Loop through entities and draws them
         for (Entity e : entities) {
-            e.draw(g2);
+            if (e.alive)
+                e.draw(g2);
         }
 
         //UI

@@ -4,7 +4,7 @@ import entity.*;
 import entity.item.Item;
 import main.Camera;
 import main.ItemHolder;
-import entity.item.KeyHandlerFight;
+import entity.keyhandler.KeyHandlerFight;
 import tile.TileManager;
 import ui.FightUIBlau;
 import ui.UI;
@@ -21,12 +21,19 @@ public class FightScreenOne extends Scene {
     private int maxScreenRow = 12;
 
     //World Settings (World 80/30, Fight 20/12)
-    private int maxWorldCol = 10;
+    private int maxWorldCol = 11;
     private int maxWorldRow = 6;
 
 
     public FightScreenOne() {
-        super();
+        this.setPreferredSize(new Dimension(getScreenWidth() / 2, getScreenHeight() / 2));
+        this.setBackground(Color.black);
+        this.setDoubleBuffered(true);
+        this.setFocusable(true);
+
+        Camera.instance.gp = this;
+        //Camera.setLimits(getScreenWidth() / 2, getWorldWidth() - getScreenWidth() / 2, getScreenHeight() / 2, getWorldHeight() - getScreenHeight() / 2);
+
         this.keyH = new KeyHandlerFight();
         this.addKeyListener(keyH);
         tileM = new TileManager(this, "Blau", "blau", "/maps/FightScreen.txt");
@@ -81,13 +88,15 @@ public class FightScreenOne extends Scene {
         return getTileSize() * getMaxWorldRow();
     }
 
+    FightEnemy guardian_blue_left, guardian_blue_right;
+
     public void setUpGame() {
 
         ItemHolder playerInventory = new ItemHolder();
-        playerOne = new Player(this, keyH, "/characterOne/char1_", 9, getScreenWidth() / 2 + 2, getTileSize() * 5, playerInventory);
+        playerOne = new FightPlayer(this, keyH, "/characterOne/char1_", 9, 500, 675, playerInventory);
         //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
-        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 9, getScreenWidth() / 2, getTileSize() * 5, playerInventory);
+        playerTwo = new FightPlayer(this, keyH, "/characterTwo/char2_", 9, 520, 670, playerInventory);
         //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
@@ -95,10 +104,10 @@ public class FightScreenOne extends Scene {
         //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
         //entities.add(enemy);
 
-        Enemy guardian_blue_left = new Enemy("/enemies/enemy_blau_left", 410, 105);
+        guardian_blue_left = new FightEnemy("/enemies/enemy_blau_left", 410, 85, playerOne);
         guardian_blue_left.image.animationSpeed = 35;
         guardian_blue_left.setSize(1.5);
-        Enemy guardian_blue_right = new Enemy("/enemies/enemy_blau_right", 525, 112);
+        guardian_blue_right = new FightEnemy("/enemies/enemy_blau_right", 675, 92, playerTwo);
         guardian_blue_right.image.animationSpeed = 25;
         guardian_blue_right.setSize(1.4);
         entities.add(guardian_blue_left);
@@ -110,7 +119,7 @@ public class FightScreenOne extends Scene {
         Camera.setPos(getScreenWidth() / 2, getScreenHeight() / 2);
     }
 
-
+    public int shootTimer = 0;
     public void update() {
 
         playerOne.setAnimationSpeed(12);
@@ -118,47 +127,21 @@ public class FightScreenOne extends Scene {
         playerTwo.setAnimationSpeed(10);
         playerTwo.updatePlayerTwo();
 
-
-        for (Entity e : entities) {
-            e.update();
-        }
-    }
-
-    public void paintComponent(Graphics g) {
-
-        super.paintComponent(g);
-
-        Graphics2D g2 = (Graphics2D) g;
-        ui.graphics = g2;
-
-        //Draws the Tiles of the current world map
-        tileM.drawWorldTiles(g2);
-
-        //Draws the items on the map
-        for (Item i : items) {
-            if (i != null) {
-                i.draw(g2);
-            }
-        }
-
-        //sorts the entities by their priority to decide which one will be drawn first and which one covers the others by running over them
-        sortEntitiesByPriority();
-
-        //Loop through entities and draws them
-        for (Entity e : entities) {
-            e.draw(g2);
-        }
-
-        //UI
-        ui.drawUI();
-
-
-        g2.dispose();
-
-        if (!gameStarted)
+        shootTimer++;
+        shootTimer %= 120;
+        if (shootTimer == 60)
         {
-            UI.instance.startOpening(20);
-            gameStarted = true;
+            entities.add(guardian_blue_left.shoot());
+        }
+        if(shootTimer == 119)
+        {
+            entities.add(guardian_blue_right.shoot());
+        }
+
+
+        for (Entity e : entities) {
+            if (e.alive)
+                e.update();
         }
     }
 

@@ -1,73 +1,53 @@
 package entity;
 
 import entity.item.Item;
+import entity.keyhandler.KeyHandler;
 import main.AnimatedBufferedImage;
 import main.Camera;
-import scene.Scene;
 import main.ItemHolder;
-import entity.keyhandler.KeyHandler;
+import scene.Scene;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
-public class Player extends Entity {
+public class FightPlayer extends Player {
 
     Scene gp;
     KeyHandler keyH;
     public int speed;
-    public AnimatedBufferedImage front, back, left, right;
-    public String direction;
 
     public ItemHolder inventory;
 
-    public Player() {
+    public FightPlayer(Scene gp, KeyHandler keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
         super();
-    }
-
-    public Player(Scene gp, KeyHandler keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
-        super(resourcePath, x, y);
-        direction = "right";
+        this.x = x;
+        this.y = y;
         this.gp = gp;
         this.keyH = keyH;
+        this.resourcePath = resourcePath;
         this.speed = speed;
         this.inventory = inventory;
+        this.direction = "right";
+        loadImages();
 
         solidPart = new Rectangle(6, 34, 58, 30);
-
     }
 
     public void setAnimationSpeed(int animationSpeed) {
-        front.animationSpeed = animationSpeed;
-        back.animationSpeed = animationSpeed;
-        left.animationSpeed = animationSpeed;
-        right.animationSpeed = animationSpeed;
+        image.animationSpeed = animationSpeed;
     }
 
     public void loadImages() {
-        front = new AnimatedBufferedImage(resourcePath + "front");
-        back = new AnimatedBufferedImage(resourcePath + "back");
-        left = new AnimatedBufferedImage(resourcePath + "left");
-        right = new AnimatedBufferedImage(resourcePath + "right");
+        image = new AnimatedBufferedImage(resourcePath + "back");
     }
 
     public void update() {
-        front.advance();
-        back.advance();
-        left.advance();
-        right.advance();
+        image.advance();
     }
 
     public void updatePlayerOne() {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
 
-            //Player 1
-            if (keyH.upPressed) {
-                direction = "back";
-
-            } else if (keyH.downPressed) {
-                direction = "front";
-
-            } else if (keyH.leftPressed) {
+            if (keyH.leftPressed) {
                 direction = "left";
 
             } else if (keyH.rightPressed) {
@@ -91,8 +71,6 @@ public class Player extends Entity {
             //If collision is false, player can move
             if (!collisionOn) {
                 switch (direction) {
-                    case "back" -> y -= speed;
-                    case "front" -> y += speed;
                     case "left" -> x -= speed;
                     case "right" -> x += speed;
                 }
@@ -107,14 +85,7 @@ public class Player extends Entity {
     public void updatePlayerTwo() {
         if (keyH.upPressed2 || keyH.downPressed2 || keyH.leftPressed2 || keyH.rightPressed2) {
 
-            //Player 2
-            if (keyH.upPressed2) {
-                direction = "back";
-
-            } else if (keyH.downPressed2) {
-                direction = "front";
-
-            } else if (keyH.leftPressed2) {
+            if (keyH.leftPressed2) {
                 direction = "left";
 
             } else if (keyH.rightPressed2) {
@@ -138,8 +109,6 @@ public class Player extends Entity {
             if (!collisionOn) {
 
                 switch (direction) {
-                    case "back" -> y -= speed;
-                    case "front" -> y += speed;
                     case "left" -> x -= speed;
                     case "right" -> x += speed;
                 }
@@ -151,17 +120,8 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics2D p) {
-
-        BufferedImage image = switch (direction) {
-            case "back" -> back.getImage();
-            case "front" -> front.getImage();
-            case "left" -> left.getImage();
-            case "right" -> right.getImage();
-            default -> null;
-        };
-
         int finalSizeX = (int) (Camera.instance.gp.getTileSize() * sizeX);
         int finalSizeY = (int) (Camera.instance.gp.getTileSize() * sizeY);
-        p.drawImage(image, x - Camera.getAbsoluteX(), y - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null); //* "Malt" den Charakter an Stelle XY plus dessen "Animation"
+        p.drawImage(image.getImage(), x - Camera.getAbsoluteX(), y - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null); //* "Malt" den Charakter an Stelle XY plus dessen "Animation"
     }
 }

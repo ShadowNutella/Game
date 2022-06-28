@@ -1,8 +1,10 @@
-package entity.item;
+package entity.keyhandler;
+
+import entity.keyhandler.KeyHandler;
 
 import java.awt.event.KeyEvent;
 
-public class KeyHandlerFight extends KeyHandler{
+public class KeyHandlerFight extends KeyHandler {
 
 
         @Override

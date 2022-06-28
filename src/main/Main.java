@@ -17,12 +17,12 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Journey Back Home");
 
-        //MapBlau mapBlau = new MapBlau();
-        //FightScreenOne gamePanelFight = new FightScreenOne();
-        MapLila gamePanel2 = new MapLila();
+        MapBlau mapBlau = new MapBlau();
+        FightScreenOne gamePanelFight = new FightScreenOne();
+        //MapLila gamePanel2 = new MapLila();
         //window.add(mapBlau);
-        //window.add(gamePanelFight);
-        window.add(gamePanel2);
+        window.add(gamePanelFight);
+        //window.add(gamePanel2);
 
         window.pack();
 
@@ -32,8 +32,8 @@ public class Main {
 
         //mapBlau.startGameThread();
 
-        //gamePanelFight.startGameThread();
-        gamePanel2.startGameThread();
+        gamePanelFight.startGameThread();
+        //gamePanel2.startGameThread();
 
     }
 

@@ -3,7 +3,7 @@ package scene;
 import entity.*;
 import entity.item.DoorGuardianItem;
 import entity.item.Item;
-import entity.item.KeyHandler;
+import entity.keyhandler.KeyHandler;
 import tile.TileManager;
 import ui.MapUILila;
 

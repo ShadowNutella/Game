@@ -64,6 +64,9 @@ public class Camera {
     public static void setPos(int x, int y) {
         setX(x);
         setY(y);
+        if ((instance.limitX1 == instance.limitX2) == (instance.limitY1 == instance.limitY2)) {
+            return;
+        }
         // If the new position is outside of the bounds, set it to the closest bound
         if (instance.x < instance.limitX1) {
             setX(instance.limitX1);
