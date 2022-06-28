@@ -50,7 +50,7 @@ public class Player extends Entity {
         right = new AnimatedBufferedImage(resourcePath + "right");
     }
 
-    public void update() {
+    public void updateEntity() {
         front.advance();
         back.advance();
         left.advance();

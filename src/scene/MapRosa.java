@@ -1,26 +1,27 @@
 package scene;
 
-import entity.*;
+import entity.Enemy;
+import entity.PatrolEnemy;
 import entity.item.DoorGuardianItem;
 import entity.item.Item;
 import entity.keyhandler.KeyHandler;
 import tile.TileManager;
-import ui.MapUIBlau;
+import ui.MapUILila;
 
-public class MapBlau extends Scene {
+public class MapRosa extends Scene {
 
     PatrolEnemy patrolerRight, patrolerLeft;
 
-
-    public MapBlau() {
+    public MapRosa() {
         super();
         keyH = new KeyHandler();
         this.addKeyListener(keyH);
-        tileM = new TileManager(this, "Blau", "blau", "/maps/worldblau.txt");
-        ui = new MapUIBlau(this);
+        tileM = new TileManager(this, "Rosa", "rosa", "/maps/worldrosa.txt");
+        ui = new MapUILila(this);
 
         setUpGame();
     }
+
 
     public void setUpGame() {
 
@@ -34,21 +35,19 @@ public class MapBlau extends Scene {
         playerTwo.y = getTileSize() * 24;
         playerTwo.speed = 6;
 
-
         //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
         //entities.add(enemy);
 
-        Enemy guardian_blue_left = new Enemy("/enemies/enemy_blau_left", 410, 105);
-        guardian_blue_left.image.animationSpeed = 35;
-        guardian_blue_left.setSize(1.5);
-        Enemy guardian_blue_right = new Enemy("/enemies/enemy_blau_right", 525, 112);
-        guardian_blue_right.image.animationSpeed = 25;
-        guardian_blue_right.setSize(1.4);
-        entities.add(guardian_blue_left);
-        entities.add(guardian_blue_right);
+        Enemy guardian_lila_left = new Enemy("/enemies/enemy_rosa_left", 410, 105);
+        guardian_lila_left.image.animationSpeed = 35;
+        guardian_lila_left.setSize(1.5);
+        Enemy guardian_lila_right = new Enemy("/enemies/enemy_rosa_right", 525, 112);
+        guardian_lila_right.image.animationSpeed = 25;
+        guardian_lila_right.setSize(1.4);
+        entities.add(guardian_lila_left);
+        entities.add(guardian_lila_right);
 
-
-        patrolerRight = new PatrolEnemy("/enemies/patrol/patrol_blau_", getTileSize() * 78, getTileSize() * 11);
+        /*patrolerRight = new PatrolEnemy("/enemies/patrol/patrol_lila_", getTileSize() * 78, getTileSize() * 11);
         patrolerRight.patrolSpeed = 2;
         patrolerRight.imageLeft.animationSpeed = 24;
         patrolerRight.imageRight.animationSpeed = 24;
@@ -56,13 +55,13 @@ public class MapBlau extends Scene {
         patrolerRight.setSize(1.7);
         entities.add(patrolerRight);
 
-        patrolerLeft = new PatrolEnemy("/enemies/patrol/patrol_blau_", getTileSize() * 62, getTileSize() * 11);
+        patrolerLeft = new PatrolEnemy("/enemies/patrol/patrol_lila_", getTileSize() * 62, getTileSize() * 11);
         patrolerLeft.patrolSpeed = 2;
         patrolerLeft.imageLeft.animationSpeed = 24;
         patrolerLeft.imageRight.animationSpeed = 24;
         items.add(patrolerLeft.textItem);
         patrolerLeft.setSize(1.7);
-        entities.add(patrolerLeft);
+        entities.add(patrolerLeft);*/
 
     }
 
@@ -70,43 +69,43 @@ public class MapBlau extends Scene {
     public void createItems() {
 
         Item i;
-        i = new Item("key", 30 * getTileSize(), 8 * getTileSize(), "blau");
+        i = new Item("key", 30 * getTileSize(), 8 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key",77 * getTileSize() , 24 * getTileSize(), "blau");
+        i = new Item("key",77 * getTileSize() , 24 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 69 * getTileSize(), 18 * getTileSize(), "blau");
+        i = new Item("key", 69 * getTileSize(), 18 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 77 * getTileSize(), 4 * getTileSize(), "blau");
+        i = new Item("key", 77 * getTileSize(), 4 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 55 * getTileSize(), 10 * getTileSize(), "blau");
+        i = new Item("key", 55 * getTileSize(), 10 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 42 * getTileSize(), 4 * getTileSize(), "blau");
+        i = new Item("key", 42 * getTileSize(), 4 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 32 * getTileSize(), 25 * getTileSize(), "blau");
+        i = new Item("key", 32 * getTileSize(), 25 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 15 * getTileSize(), 25 * getTileSize(), "blau");
+        i = new Item("key", 15 * getTileSize(), 25 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 22 * getTileSize(), 13 * getTileSize(), "blau");
+        i = new Item("key", 22 * getTileSize(), 13 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 5 * getTileSize(), 10 * getTileSize(), "blau");
+        i = new Item("key", 5 * getTileSize(), 10 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
@@ -115,7 +114,6 @@ public class MapBlau extends Scene {
 
     }
 
-
     public void update() {
 
         playerOne.setAnimationSpeed(12);
@@ -123,7 +121,7 @@ public class MapBlau extends Scene {
         playerTwo.setAnimationSpeed(10);
         playerTwo.updatePlayerTwo();
 
-        if (patrolerRight.x > getTileSize() * 78)
+        /*if (patrolerRight.x > getTileSize() * 78)
             patrolerRight.moveLeft = true;
         if (patrolerRight.x < getTileSize() * 70 + 32)
             patrolerRight.moveLeft = false;
@@ -133,11 +131,9 @@ public class MapBlau extends Scene {
             patrolerLeft.moveLeft = true;
         if (patrolerLeft.x < getTileSize() * 62)
             patrolerLeft.moveLeft = false;
-        patrolerLeft.move();
+        patrolerLeft.move();*/
 
-
-
+        super.update();
     }
 
 }
-

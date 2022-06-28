@@ -168,13 +168,12 @@ public class Scene extends JPanel implements Runnable {
 
         for (Entity e : entities) {
             if (e.alive)
-                e.update();
+                e.updateEntity();
         }
 
-        for (Item i : items)
-        {
-            if(i.alive)
-                i.update();
+        for (Item i : items) {
+            if (i.alive)
+                i.updateEntity();
         }
 
         int cameraX, cameraY;
@@ -239,6 +238,7 @@ public class Scene extends JPanel implements Runnable {
 
     public void win()
     {
+
         levelStatus = 1;
     }
 
@@ -251,4 +251,7 @@ public class Scene extends JPanel implements Runnable {
     {
         return levelStatus;
     }
+
+
+
 }

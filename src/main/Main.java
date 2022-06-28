@@ -3,6 +3,7 @@ package main;
 import scene.FightScreenOne;
 import scene.MapBlau;
 import scene.MapLila;
+import scene.Scene;
 
 import javax.swing.*;
 
@@ -17,11 +18,13 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Journey Back Home");
 
+
         MapBlau mapBlau = new MapBlau();
-        FightScreenOne gamePanelFight = new FightScreenOne();
-        //MapLila gamePanel2 = new MapLila();
-        //window.add(mapBlau);
-        window.add(gamePanelFight);
+        //FightScreenOne FightOne = new FightScreenOne();
+        //MapLila mapLila = new MapLila();
+
+        window.add(mapBlau);
+        //window.add(gamePanelFight);
         //window.add(gamePanel2);
 
         window.pack();
@@ -30,9 +33,9 @@ public class Main {
         window.setVisible(true);
 
 
-        //mapBlau.startGameThread();
+        mapBlau.startGameThread();
 
-        gamePanelFight.startGameThread();
+        //gamePanelFight.startGameThread();
         //gamePanel2.startGameThread();
 
     }

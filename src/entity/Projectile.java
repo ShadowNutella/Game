@@ -9,6 +9,8 @@ public class Projectile extends Item {
 
     public int targetX, targetY;
     public double speed;
+
+
     public Projectile(String resourcePath, int x, int y, int targetX, int targetY, double speed) {
         super(resourcePath, x, y);
         this.targetX = targetX;
@@ -16,16 +18,21 @@ public class Projectile extends Item {
         this.speed = speed;
         solidPart = new Rectangle(0, 0, 64, 64);
         collisionOn = true;
+
     }
 
 
     public boolean pickUp(Player player) {
-        UI.instance.showMessage("You got hit, idiot", 30);
+
+        if (alive) {
+            UI.instance.showMessage("You got hit, idiot", 30);
+        }
+
         return true;
     }
 
-    public void update() {
-        super.update();
+    public void updateEntity() {
+        super.updateEntity();
         move();
     }
 

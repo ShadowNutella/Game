@@ -1,17 +1,16 @@
 package scene;
 
-import entity.*;
-import entity.item.Item;
+import entity.FightEnemy;
+import entity.FightPlayer;
+import entity.keyhandler.KeyHandlerFight;
 import main.Camera;
 import main.ItemHolder;
-import entity.keyhandler.KeyHandlerFight;
 import tile.TileManager;
 import ui.FightUIBlau;
-import ui.UI;
 
 import java.awt.*;
 
-public class FightScreenOne extends Scene {
+public class FightScreenThree extends Scene {
 
     //SCREEN SETTINGS
     private int originalTileSize = 32; //32x32 tile
@@ -25,7 +24,7 @@ public class FightScreenOne extends Scene {
     private int maxWorldRow = 6;
 
 
-    public FightScreenOne() {
+    public FightScreenThree() {
         this.setPreferredSize(new Dimension(getScreenWidth() / 2, getScreenHeight() / 2));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -36,7 +35,7 @@ public class FightScreenOne extends Scene {
 
         this.keyH = new KeyHandlerFight();
         this.addKeyListener(keyH);
-        tileM = new TileManager(this, "Blau", "blau", "/maps/FightScreen.txt");
+        tileM = new TileManager(this, "Rosa", "rosa", "/maps/FightScreen.txt");
         ui = new FightUIBlau(this);
 
         setUpGame();
@@ -86,7 +85,7 @@ public class FightScreenOne extends Scene {
         return getTileSize() * getMaxWorldRow();
     }
 
-    FightEnemy guardian_blue_left, guardian_blue_right;
+    FightEnemy guardian_rosa_left, guardian_rosa_right;
 
     public void setUpGame() {
 
@@ -102,14 +101,14 @@ public class FightScreenOne extends Scene {
         //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
         //entities.add(enemy);
 
-        guardian_blue_left = new FightEnemy("/enemies/enemy_blau_left", 410, 85, playerOne);
-        guardian_blue_left.image.animationSpeed = 35;
-        guardian_blue_left.setSize(1.5);
-        guardian_blue_right = new FightEnemy("/enemies/enemy_blau_right", 675, 92, playerTwo);
-        guardian_blue_right.image.animationSpeed = 25;
-        guardian_blue_right.setSize(1.4);
-        entities.add(guardian_blue_left);
-        entities.add(guardian_blue_right);
+        guardian_rosa_left = new FightEnemy("/enemies/enemy_rosa_left", 410, 85, playerOne);
+        guardian_rosa_left.image.animationSpeed = 35;
+        guardian_rosa_left.setSize(1.5);
+        guardian_rosa_right = new FightEnemy("/enemies/enemy_rosa_right", 675, 92, playerTwo);
+        guardian_rosa_right.image.animationSpeed = 25;
+        guardian_rosa_right.setSize(1.4);
+        entities.add(guardian_rosa_left);
+        entities.add(guardian_rosa_right);
 
         entities.add(playerOne);
         entities.add(playerTwo);
@@ -129,10 +128,10 @@ public class FightScreenOne extends Scene {
         shootTimer++;
         shootTimer %= 240;
         if (shootTimer == 120) {
-            items.add(guardian_blue_left.shoot("blau"));
+            items.add(guardian_rosa_left.shoot("rosa"));
         }
         if (shootTimer == 180) {
-            items.add(guardian_blue_right.shoot("blau"));
+            items.add(guardian_rosa_right.shoot("rosa"));
         }
 
 

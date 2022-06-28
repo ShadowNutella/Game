@@ -40,7 +40,7 @@ public class FightPlayer extends Player {
         image = new AnimatedBufferedImage(resourcePath + "back");
     }
 
-    public void update() {
+    public void updateEntity() {
         image.advance();
     }
 
