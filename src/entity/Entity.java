@@ -1,6 +1,7 @@
 package entity;
 
 import main.AnimatedBufferedImage;
+import main.Camera;
 
 import java.awt.*;
 
@@ -71,8 +72,8 @@ public class Entity {
 
 
     public void draw(Graphics2D p) {
-        int finalSizeX = (int) ((double) Camera.instance.gp.tileSize * sizeX);
-        int finalSizeY = (int) ((double) Camera.instance.gp.tileSize * sizeY);
+        int finalSizeX = (int) ((double) Camera.instance.gp.getTileSize() * sizeX);
+        int finalSizeY = (int) ((double) Camera.instance.gp.getTileSize() * sizeY);
         if (image != null) {
             p.drawImage(image.getImage(), x - Camera.getAbsoluteX(), y - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null); //* "Malt" den Charakter an Stelle XY plus dessen "Animation"
         }

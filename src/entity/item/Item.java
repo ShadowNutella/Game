@@ -1,5 +1,7 @@
-package entity;
+package entity.item;
 
+import entity.Entity;
+import entity.Player;
 import main.ItemHolder;
 
 import java.awt.*;

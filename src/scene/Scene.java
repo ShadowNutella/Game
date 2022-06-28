@@ -1,37 +1,37 @@
-package main;
+package scene;
 
 import entity.*;
-import entity.Item;
+import entity.item.Item;
+import main.Camera;
+import main.CollisionChecker;
+import main.ItemHolder;
+import entity.item.KeyHandler;
 import tile.TileManager;
+import ui.UI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GamePanel extends JPanel implements Runnable {
+public class Scene extends JPanel implements Runnable {
 
     //SCREEN SETTINGS
-    final int originalTileSize = 32; //32x32 tile
-    public int scale = 2; //World * 2 | Fight * 4
+    private int originalTileSize = 32; //32x32 tile
+    private int scale = 2; //World * 2 | Fight * 4
 
-    public final int tileSize = originalTileSize * scale; //World 64x64 tile
-    public final int maxScreenCol = 20;
-    public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol;
-    public final int screenHeight = tileSize * maxScreenRow;
+    private int maxScreenCol = 20;
+    private int maxScreenRow = 12;
 
     //World Settings (World 80/30, Fight 20/12)
-    public int maxWorldCol = 80;
-    public int maxWorldRow = 30;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
+    private int maxWorldCol = 80;
+    private int maxWorldRow = 30;
 
     //FPS
     int FPS = 60;
 
-    TileManager tileM;
-    KeyHandler keyH;
-    Thread gameThread;
+    public TileManager tileM;
+    public KeyHandler keyH;
+    public Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
     public UI ui;
 
@@ -43,22 +43,68 @@ public class GamePanel extends JPanel implements Runnable {
 
     public boolean gameStarted = false;
 
+    // 0 => Playing, 1 => Won, 2 => Lost
+    private int levelStatus = 0;
 
-    public GamePanel() {
 
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+    public Scene() {
+
+        this.setPreferredSize(new Dimension(getScreenWidth(), getScreenHeight()));
         this.setBackground(Color.black);
-        this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
+        this.setDoubleBuffered(true);
         this.setFocusable(true);
         //tileM = new TileManager(this, "Blau", "blau", "/maps/worldblau.txt");
 
         Camera.instance.gp = this;
-        Camera.setLimits(screenWidth / 2, worldWidth - screenWidth / 2, screenHeight / 2, worldHeight - screenHeight / 2);
-
-        setUpGame();
+        Camera.setLimits(getScreenWidth() / 2, getWorldWidth() - getScreenWidth() / 2, getScreenHeight() / 2, getWorldHeight() - getScreenHeight() / 2);
     }
 
+    public int getMaxWorldRow() {
+        return maxWorldRow;
+    }
+
+    public int getMaxWorldCol() {
+        return maxWorldCol;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public int getOriginalTileSize()
+    {
+        return originalTileSize;
+    }
+
+    public int getTileSize() {
+        return getOriginalTileSize() * getScale();
+    }
+
+    public int getScreenWidth() {
+        return getTileSize() * getMaxScreenCol();
+    }
+
+    public int getMaxScreenCol() {
+        return maxScreenCol;
+    }
+
+    public int getScreenHeight() {
+        return getTileSize() * getMaxScreenRow();
+    }
+
+    public int getMaxScreenRow()
+    {
+        return maxScreenRow;
+    }
+
+    public int getWorldWidth() {
+        return getTileSize() * getMaxWorldCol();
+    }
+
+    public int getWorldHeight() {
+        return getTileSize() * getMaxWorldRow();
+    }
 
     public void setUpGame() {
 
@@ -66,10 +112,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         ItemHolder playerInventory = new ItemHolder();
 
-        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, tileSize * 69, tileSize * 24, playerInventory);
+        playerOne = new Player(this, keyH, "/characterOne/char1_", 5, getTileSize() * 69, getTileSize()  * 24, playerInventory);
         //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
-        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, tileSize * 71, tileSize * 24, playerInventory);
+        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, getTileSize()  * 71, getTileSize()  * 24, playerInventory);
         //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
@@ -183,5 +229,18 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    public void win()
+    {
+        levelStatus = 1;
+    }
 
+    public void lose()
+    {
+        levelStatus = 2;
+    }
+
+    public int getLevelStatus()
+    {
+        return levelStatus;
+    }
 }

@@ -1,8 +1,8 @@
 package tile;
 
-import entity.Camera;
-import main.FightScreenOne;
-import main.GamePanel;
+import main.Camera;
+import scene.FightScreenOne;
+import scene.Scene;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,18 +13,18 @@ import java.io.InputStreamReader;
 
 public class TileManager {
 
-    GamePanel gp;
+    Scene gp;
     FightScreenOne fp;
     public Tile[] tile;
     public int[][] mapTileNum;
 
 
-    public TileManager(GamePanel gp, String farbe1, String farbe2, String filePath) {
+    public TileManager(Scene gp, String farbe1, String farbe2, String filePath) {
 
         this.gp = gp;
 
         tile = new Tile[24];
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapTileNum = new int[gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 
         getTileImage(farbe1, farbe2);
         loadMap(filePath);
@@ -131,11 +131,11 @@ public class TileManager {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            for (int row = 0; row < gp.maxWorldRow; row++) {
+            for (int row = 0; row < gp.getMaxWorldRow(); row++) {
                 String line = br.readLine();
                 String[] numbers = line.split(" ");
 
-                for (int col = 0; col < gp.maxWorldCol; col++) {
+                for (int col = 0; col < gp.getMaxWorldCol(); col++) {
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                 }
@@ -143,23 +143,23 @@ public class TileManager {
             br.close();
 
         } catch (Exception e) {
-
+            System.out.println("Load Map didn't work ;-;");
         }
     }
 
     public void drawWorldTiles(Graphics2D w1) {
 
-        for (int worldCol = 0; worldCol < gp.maxWorldCol; worldCol++) {
-            for (int worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
+        for (int worldCol = 0; worldCol < gp.getMaxWorldCol(); worldCol++) {
+            for (int worldRow = 0; worldRow < gp.getMaxWorldRow(); worldRow++) {
                 int tileNum = mapTileNum[worldCol][worldRow];
 
-                int worldX = worldCol * gp.tileSize;
-                int worldY = worldRow * gp.tileSize;
+                int worldX = worldCol * gp.getTileSize();
+                int worldY = worldRow * gp.getTileSize();
 
                 int screenX = worldX - Camera.getAbsoluteX();
                 int screenY = worldY - Camera.getAbsoluteY();
 
-                w1.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null); //* "Malt" die Tiles für die Umgebung
+                w1.drawImage(tile[tileNum].image, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null); //* "Malt" die Tiles für die Umgebung
             }
         }
 

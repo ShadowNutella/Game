@@ -1,6 +1,6 @@
 package main;
 
-import entity.Item;
+import entity.item.Item;
 
 import java.util.ArrayList;
 

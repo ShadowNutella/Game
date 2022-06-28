@@ -1,6 +1,6 @@
-package main;
+package ui;
 
-import tile.TileManager;
+import scene.Scene;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,9 +11,9 @@ import java.io.IOException;
 public class UI {
 
     public static UI instance;
-    GamePanel gp;
+    public Scene gp;
 
-    Graphics2D graphics;
+    public Graphics2D graphics;
     public Font arial_30;
 
     private String currentMessage = "";
@@ -26,7 +26,7 @@ public class UI {
 
 
 
-    public UI(GamePanel gp) {
+    public UI(Scene gp) {
 
         instance = this;
         this.gp = gp;
@@ -61,6 +61,7 @@ public class UI {
 
     public void startClosing(int duration)
     {
+        gp.lose();
         sceneChangeTimer = 0;
         sceneChangeTimerTarget = duration;
         closing = true;
@@ -86,14 +87,14 @@ public class UI {
 
         int sizeX, sizeY;
         double percentage = (double) sceneChangeTimer / (double) sceneChangeTimerTarget;
-        sizeX = (int) (percentage * (gp.screenWidth / 2));
-        sizeY = (int) (percentage * (gp.screenHeight / 2));
+        sizeX = (int) (percentage * (gp.getScreenWidth() / 2));
+        sizeY = (int) (percentage * (gp.getScreenHeight() / 2));
         // Screen: 1280x768
 
-        graphics.drawImage(curtain, 0, 0, sizeX, gp.screenHeight, null); //Left
-        graphics.drawImage(curtain, gp.screenWidth - sizeX, 0, gp.screenWidth, gp.screenHeight, null); //Right
-        graphics.drawImage(curtain, 0, 0, gp.screenWidth, sizeY, null); //Top
-        graphics.drawImage(curtain, 0, gp.screenHeight - sizeY, gp.screenWidth, gp.screenHeight, null); //Bottom
+        graphics.drawImage(curtain, 0, 0, sizeX, gp.getScreenHeight(), null); //Left
+        graphics.drawImage(curtain, gp.getScreenWidth() - sizeX, 0, gp.getScreenWidth(), gp.getScreenHeight(), null); //Right
+        graphics.drawImage(curtain, 0, 0, gp.getScreenWidth(), sizeY, null); //Top
+        graphics.drawImage(curtain, 0, gp.getScreenHeight() - sizeY, gp.getScreenWidth(), gp.getScreenHeight(), null); //Bottom
 
         sceneChangeTimer++;
     }
@@ -110,14 +111,14 @@ public class UI {
 
         int sizeX, sizeY;
         double percentage = (double) sceneChangeTimer / (double) sceneChangeTimerTarget;
-        sizeX = (int) (percentage * (gp.screenWidth / 2));
-        sizeY = (int) (percentage * (gp.screenHeight / 2));
+        sizeX = (int) (percentage * (gp.getScreenWidth() / 2));
+        sizeY = (int) (percentage * (gp.getScreenHeight() / 2));
         // Screen: 1280x768
 
-        graphics.drawImage(curtain, 0, 0, sizeX, gp.screenHeight, null); //Left
-        graphics.drawImage(curtain, gp.screenWidth - sizeX, 0, gp.screenWidth, gp.screenHeight, null); //Right
-        graphics.drawImage(curtain, 0, 0, gp.screenWidth, sizeY, null); //Top
-        graphics.drawImage(curtain, 0, gp.screenHeight - sizeY, gp.screenWidth, gp.screenHeight, null); //Bottom
+        graphics.drawImage(curtain, 0, 0, sizeX, gp.getScreenHeight(), null); //Left
+        graphics.drawImage(curtain, gp.getScreenWidth() - sizeX, 0, gp.getScreenWidth(), gp.getScreenHeight(), null); //Right
+        graphics.drawImage(curtain, 0, 0, gp.getScreenWidth(), sizeY, null); //Top
+        graphics.drawImage(curtain, 0, gp.getScreenHeight() - sizeY, gp.getScreenWidth(), gp.getScreenHeight(), null); //Bottom
 
         sceneChangeTimer--;
     }

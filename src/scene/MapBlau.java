@@ -1,36 +1,40 @@
-package main;
+package scene;
 
 import entity.*;
+import entity.item.DoorGuardianItem;
+import entity.item.Item;
+import entity.item.KeyHandler;
 import tile.TileManager;
+import ui.MapUIBlau;
 
-import java.awt.*;
-import java.util.ArrayList;
-
-public class MapBlau extends GamePanel {
+public class MapBlau extends Scene {
 
     PatrolEnemy patrolerRight, patrolerLeft;
 
 
     public MapBlau() {
-
         super();
         keyH = new KeyHandler();
+        this.addKeyListener(keyH);
         tileM = new TileManager(this, "Blau", "blau", "/maps/worldblau.txt");
         ui = new MapUIBlau(this);
 
+        setUpGame();
     }
+
+    public String finished = "naw";
 
 
     public void setUpGame() {
 
         super.setUpGame();
 
-        playerOne.x = tileSize * 69;
-        playerOne.y = tileSize * 24;
+        playerOne.x = getTileSize() * 69;
+        playerOne.y = getTileSize() * 24;
         playerOne.speed = 5;
 
-        playerTwo.x = tileSize * 71;
-        playerTwo.y = tileSize * 24;
+        playerTwo.x = getTileSize() * 71;
+        playerTwo.y = getTileSize() * 24;
         playerTwo.speed = 6;
 
 
@@ -47,7 +51,7 @@ public class MapBlau extends GamePanel {
         entities.add(guardian_blue_right);
 
 
-        patrolerRight = new PatrolEnemy("/enemies/patrol/patrol_blau_", tileSize * 78, tileSize * 11);
+        patrolerRight = new PatrolEnemy("/enemies/patrol/patrol_blau_", getTileSize() * 78, getTileSize() * 11);
         patrolerRight.patrolSpeed = 2;
         patrolerRight.imageLeft.animationSpeed = 24;
         patrolerRight.imageRight.animationSpeed = 24;
@@ -55,7 +59,7 @@ public class MapBlau extends GamePanel {
         patrolerRight.setSize(1.7);
         entities.add(patrolerRight);
 
-        patrolerLeft = new PatrolEnemy("/enemies/patrol/patrol_blau_", tileSize * 62, tileSize * 11);
+        patrolerLeft = new PatrolEnemy("/enemies/patrol/patrol_blau_", getTileSize() * 62, getTileSize() * 11);
         patrolerLeft.patrolSpeed = 2;
         patrolerLeft.imageLeft.animationSpeed = 24;
         patrolerLeft.imageRight.animationSpeed = 24;
@@ -69,47 +73,47 @@ public class MapBlau extends GamePanel {
     public void createItems() {
 
         Item i;
-        i = new Item("key", 30 * tileSize, 8 * tileSize, "blau");
+        i = new Item("key", 30 * getTileSize(), 8 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key",77 * tileSize , 24 * tileSize, "blau");
+        i = new Item("key",77 * getTileSize() , 24 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 69 * tileSize, 18 * tileSize, "blau");
+        i = new Item("key", 69 * getTileSize(), 18 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 77 * tileSize, 4 * tileSize, "blau");
+        i = new Item("key", 77 * getTileSize(), 4 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 55 * tileSize, 10 * tileSize, "blau");
+        i = new Item("key", 55 * getTileSize(), 10 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 42 * tileSize, 4 * tileSize, "blau");
+        i = new Item("key", 42 * getTileSize(), 4 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 32 * tileSize, 25 * tileSize, "blau");
+        i = new Item("key", 32 * getTileSize(), 25 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 15 * tileSize, 25 * tileSize, "blau");
+        i = new Item("key", 15 * getTileSize(), 25 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 22 * tileSize, 13 * tileSize, "blau");
+        i = new Item("key", 22 * getTileSize(), 13 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 5 * tileSize, 10 * tileSize, "blau");
+        i = new Item("key", 5 * getTileSize(), 10 * getTileSize(), "blau");
         i.collisionOn = true;
         items.add(i);
 
-        i = new DoorGuardianItem(410, 175, tileSize * 4, tileSize);
+        i = new DoorGuardianItem(410, 175, getTileSize() * 4, getTileSize());
         items.add(i);
 
     }
@@ -122,15 +126,15 @@ public class MapBlau extends GamePanel {
         playerTwo.setAnimationSpeed(10);
         playerTwo.updatePlayerTwo();
 
-        if (patrolerRight.x > tileSize * 78)
+        if (patrolerRight.x > getTileSize() * 78)
             patrolerRight.moveLeft = true;
-        if (patrolerRight.x < tileSize * 70 + 32)
+        if (patrolerRight.x < getTileSize() * 70 + 32)
             patrolerRight.moveLeft = false;
         patrolerRight.move();
 
-        if (patrolerLeft.x > tileSize * 70 - 32)
+        if (patrolerLeft.x > getTileSize() * 70 - 32)
             patrolerLeft.moveLeft = true;
-        if (patrolerLeft.x < tileSize * 62)
+        if (patrolerLeft.x < getTileSize() * 62)
             patrolerLeft.moveLeft = false;
         patrolerLeft.move();
 

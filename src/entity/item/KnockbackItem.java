@@ -1,6 +1,7 @@
-package entity;
+package entity.item;
 
-import main.UI;
+import entity.PatrolEnemy;
+import entity.Player;
 
 public class KnockbackItem extends TextInteractionItem {
     private PatrolEnemy owner;

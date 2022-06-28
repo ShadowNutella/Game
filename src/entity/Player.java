@@ -1,16 +1,18 @@
 package entity;
 
+import entity.item.Item;
 import main.AnimatedBufferedImage;
-import main.GamePanel;
+import main.Camera;
+import scene.Scene;
 import main.ItemHolder;
-import main.KeyHandler;
+import entity.item.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
 
-    GamePanel gp;
+    Scene gp;
     KeyHandler keyH;
     public int speed;
     public AnimatedBufferedImage front, back, left, right;
@@ -19,7 +21,7 @@ public class Player extends Entity {
     public ItemHolder inventory;
 
 
-    public Player(GamePanel gp, KeyHandler keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
+    public Player(Scene gp, KeyHandler keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
         super(resourcePath, x, y);
         direction = "right";
         this.gp = gp;
@@ -155,8 +157,8 @@ public class Player extends Entity {
             default -> null;
         };
 
-        int finalSizeX = (int) (Camera.instance.gp.tileSize * sizeX);
-        int finalSizeY = (int) (Camera.instance.gp.tileSize * sizeY);
+        int finalSizeX = (int) (Camera.instance.gp.getTileSize() * sizeX);
+        int finalSizeY = (int) (Camera.instance.gp.getTileSize() * sizeY);
         p.drawImage(image, x - Camera.getAbsoluteX(), y - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null); //* "Malt" den Charakter an Stelle XY plus dessen "Animation"
     }
 }

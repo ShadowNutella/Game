@@ -1,6 +1,7 @@
-package entity;
+package entity.item;
 
-import main.UI;
+import entity.Player;
+import ui.UI;
 
 import java.awt.*;
 

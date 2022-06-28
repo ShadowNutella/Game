@@ -1,46 +1,93 @@
-package main;
+package scene;
 
 import entity.*;
+import entity.item.Item;
+import main.Camera;
+import main.ItemHolder;
+import entity.item.KeyHandlerFight;
 import tile.TileManager;
+import ui.FightUIBlau;
+import ui.UI;
 
 import java.awt.*;
 
-public class FightScreenOne extends GamePanel{
+public class FightScreenOne extends Scene {
 
     //SCREEN SETTINGS
-    final int originalTileSize = 32; //32x32 tile
-    public int scale = 4; //World * 2 | Fight * 4
+    private int originalTileSize = 32; //32x32 tile
+    private int scale = 4; //World * 2 | Fight * 4
 
-    public final int tileSize = originalTileSize * scale; //World 64x64 tile
-    public final int maxScreenCol = 20;
-    public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * 2 * maxScreenCol;
-    public final int screenHeight = tileSize * 2 * maxScreenRow;
+    private int maxScreenCol = 20;
+    private int maxScreenRow = 12;
 
     //World Settings (World 80/30, Fight 20/12)
-    public int maxWorldCol = 20;
-    public int maxWorldRow = 12;
-    public final int worldWidth = maxWorldCol;
-    public final int worldHeight = maxWorldRow;
-
+    private int maxWorldCol = 10;
+    private int maxWorldRow = 6;
 
 
     public FightScreenOne() {
-
         super();
         this.keyH = new KeyHandlerFight();
+        this.addKeyListener(keyH);
         tileM = new TileManager(this, "Blau", "blau", "/maps/FightScreen.txt");
         ui = new FightUIBlau(this);
 
+        setUpGame();
+    }
+
+    public int getMaxWorldRow() {
+        return maxWorldRow;
+    }
+
+    public int getMaxWorldCol() {
+        return maxWorldCol;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public int getOriginalTileSize()
+    {
+        return originalTileSize;
+    }
+
+    public int getTileSize() {
+        return getOriginalTileSize() * getScale();
+    }
+
+    public int getScreenWidth() {
+        return getTileSize() * getMaxScreenCol();
+    }
+
+    public int getMaxScreenCol() {
+        return maxScreenCol;
+    }
+
+    public int getScreenHeight() {
+        return getTileSize() * getMaxScreenRow();
+    }
+
+    public int getMaxScreenRow()
+    {
+        return maxScreenRow;
+    }
+
+    public int getWorldWidth() {
+        return getTileSize() * getMaxWorldCol();
+    }
+
+    public int getWorldHeight() {
+        return getTileSize() * getMaxWorldRow();
     }
 
     public void setUpGame() {
 
         ItemHolder playerInventory = new ItemHolder();
-        playerOne = new Player(this, keyH, "/characterOne/char1_", 9, screenWidth / 2 + 2, tileSize * 12, playerInventory);
+        playerOne = new Player(this, keyH, "/characterOne/char1_", 9, getScreenWidth() / 2 + 2, getTileSize() * 5, playerInventory);
         //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
-        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 9, screenWidth / 2, tileSize * 12, playerInventory);
+        playerTwo = new Player(this, keyH, "/characterTwo/char2_", 9, getScreenWidth() / 2, getTileSize() * 5, playerInventory);
         //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
@@ -60,7 +107,7 @@ public class FightScreenOne extends GamePanel{
         entities.add(playerOne);
         entities.add(playerTwo);
 
-
+        Camera.setPos(getScreenWidth() / 2, getScreenHeight() / 2);
     }
 
 
@@ -75,12 +122,6 @@ public class FightScreenOne extends GamePanel{
         for (Entity e : entities) {
             e.update();
         }
-
-        int cameraX, cameraY;
-        // Calculate cameraX and cameraY as point in the center between playerOne and playerTwo
-        cameraX = (playerOne.x + playerTwo.x) / 2;
-        cameraY = (playerOne.y + playerTwo.y) / 2;
-        Camera.setPos(cameraX, cameraY);
     }
 
     public void paintComponent(Graphics g) {

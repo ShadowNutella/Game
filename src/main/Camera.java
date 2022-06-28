@@ -1,6 +1,6 @@
-package entity;
+package main;
 
-import main.GamePanel;
+import scene.Scene;
 
 public class Camera {
     // A static object of the camera so we can access it from everywhere using Camera.instance.
@@ -8,7 +8,7 @@ public class Camera {
     public static Camera instance = new Camera(0, 0);
 
     // Reference to the game panel needed for screen width
-    public GamePanel gp;
+    public Scene gp;
 
     // Coordinates of the camera. The coordinates describe the center of the camera, not the top left corner
     private int x, y;
@@ -35,11 +35,11 @@ public class Camera {
     // and x and y coordinates are at the center.
     public static int getAbsoluteX() {
         // Subtract half width from the coordinate
-        return instance.x - instance.gp.screenWidth / 2;
+        return instance.x - instance.gp.getScreenWidth() / 2;
     }
 
     public static int getAbsoluteY() {
-        return instance.y - instance.gp.screenHeight / 2;
+        return instance.y - instance.gp.getScreenHeight() / 2;
     }
 
     public static void setX(int x) {

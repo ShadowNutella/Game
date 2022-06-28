@@ -1,5 +1,6 @@
 package entity;
 
+import entity.item.TextInteractionItem;
 import main.AnimatedBufferedImage;
 
 public class PatrolEnemy extends Enemy {
