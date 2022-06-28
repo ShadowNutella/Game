@@ -139,7 +139,7 @@ public class Scene extends JPanel implements Runnable {
     }
 
     public void endGameThread() {
-        gameThread.interrupt();
+        gameThread = null;
     }
 
 

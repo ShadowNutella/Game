@@ -14,7 +14,6 @@ import java.io.InputStreamReader;
 public class TileManager {
 
     Scene gp;
-    FightScreenOne fp;
     public Tile[] tile;
     public int[][] mapTileNum;
 

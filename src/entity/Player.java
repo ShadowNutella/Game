@@ -70,12 +70,10 @@ public class Player extends Entity {
             } else if (keyH.leftPressed) {
                 direction = "left";
 
-            } else if (keyH.rightPressed) {
+            } else {
                 direction = "right";
 
             }
-            else
-                System.out.println("WTF");
 
             //Check Tile collision
             collisionOn = false;
@@ -122,7 +120,7 @@ public class Player extends Entity {
             } else if (keyH.leftPressed2) {
                 direction = "left";
 
-            } else if (keyH.rightPressed2) {
+            } else {
                 direction = "right";
 
             }
