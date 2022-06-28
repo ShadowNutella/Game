@@ -1,5 +1,6 @@
 package ui;
 
+import scene.LevelStatus;
 import scene.Scene;
 
 import javax.imageio.ImageIO;
@@ -24,7 +25,7 @@ public class UI {
     private int sceneChangeTimer = 0;
     private int sceneChangeTimerTarget = 60;
 
-
+    private LevelStatus statusToSet; // Set this status after finished closing
 
     public UI(Scene gp) {
 
@@ -59,13 +60,13 @@ public class UI {
         }
     }
 
-    public void startClosing(int duration)
+    public void startClosing(int duration, LevelStatus status)
     {
-        gp.lose();
         sceneChangeTimer = 0;
         sceneChangeTimerTarget = duration;
         closing = true;
         opening = false;
+        statusToSet = status;
     }
 
     public void startOpening(int duration)
@@ -97,6 +98,12 @@ public class UI {
         graphics.drawImage(curtain, 0, gp.getScreenHeight() - sizeY, gp.getScreenWidth(), gp.getScreenHeight(), null); //Bottom
 
         sceneChangeTimer++;
+
+        if (sceneChangeTimer == sceneChangeTimerTarget)
+        {
+            gp.setLevelStatus(statusToSet);
+            closing = false;
+        }
     }
 
     private void openScene()

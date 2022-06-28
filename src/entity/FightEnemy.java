@@ -3,6 +3,7 @@ package entity;
 public class FightEnemy extends Enemy {
 
     public Entity target;
+    public String projectileFarbe;
 
     public FightEnemy() {
 
@@ -14,9 +15,9 @@ public class FightEnemy extends Enemy {
         this.target = target;
     }
 
-    public Projectile shoot(String farbe)
+    public Projectile shoot()
     {
-        Projectile projectile = new Projectile("/objects/projectile/flame_" + farbe + "_", x, y, target.x, target.y, 10);
+        Projectile projectile = new Projectile("/objects/projectile/flame_" + projectileFarbe + "_", x, y, target.x, target.y, 10);
         projectile.drawPriority = 105;
         projectile.setSize(0.8);
         return projectile;

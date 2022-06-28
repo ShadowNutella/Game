@@ -23,6 +23,8 @@ public class TextInteractionItem extends Item {
 
     public void loadImages() { }
 
+    public void updateEntity() { }
+
     public void draw(Graphics2D p) {
         if (messageText == null || currentDuration <= 0)
             return;

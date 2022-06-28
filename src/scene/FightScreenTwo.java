@@ -1,7 +1,9 @@
 package scene;
 
+import entity.Entity;
 import entity.FightEnemy;
 import entity.FightPlayer;
+import entity.item.Item;
 import entity.keyhandler.KeyHandlerFight;
 import main.Camera;
 import main.ItemHolder;
@@ -30,13 +32,14 @@ public class FightScreenTwo extends Scene {
         this.setDoubleBuffered(true);
         this.setFocusable(true);
 
-        Camera.instance.gp = this;
-        //Camera.setLimits(getScreenWidth() / 2, getWorldWidth() - getScreenWidth() / 2, getScreenHeight() / 2, getWorldHeight() - getScreenHeight() / 2);
-
         this.keyH = new KeyHandlerFight();
         this.addKeyListener(keyH);
         tileM = new TileManager(this, "Lila", "lila", "/maps/FightScreen.txt");
         ui = new FightUIBlau(this);
+
+        Camera.instance = new Camera(0, 0);
+        Camera.instance.gp = this;
+        Camera.setLimits(0, 0, 0, 0);
 
         setUpGame();
     }
@@ -104,9 +107,11 @@ public class FightScreenTwo extends Scene {
         guardian_lila_left = new FightEnemy("/enemies/enemy_lila_left", 410, 85, playerOne);
         guardian_lila_left.image.animationSpeed = 35;
         guardian_lila_left.setSize(1.5);
+        guardian_lila_left.projectileFarbe = "lila";
         guardian_lila_right = new FightEnemy("/enemies/enemy_lila_right", 675, 92, playerTwo);
         guardian_lila_right.image.animationSpeed = 25;
         guardian_lila_right.setSize(1.4);
+        guardian_lila_right.projectileFarbe = "lila";
         entities.add(guardian_lila_left);
         entities.add(guardian_lila_right);
 
@@ -128,12 +133,20 @@ public class FightScreenTwo extends Scene {
         shootTimer++;
         shootTimer %= 240;
         if (shootTimer == 120) {
-            items.add(guardian_lila_left.shoot("lila"));
+            items.add(guardian_lila_left.shoot());
         }
         if (shootTimer == 180) {
-            items.add(guardian_lila_right.shoot("lila"));
+            items.add(guardian_lila_right.shoot());
         }
 
+        for (Entity e : entities) {
+            if (e.alive)
+                e.updateEntity();
+        }
 
+        for (Item i : items) {
+            if (i.alive)
+                i.updateEntity();
+        }
     }
 }

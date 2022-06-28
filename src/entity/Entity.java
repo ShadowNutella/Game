@@ -48,8 +48,7 @@ public class Entity {
     }
 
     public void updateEntity() {
-
-            image.advance();
+        image.advance();
     }
 
     public void setSizeX(double sizeX) {

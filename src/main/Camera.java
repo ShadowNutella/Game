@@ -5,7 +5,7 @@ import scene.Scene;
 public class Camera {
     // A static object of the camera so we can access it from everywhere using Camera.instance.
     // All methods in this class are static so they can be used with Camera.method() instead of Camera.instance.method().
-    public static Camera instance = new Camera(0, 0);
+    public static Camera instance;
 
     // Reference to the game panel needed for screen width
     public Scene gp;
@@ -64,7 +64,7 @@ public class Camera {
     public static void setPos(int x, int y) {
         setX(x);
         setY(y);
-        if ((instance.limitX1 == instance.limitX2) == (instance.limitY1 == instance.limitY2)) {
+        if ((instance.limitX1 == instance.limitX2) && (instance.limitY1 == instance.limitY2)) {
             return;
         }
         // If the new position is outside of the bounds, set it to the closest bound

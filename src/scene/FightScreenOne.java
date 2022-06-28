@@ -31,13 +31,14 @@ public class FightScreenOne extends Scene {
         this.setDoubleBuffered(true);
         this.setFocusable(true);
 
-        Camera.instance.gp = this;
-        //Camera.setLimits(getScreenWidth() / 2, getWorldWidth() - getScreenWidth() / 2, getScreenHeight() / 2, getWorldHeight() - getScreenHeight() / 2);
-
         this.keyH = new KeyHandlerFight();
         this.addKeyListener(keyH);
         tileM = new TileManager(this, "Blau", "blau", "/maps/FightScreen.txt");
         ui = new FightUIBlau(this);
+
+        Camera.instance = new Camera(0, 0);
+        Camera.instance.gp = this;
+        Camera.setLimits(0, 0, 0, 0);
 
         setUpGame();
     }
@@ -105,9 +106,11 @@ public class FightScreenOne extends Scene {
         guardian_blue_left = new FightEnemy("/enemies/enemy_blau_left", 410, 85, playerOne);
         guardian_blue_left.image.animationSpeed = 35;
         guardian_blue_left.setSize(1.5);
+        guardian_blue_left.projectileFarbe = "blau";
         guardian_blue_right = new FightEnemy("/enemies/enemy_blau_right", 675, 92, playerTwo);
         guardian_blue_right.image.animationSpeed = 25;
         guardian_blue_right.setSize(1.4);
+        guardian_blue_right.projectileFarbe = "blau";
         entities.add(guardian_blue_left);
         entities.add(guardian_blue_right);
 
@@ -129,12 +132,20 @@ public class FightScreenOne extends Scene {
         shootTimer++;
         shootTimer %= 240;
         if (shootTimer == 120) {
-            items.add(guardian_blue_left.shoot("blau"));
+            items.add(guardian_blue_left.shoot());
         }
         if (shootTimer == 180) {
-            items.add(guardian_blue_right.shoot("blau"));
+            items.add(guardian_blue_right.shoot());
         }
 
+        for (Entity e : entities) {
+            if (e.alive)
+                e.updateEntity();
+        }
 
+        for (Item i : items) {
+            if (i.alive)
+                i.updateEntity();
+        }
     }
 }

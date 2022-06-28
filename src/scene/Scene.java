@@ -44,7 +44,7 @@ public class Scene extends JPanel implements Runnable {
     public boolean gameStarted = false;
 
     // 0 => Playing, 1 => Won, 2 => Lost
-    private int levelStatus = 0;
+    private LevelStatus levelStatus = LevelStatus.PLAYING;
 
 
     public Scene() {
@@ -56,6 +56,7 @@ public class Scene extends JPanel implements Runnable {
         this.setFocusable(true);
         //tileM = new TileManager(this, "Blau", "blau", "/maps/worldblau.txt");
 
+        Camera.instance = new Camera(0, 0);
         Camera.instance.gp = this;
         Camera.setLimits(getScreenWidth() / 2, getWorldWidth() - getScreenWidth() / 2, getScreenHeight() / 2, getWorldHeight() - getScreenHeight() / 2);
     }
@@ -135,6 +136,10 @@ public class Scene extends JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
 
+    }
+
+    public void endGameThread() {
+        gameThread.interrupt();
     }
 
 
@@ -238,16 +243,20 @@ public class Scene extends JPanel implements Runnable {
 
     public void win()
     {
-
-        levelStatus = 1;
+        ui.startClosing(60, LevelStatus.WON);
     }
 
     public void lose()
     {
-        levelStatus = 2;
+        ui.startClosing(60, LevelStatus.LOST);
     }
 
-    public int getLevelStatus()
+    public void setLevelStatus(LevelStatus status)
+    {
+        levelStatus = status;
+    }
+
+    public LevelStatus getLevelStatus()
     {
         return levelStatus;
     }

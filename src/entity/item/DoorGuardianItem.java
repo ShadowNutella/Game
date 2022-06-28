@@ -1,6 +1,7 @@
 package entity.item;
 
 import entity.Player;
+import scene.LevelStatus;
 import ui.UI;
 
 public class DoorGuardianItem extends TextInteractionItem {
@@ -22,7 +23,7 @@ public class DoorGuardianItem extends TextInteractionItem {
         else
         {
             //UI.instance.showMessage("You have opened the door.", 240);
-            UI.instance.startClosing(60);
+            UI.instance.startClosing(60, LevelStatus.WON);
             // doFightScreenStuff();
             return true;
         }

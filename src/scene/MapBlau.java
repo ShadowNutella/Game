@@ -135,8 +135,7 @@ public class MapBlau extends Scene {
             patrolerLeft.moveLeft = false;
         patrolerLeft.move();
 
-
-
+        super.update();
     }
 
 }
