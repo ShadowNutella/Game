@@ -11,8 +11,10 @@ public class Main {
         JFrame window = null;
 
 
-        LevelStatus result = LevelStatus.PLAYING;
+        // These methods are used for every level, in order
 
+        // Level 1: Blue Level
+        LevelStatus result = LevelStatus.PLAYING;
         while(result != LevelStatus.WON)
         {
             MapBlau mapBlau = new MapBlau();
@@ -24,10 +26,8 @@ public class Main {
         disposeWindow(window);
 
 
-
+        // Level 1: Fight Scene of Blue Level
         result = LevelStatus.PLAYING;
-
-
         while(result != LevelStatus.WON)
         {
             FightScreenOne fightScreenOne = new FightScreenOne();
@@ -42,6 +42,7 @@ public class Main {
 
     public static LevelStatus getLevelResult(Scene scene)
     {
+        // Loop and wait until the level-status is no longer "playing"
         while(scene.getLevelStatus() == LevelStatus.PLAYING)
         {
             try {
@@ -50,6 +51,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        // Return the new level status, either "won" or "lost"
         return scene.getLevelStatus();
     }
 
@@ -64,6 +66,7 @@ public class Main {
 
         window = new JFrame();
         //window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // We are re-using the window object, so we cannot exit the application
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Journey Back Home");
