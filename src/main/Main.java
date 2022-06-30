@@ -38,7 +38,6 @@ public class Main {
         disposeWindow(window);
 
 
-
         result = LevelStatus.PLAYING;
         while(result != LevelStatus.WON)
         {

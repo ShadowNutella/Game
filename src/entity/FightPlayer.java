@@ -11,12 +11,6 @@ import java.awt.*;
 
 public class FightPlayer extends Player {
 
-    Scene gp;
-    KeyHandler keyH;
-    public int speed;
-
-    public ItemHolder inventory;
-
     public FightPlayer(Scene gp, KeyHandler keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
         super();
         this.x = x;

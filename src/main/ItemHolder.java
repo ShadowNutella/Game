@@ -32,7 +32,7 @@ public class ItemHolder {
 
     }
 
-    public void getDamage(int damage) {
+    public void takeDamage(int damage) {
 
         this.damage = damage;
         HP -= damage;

@@ -1,7 +1,6 @@
 package entity;
 
 import entity.item.Item;
-import main.ItemHolder;
 import scene.LevelStatus;
 import ui.UI;
 
@@ -31,7 +30,7 @@ public class Projectile extends Item {
         if (alive) {
             UI.instance.showMessage("You got hit, idiot", 30);
             //UI.instance.startClosing(60, LevelStatus.WON);
-            player.inventory.getDamage(damage);
+            player.inventory.takeDamage(damage);
 
             if (player.inventory.HP <= 0) {
 

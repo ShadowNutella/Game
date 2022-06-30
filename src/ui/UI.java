@@ -62,6 +62,8 @@ public class UI {
 
     public void startClosing(int duration, LevelStatus status)
     {
+        if (closing)
+            return;
         sceneChangeTimer = 0;
         sceneChangeTimerTarget = duration;
         closing = true;
@@ -71,6 +73,8 @@ public class UI {
 
     public void startOpening(int duration)
     {
+        if (opening)
+            return;
         sceneChangeTimer = duration;
         sceneChangeTimerTarget = duration;
         closing = false;
