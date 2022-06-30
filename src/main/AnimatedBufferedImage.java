@@ -78,6 +78,11 @@ public class AnimatedBufferedImage {
         return images[currentIndex];
     }
 
+    public BufferedImage getFrame(int i) {
+
+        return images[i];
+    }
+
 
     public BufferedImage getNext() {
         if (images.length == 0) {

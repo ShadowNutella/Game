@@ -1,5 +1,7 @@
 package ui;
 
+import entity.HealthBar;
+import entity.Player;
 import main.AnimatedBufferedImage;
 import scene.Scene;
 
@@ -8,8 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class FightUIBlau extends UI {
-
-    private AnimatedBufferedImage keyImage = new AnimatedBufferedImage("/objects/Leben_full");
 
     public FightUIBlau(Scene gp) {
 
@@ -20,8 +20,6 @@ public class FightUIBlau extends UI {
     public void drawUI() {
 
         super.drawUI();
-
-
 
     }
 

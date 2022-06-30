@@ -105,6 +105,10 @@ public class FightScreenOne extends Scene {
 
         playerInventory.setHP(10);
 
+        HealthBar healthBar = new HealthBar("/objects/HP_", 0, 0);
+        healthBar.inventory = playerInventory;
+        entities.add(healthBar);
+
 
         //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
         //entities.add(enemy);
