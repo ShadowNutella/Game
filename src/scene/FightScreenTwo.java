@@ -8,7 +8,7 @@ import entity.keyhandler.KeyHandlerFight;
 import main.Camera;
 import main.ItemHolder;
 import tile.TileManager;
-import ui.FightUIBlau;
+import ui.FightUILila;
 
 import java.awt.*;
 
@@ -35,7 +35,7 @@ public class FightScreenTwo extends Scene {
         this.keyH = new KeyHandlerFight();
         this.addKeyListener(keyH);
         tileM = new TileManager(this, "Lila", "lila", "/maps/FightScreen.txt");
-        ui = new FightUIBlau(this);
+        ui = new FightUILila(this);
 
         Camera.instance = new Camera(0, 0);
         Camera.instance.gp = this;
@@ -96,22 +96,28 @@ public class FightScreenTwo extends Scene {
         playerOne = new FightPlayer(this, keyH, "/characterOne/char1_", 9, 500, 675, playerInventory);
         //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
+
         playerTwo = new FightPlayer(this, keyH, "/characterTwo/char2_", 9, 520, 670, playerInventory);
         //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
+        playerInventory.setHP(30);
 
         //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
         //entities.add(enemy);
 
-        guardian_lila_left = new FightEnemy("/enemies/enemy_lila_left", 410, 85, playerOne);
+        guardian_lila_left = new FightEnemy("/enemies/enemy_lila_left", 410, 85, playerOne,3);
         guardian_lila_left.image.animationSpeed = 35;
         guardian_lila_left.setSize(1.5);
         guardian_lila_left.projectileFarbe = "lila";
-        guardian_lila_right = new FightEnemy("/enemies/enemy_lila_right", 675, 92, playerTwo);
+        guardian_lila_left.setEnemyHP(50);
+
+        guardian_lila_right = new FightEnemy("/enemies/enemy_lila_right", 675, 92, playerTwo,3);
         guardian_lila_right.image.animationSpeed = 25;
         guardian_lila_right.setSize(1.4);
         guardian_lila_right.projectileFarbe = "lila";
+        guardian_lila_right.setEnemyHP(50);
+
         entities.add(guardian_lila_left);
         entities.add(guardian_lila_right);
 

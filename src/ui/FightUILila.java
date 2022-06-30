@@ -7,11 +7,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class FightUIBlau extends UI {
+public class FightUILila extends UI {
 
     private AnimatedBufferedImage keyImage = new AnimatedBufferedImage("/objects/Leben_full");
 
-    public FightUIBlau(Scene gp) {
+    public FightUILila(Scene gp) {
 
         super(gp);
 

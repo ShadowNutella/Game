@@ -1,6 +1,8 @@
 package entity;
 
 import entity.item.Item;
+import main.ItemHolder;
+import scene.LevelStatus;
 import ui.UI;
 
 import java.awt.*;
@@ -9,13 +11,15 @@ public class Projectile extends Item {
 
     public int targetX, targetY;
     public double speed;
+    public int damage;
 
 
-    public Projectile(String resourcePath, int x, int y, int targetX, int targetY, double speed) {
+    public Projectile(String resourcePath, int x, int y, int targetX, int targetY, double speed, int damage) {
         super(resourcePath, x, y);
         this.targetX = targetX;
         this.targetY = targetY;
         this.speed = speed;
+        this.damage = damage;
         solidPart = new Rectangle(0, 0, 64, 64);
         collisionOn = true;
 
@@ -26,7 +30,15 @@ public class Projectile extends Item {
 
         if (alive) {
             UI.instance.showMessage("You got hit, idiot", 30);
+            //UI.instance.startClosing(60, LevelStatus.WON);
+            player.inventory.getDamage(damage);
+
+            if (player.inventory.HP <= 0) {
+
+                UI.instance.startClosing(60, LevelStatus.LOST);
+            }
         }
+
 
         return true;
     }

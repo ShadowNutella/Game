@@ -96,22 +96,28 @@ public class FightScreenThree extends Scene {
         playerOne = new FightPlayer(this, keyH, "/characterOne/char1_", 9, 500, 675, playerInventory);
         //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
+
         playerTwo = new FightPlayer(this, keyH, "/characterTwo/char2_", 9, 520, 670, playerInventory);
         //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
+        playerInventory.setHP(20);
 
         //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
         //entities.add(enemy);
 
-        guardian_rosa_left = new FightEnemy("/enemies/enemy_rosa_left", 410, 85, playerOne);
+        guardian_rosa_left = new FightEnemy("/enemies/enemy_rosa_left", 410, 85, playerOne, 8);
         guardian_rosa_left.image.animationSpeed = 35;
         guardian_rosa_left.setSize(1.5);
         guardian_rosa_left.projectileFarbe = "rosa";
-        guardian_rosa_right = new FightEnemy("/enemies/enemy_rosa_right", 675, 92, playerTwo);
+        guardian_rosa_left.setEnemyHP(70);
+
+        guardian_rosa_right = new FightEnemy("/enemies/enemy_rosa_right", 675, 92, playerTwo, 8);
         guardian_rosa_right.image.animationSpeed = 25;
-        guardian_rosa_right.projectileFarbe = "rosa";
         guardian_rosa_right.setSize(1.4);
+        guardian_rosa_right.projectileFarbe = "rosa";
+        guardian_rosa_right.setEnemyHP(70);
+
         entities.add(guardian_rosa_left);
         entities.add(guardian_rosa_right);
 

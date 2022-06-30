@@ -20,12 +20,12 @@ public class UI {
     private String currentMessage = "";
     private int messageTimer = 0;
 
-    private boolean closing = true;
+    public boolean closing = false;
     private boolean opening = false;
-    private int sceneChangeTimer = 0;
-    private int sceneChangeTimerTarget = 60;
+    public int sceneChangeTimer = 0;
+    public int sceneChangeTimerTarget = 60;
 
-    private LevelStatus statusToSet; // Set this status after finished closing
+    public LevelStatus statusToSet; // Set this status after finished closing
 
     public UI(Scene gp) {
 
@@ -77,7 +77,7 @@ public class UI {
         opening = true;
     }
 
-    private void closeScene()
+    public void closeScene()
     {
         BufferedImage curtain;
         try {
@@ -106,7 +106,7 @@ public class UI {
         }
     }
 
-    private void openScene()
+    public void openScene()
     {
         // Analog to closeScene()
         BufferedImage curtain;

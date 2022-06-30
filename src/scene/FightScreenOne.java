@@ -92,25 +92,35 @@ public class FightScreenOne extends Scene {
     public void setUpGame() {
 
         ItemHolder playerInventory = new ItemHolder();
+
         playerOne = new FightPlayer(this, keyH, "/characterOne/char1_", 9, 500, 675, playerInventory);
         //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
+
+        playerInventory.setHP(10);
+
         playerTwo = new FightPlayer(this, keyH, "/characterTwo/char2_", 9, 520, 670, playerInventory);
         //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
+
+        playerInventory.setHP(10);
 
 
         //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
         //entities.add(enemy);
 
-        guardian_blue_left = new FightEnemy("/enemies/enemy_blau_left", 410, 85, playerOne);
+        guardian_blue_left = new FightEnemy("/enemies/enemy_blau_left", 410, 85, playerOne, 1);
         guardian_blue_left.image.animationSpeed = 35;
         guardian_blue_left.setSize(1.5);
         guardian_blue_left.projectileFarbe = "blau";
-        guardian_blue_right = new FightEnemy("/enemies/enemy_blau_right", 675, 92, playerTwo);
+        guardian_blue_left.setEnemyHP(30);
+
+        guardian_blue_right = new FightEnemy("/enemies/enemy_blau_right", 675, 92, playerTwo,1);
         guardian_blue_right.image.animationSpeed = 25;
         guardian_blue_right.setSize(1.4);
         guardian_blue_right.projectileFarbe = "blau";
+        guardian_blue_right.setEnemyHP(30);
+
         entities.add(guardian_blue_left);
         entities.add(guardian_blue_right);
 
@@ -147,5 +157,6 @@ public class FightScreenOne extends Scene {
             if (i.alive)
                 i.updateEntity();
         }
+
     }
 }
