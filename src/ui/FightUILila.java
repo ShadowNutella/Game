@@ -9,8 +9,6 @@ import java.io.IOException;
 
 public class FightUILila extends UI {
 
-    private AnimatedBufferedImage keyImage = new AnimatedBufferedImage("/objects/Leben_full");
-
     public FightUILila(Scene gp) {
 
         super(gp);

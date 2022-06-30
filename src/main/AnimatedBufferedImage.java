@@ -21,10 +21,14 @@ public class AnimatedBufferedImage {
 
     }
 
+    public AnimatedBufferedImage(String path)
+    {
+        this(path, 1);
+    }
 
-    public AnimatedBufferedImage(String path) {
+    public AnimatedBufferedImage(String path, int startIndex) {
         ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
-        int i = 1;
+        int i = startIndex;
         while (true) {
             try {
                 images.add(ImageIO.read(getClass().getResourceAsStream(path + i + ".png")));
