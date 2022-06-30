@@ -21,8 +21,9 @@ public class Main {
 
             result = getLevelResult(mapBlau);
             mapBlau.endGameThread();
+            disposeWindow(window);
         }
-        disposeWindow(window);
+
 
 
         // Level 1: Fight Scene of Blue Level
@@ -34,8 +35,9 @@ public class Main {
 
             result = getLevelResult(fightScreenOne);
             fightScreenOne.endGameThread();
+            disposeWindow(window);
         }
-        disposeWindow(window);
+
 
 
         result = LevelStatus.PLAYING;

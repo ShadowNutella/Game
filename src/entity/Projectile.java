@@ -33,7 +33,7 @@ public class Projectile extends Item {
             player.inventory.takeDamage(damage);
 
             if (player.inventory.HP <= 0) {
-
+                player.inventory.HP = 0;
                 UI.instance.startClosing(60, LevelStatus.LOST);
             }
         }

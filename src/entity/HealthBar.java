@@ -40,10 +40,10 @@ public class HealthBar extends Entity {
     public void draw(Graphics2D h) {
 
         BufferedImage img = image.getFrame(inventory.HP);
-        int finalSizeX = (int) ((double) Camera.instance.gp.getTileSize() * sizeX);
-        int finalSizeY = (int) ((double) Camera.instance.gp.getTileSize() * sizeY);
+        int finalSizeX = (int) ((double) Camera.instance.gp.getTileSize() * 2);
+        int finalSizeY = (int) ((double) Camera.instance.gp.getTileSize() * 2);
         if (image != null) {
-            h.drawImage(img, x, y, finalSizeX, finalSizeY, null);
+            h.drawImage(img, 20, -50, finalSizeX, finalSizeY, null);
         }
     }
 
