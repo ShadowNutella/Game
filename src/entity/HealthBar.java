@@ -43,7 +43,7 @@ public class HealthBar extends Entity {
         int finalSizeX = (int) ((double) Camera.instance.gp.getTileSize() * 2);
         int finalSizeY = (int) ((double) Camera.instance.gp.getTileSize() * 2);
         if (image != null) {
-            h.drawImage(img, 20, -60, finalSizeX, finalSizeY, null);
+            h.drawImage(img, x, y, finalSizeX, finalSizeY, null);
         }
     }
 

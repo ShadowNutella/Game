@@ -2,7 +2,7 @@ package scene;
 
 import entity.*;
 import entity.item.Item;
-import entity.keyhandler.KeyHandler;
+import entity.keyhandler.KeyHandlerFightOne;
 import main.Camera;
 import main.ItemHolder;
 import tile.TileManager;
@@ -23,14 +23,14 @@ public class FightScreenOne extends Scene {
     private int maxWorldCol = 11;
     private int maxWorldRow = 6;
 
+    public KeyHandlerFightOne keyH;
 
     public FightScreenOne() {
         this.setPreferredSize(new Dimension(getScreenWidth() / 2, getScreenHeight() / 2));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        keyH = new KeyHandler();
-        this.addKeyListener(keyH);
+
         tileM = new TileManager(this, "Blau", "blau", "/maps/FightScreen.txt");
         ui = new FightUIBlau(this);
 
@@ -85,9 +85,12 @@ public class FightScreenOne extends Scene {
         return getTileSize() * getMaxWorldRow();
     }
 
-    FightEnemy guardian_blue_left, guardian_blue_right;
+    public FightEnemy guardian_blue_left, guardian_blue_right;
 
     public void setUpGame() {
+
+        keyH = new KeyHandlerFightOne();
+        this.addKeyListener(keyH);
 
         ItemHolder playerInventory = new ItemHolder();
 
@@ -103,7 +106,7 @@ public class FightScreenOne extends Scene {
 
         playerInventory.setHP(10);
 
-        HealthBar healthBar = new HealthBar("/objects/HP_", 0, 0);
+        HealthBar healthBar = new HealthBar("/objects/HP_", 20, -60);
         healthBar.inventory = playerInventory;
         entities.add(healthBar);
 
@@ -114,14 +117,21 @@ public class FightScreenOne extends Scene {
         guardian_blue_left = new FightEnemy("/enemies/enemy_blau_left", 410, 85, playerOne, 1);
         guardian_blue_left.image.animationSpeed = 35;
         guardian_blue_left.setSize(1.5);
+        guardian_blue_left.offsetX = 0;
+        guardian_blue_left.offsetY = 0;
+        guardian_blue_left.direction = "left";
         guardian_blue_left.projectileFarbe = "blau";
         guardian_blue_left.setEnemyHP(30);
 
         guardian_blue_right = new FightEnemy("/enemies/enemy_blau_right", 675, 92, playerTwo,1);
         guardian_blue_right.image.animationSpeed = 25;
         guardian_blue_right.setSize(1.4);
+        guardian_blue_right.offsetX = 10;
+        guardian_blue_right.offsetY = 0;
+        guardian_blue_right.direction = "right";
         guardian_blue_right.projectileFarbe = "blau";
         guardian_blue_right.setEnemyHP(30);
+
 
         entities.add(guardian_blue_left);
         entities.add(guardian_blue_right);
@@ -159,6 +169,15 @@ public class FightScreenOne extends Scene {
             if (i.alive)
                 i.updateEntity();
         }
+
+    }
+
+    public Enemy[] getEnemies() {
+
+        Enemy[] enemies = new Enemy[2];
+        enemies[0] = guardian_blue_left;
+        enemies[1] = guardian_blue_right;
+        return enemies;
 
     }
 }

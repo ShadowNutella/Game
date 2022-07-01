@@ -261,5 +261,9 @@ public class Scene extends JPanel implements Runnable {
         return levelStatus;
     }
 
+    public Enemy[] getEnemies() {
+
+        return new Enemy[0];
+    }
 
 }

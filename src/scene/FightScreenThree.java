@@ -4,7 +4,7 @@ import entity.Entity;
 import entity.FightEnemy;
 import entity.FightPlayer;
 import entity.item.Item;
-import entity.keyhandler.KeyHandler;
+import entity.keyhandler.KeyHandlerFightOne;
 import main.Camera;
 import main.ItemHolder;
 import tile.TileManager;
@@ -25,13 +25,13 @@ public class FightScreenThree extends Scene {
     private int maxWorldCol = 11;
     private int maxWorldRow = 6;
 
+    public KeyHandlerFightOne keyH;
 
     public FightScreenThree() {
         this.setPreferredSize(new Dimension(getScreenWidth() / 2, getScreenHeight() / 2));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        keyH = new KeyHandler();
         this.addKeyListener(keyH);
         tileM = new TileManager(this, "Rosa", "rosa", "/maps/FightScreen.txt");
         ui = new FightUIBlau(this);
