@@ -2,12 +2,11 @@ package scene;
 
 import entity.*;
 import entity.item.Item;
+import entity.keyhandler.KeyHandler;
 import main.Camera;
 import main.ItemHolder;
-import entity.keyhandler.KeyHandlerFight;
 import tile.TileManager;
 import ui.FightUIBlau;
-import ui.UI;
 
 import java.awt.*;
 
@@ -30,8 +29,7 @@ public class FightScreenOne extends Scene {
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-
-        this.keyH = new KeyHandlerFight();
+        keyH = new KeyHandler();
         this.addKeyListener(keyH);
         tileM = new TileManager(this, "Blau", "blau", "/maps/FightScreen.txt");
         ui = new FightUIBlau(this);

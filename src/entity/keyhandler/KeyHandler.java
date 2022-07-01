@@ -5,8 +5,8 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
-    public boolean upPressed2, downPressed2, leftPressed2, rightPressed2;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, abilityOne, abilityTwo, abilityThree;
+    public boolean upPressed2, downPressed2, leftPressed2, rightPressed2, abilityOne2, abilityTwo2, abilityThree2;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -32,6 +32,15 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
+        if (code == KeyEvent.VK_1) {
+            abilityOne = true;
+        }
+        if (code == KeyEvent.VK_2) {
+            abilityTwo = true;
+        }
+        if (code == KeyEvent.VK_3) {
+            abilityThree = true;
+        }
 
         //Spieler 2 Steuerung
 
@@ -47,6 +56,15 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_RIGHT) {
             rightPressed2 = true;
         }
+        if (code == KeyEvent.VK_NUMPAD1) {
+            abilityOne2 = true;
+        }
+        if (code == KeyEvent.VK_NUMPAD2) {
+            abilityTwo2 = true;
+        }
+        if (code == KeyEvent.VK_NUMPAD3) {
+            abilityThree2 = true;
+        }
 
     }
 
@@ -55,6 +73,7 @@ public class KeyHandler implements KeyListener {
 
         int code = e.getKeyCode();
 
+        //Player 1
         if (code == KeyEvent.VK_W) {
             upPressed = false;
         }
@@ -67,7 +86,17 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
         }
+        if (code == KeyEvent.VK_1) {
+            abilityOne = false;
+        }
+        if (code == KeyEvent.VK_2) {
+            abilityTwo =false;
+        }
+        if (code == KeyEvent.VK_3) {
+            abilityThree = false;
+        }
 
+        //Player 2
         if (code == KeyEvent.VK_UP) {
             upPressed2 = false;
         }
@@ -79,6 +108,15 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_RIGHT) {
             rightPressed2 = false;
+        }
+        if (code == KeyEvent.VK_NUMPAD1) {
+            abilityOne2 = false;
+        }
+        if (code == KeyEvent.VK_NUMPAD2) {
+            abilityTwo2 = false;
+        }
+        if (code == KeyEvent.VK_NUMPAD3) {
+            abilityThree2 = false;
         }
 
     }

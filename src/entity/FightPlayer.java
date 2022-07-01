@@ -11,6 +11,12 @@ import java.awt.*;
 
 public class FightPlayer extends Player {
 
+    KeyHandler keyH;
+
+    public AnimatedBufferedImage particleOnePL1 = new AnimatedBufferedImage("/objects/abilities/abilityOne_dragon_left_1");
+    public AnimatedBufferedImage particleOnePR1 = new AnimatedBufferedImage("/objects/abilities/abilityOne_dragon_right_1");
+    Graphics2D particles;
+
     public FightPlayer(Scene gp, KeyHandler keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
         super();
         this.x = x;
@@ -38,16 +44,34 @@ public class FightPlayer extends Player {
         image.advance();
     }
 
-    public void updatePlayerOne() {
-        if (keyH.leftPressed || keyH.rightPressed) {
 
-            if (keyH.leftPressed) {
+    public void updatePlayerOne() {
+
+
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.abilityOne) {
+
+            //Player 1
+            if (keyH.upPressed) {
+
+
+            } else if (keyH.downPressed) {
+
+
+            } else if (keyH.leftPressed) {
                 direction = "left";
 
-            } else if (keyH.rightPressed) {
+            }
+            else if (keyH.abilityOne) {
+
+                System.out.println("Ability Player 1");
+                particles.drawImage(particleOnePL1.getImage(), 0, 0, gp.getTileSize(), gp.getTileSize(), null);
+                particles.drawImage(particleOnePR1.getImage(),0,0,gp.getTileSize(), gp.getTileSize(), null);
+
+            }  else {
                 direction = "right";
 
             }
+
 
             //Check Tile collision
             collisionOn = false;
@@ -63,29 +87,43 @@ public class FightPlayer extends Player {
                 }
 
             }
-        } else {
-            setAnimationSpeed(0);
-        }
+        }  else {
+                setAnimationSpeed(0);
+            }
 
-        int tempSpeed = speed;
-        speed = 0;
-        Item[] collisions = gp.cChecker.checkObjects(this);
-        for (int i = 0; i < collisions.length; i++) {
-            boolean remove = collisions[i].pickUp(this);
-            if (remove)
-                gp.items.remove(collisions[i]);
-        }
-        speed = tempSpeed;
-
+            int tempSpeed = speed;
+            speed = 0;
+            Item[] collisions = gp.cChecker.checkObjects(this);
+            for (int i = 0; i < collisions.length; i++) {
+                boolean remove = collisions[i].pickUp(this);
+                if (remove)
+                    gp.items.remove(collisions[i]);
+            }
+            speed = tempSpeed;
     }
 
     public void updatePlayerTwo() {
-        if (keyH.upPressed2 || keyH.downPressed2 || keyH.leftPressed2 || keyH.rightPressed2) {
 
-            if (keyH.leftPressed2) {
+        if (keyH.upPressed2 || keyH.downPressed2 || keyH.leftPressed2 || keyH.rightPressed2 || keyH.abilityOne2) {
+
+            //Player 1
+            if (keyH.upPressed2) {
+
+
+            } else if (keyH.downPressed2) {
+
+
+            } else if (keyH.leftPressed2) {
                 direction = "left";
 
-            } else if (keyH.rightPressed2) {
+            }
+            else if (keyH.abilityOne2) {
+
+                System.out.println("Ability Player 2");
+                /**particles.drawImage(particleOnePL2.getImage(), 0, 0, gp.getTileSize(), gp.getTileSize(), null);
+                particles.drawImage(particleOnePR2.getImage(),0,0,gp.getTileSize(), gp.getTileSize(), null);**/
+
+            }  else {
                 direction = "right";
 
             }
