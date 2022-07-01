@@ -6,7 +6,7 @@ import entity.item.DoorGuardianItem;
 import entity.item.Item;
 import entity.keyhandler.KeyHandler;
 import tile.TileManager;
-import ui.MapUILila;
+import ui.MapUIRosa;
 
 public class MapRosa extends Scene {
 
@@ -17,7 +17,7 @@ public class MapRosa extends Scene {
         keyH = new KeyHandler();
         this.addKeyListener(keyH);
         tileM = new TileManager(this, "Rosa", "rosa", "/maps/worldrosa.txt");
-        ui = new MapUILila(this);
+        ui = new MapUIRosa(this);
 
         setUpGame();
     }
@@ -69,23 +69,23 @@ public class MapRosa extends Scene {
     public void createItems() {
 
         Item i;
-        i = new Item("key", 30 * getTileSize(), 8 * getTileSize(), "rosa");
+        i = new Item("key", 78 * getTileSize(), 24 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key",77 * getTileSize() , 24 * getTileSize(), "rosa");
+        i = new Item("key",68 * getTileSize() , 19 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 69 * getTileSize(), 18 * getTileSize(), "rosa");
+        i = new Item("key", 72 * getTileSize(), 12 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 77 * getTileSize(), 4 * getTileSize(), "rosa");
+        i = new Item("key", 45 * getTileSize(), 16 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 55 * getTileSize(), 10 * getTileSize(), "rosa");
+        i = new Item("key", 55 * getTileSize(), 4 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
@@ -93,19 +93,19 @@ public class MapRosa extends Scene {
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 32 * getTileSize(), 25 * getTileSize(), "rosa");
+        i = new Item("key", 30 * getTileSize(), 4 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 15 * getTileSize(), 25 * getTileSize(), "rosa");
+        i = new Item("key", 15 * getTileSize(), 5 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 22 * getTileSize(), 13 * getTileSize(), "rosa");
+        i = new Item("key", 3 * getTileSize(), 4 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 5 * getTileSize(), 10 * getTileSize(), "rosa");
+        i = new Item("key", 37 * getTileSize(), 4 * getTileSize(), "rosa");
         i.collisionOn = true;
         items.add(i);
 

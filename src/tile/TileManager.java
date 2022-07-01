@@ -142,7 +142,7 @@ public class TileManager {
             br.close();
 
         } catch (Exception e) {
-            System.out.println("Load Map didn't work ;-;");
+            System.out.println("Loading didn't work");
         }
     }
 

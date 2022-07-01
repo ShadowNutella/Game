@@ -1,8 +1,9 @@
 package entity.item;
 
 import entity.Player;
+import main.AnimatedBufferedImage;
 
-public class Particle extends Item{
+public class Particle extends Item {
 
     public int duration;
 
@@ -23,4 +24,10 @@ public class Particle extends Item{
             alive = false;
         }
     }
+
+    public void loadImages() {
+
+        image = new AnimatedBufferedImage(resourcePath, true);
+    }
+
 }

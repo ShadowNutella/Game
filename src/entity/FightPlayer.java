@@ -6,19 +6,13 @@ import entity.keyhandler.KeyHandlerFightOne;
 import main.AnimatedBufferedImage;
 import main.Camera;
 import main.ItemHolder;
-import scene.FightScreenOne;
 import scene.Scene;
-import ui.UI;
 
 import java.awt.*;
 
 public class FightPlayer extends Player {
 
     KeyHandlerFightOne keyH;
-    AnimatedBufferedImage ability;
-    String player, side, number, count;
-    public boolean attacking = false;
-    int animationCounter = 0;
 
     public FightPlayer(Scene gp, KeyHandlerFightOne keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
         super();
@@ -52,9 +46,7 @@ public class FightPlayer extends Player {
 
 
         if (keyH.abilityOne) {
-            System.out.println("Ability Player 1");
-            attacking = true;
-            attack();
+            attack("dragon");
         }
 
         if (keyH.leftPressed || keyH.rightPressed) {
@@ -62,12 +54,9 @@ public class FightPlayer extends Player {
             //Player 1
             if (keyH.leftPressed) {
                 direction = "left";
-
             }
-
             else {
                 direction = "right";
-
             }
 
 
@@ -104,9 +93,7 @@ public class FightPlayer extends Player {
     public void updatePlayerTwo() {
 
         if (keyH.abilityOne2) {
-            System.out.println("Ability Player 2");
-            attacking = true;
-            attack();
+            attack("fox");
         }
 
         if (keyH.leftPressed2 || keyH.rightPressed2 ) {
@@ -114,12 +101,9 @@ public class FightPlayer extends Player {
             //Player 1
             if (keyH.leftPressed2) {
                 direction = "left";
-
             }
-
             else {
                 direction = "right";
-
             }
 
             collisionOn = false;
@@ -159,33 +143,22 @@ public class FightPlayer extends Player {
     }
 
 
-    public void drawAttackImage(String player, String side, String number, String count) {
-
-        this.player = player;
-        this.side = side;
-        this.number = number;
-        this.count = count;
-        this.ability = new AnimatedBufferedImage("/objects/abilities/ability" + count + "_" + player + "_" + side + "_" + number);
-
-        int finalSizeX = (int) (Camera.instance.gp.getTileSize() * sizeX);
-        int finalSizeY = (int) (Camera.instance.gp.getTileSize() * sizeY);
-        UI.instance.graphics.drawImage(this.ability.getImage(), 100, 100, finalSizeX, finalSizeY, null);
-    }
-
-
-    public void attack() {
+    public void attack(String character) {
 
         Enemy[] enemies = Camera.instance.gp.getEnemies();
         Particle[] particles = new Particle[enemies.length];
 
         for (int i = 0; i < particles.length; i++) {
-            particles[i] = new Particle("/objects/abilities/abilityOne_dragon_" + enemies[i].direction + "_", enemies[i].x + enemies[i].offsetX, enemies[i].y + enemies[i].offsetY, 12);
+            particles[i] = new Particle("/objects/abilities/abilityOne_" + character + "_" + enemies[i].direction + "_", enemies[i].x + enemies[i].offsetX, enemies[i].y + enemies[i].offsetY, 20);
 
 
             particles[i].sizeX = enemies[i].sizeX;
             particles[i].sizeY = enemies[i].sizeY;
-            particles[i].setAnimationSpeed(10);
+            particles[i].setAnimationSpeed(2);
             Camera.instance.gp.entities.add(particles[i]);
+
+            enemies[i].takeDamage(1);
         }
+
     }
 }

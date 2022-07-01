@@ -1,15 +1,17 @@
 package entity;
 
+import main.ItemHolder;
+
 public class FightEnemy extends Enemy {
 
     public Entity target;
     public String projectileFarbe;
-    public int enemyHP;
     public int damage;
 
-    public FightEnemy() {
 
+    public FightEnemy() {
         super();
+
     }
 
     public FightEnemy(String resourcePath, int x, int y, Entity target, int damageEnemy) {
@@ -26,8 +28,4 @@ public class FightEnemy extends Enemy {
         return projectile;
     }
 
-    public void setEnemyHP(int enemyHP) {
-
-        this.enemyHP = enemyHP;
-    }
 }

@@ -48,8 +48,9 @@ public class Main {
 
             result = getLevelResult(mapLila);
             mapLila.endGameThread();
+            disposeWindow(window);
         }
-        disposeWindow(window);
+
 
 
         result = LevelStatus.PLAYING;
@@ -60,8 +61,46 @@ public class Main {
 
             result = getLevelResult(fightScreenTwo);
             fightScreenTwo.endGameThread();
+            disposeWindow(window);
         }
-        disposeWindow(window);
+
+
+
+        result = LevelStatus.PLAYING;
+        while(result != LevelStatus.WON)
+        {
+            MapRosa mapRosa = new MapRosa();
+            window = startLevel(mapRosa);
+
+            result = getLevelResult(mapRosa);
+            mapRosa.endGameThread();
+            disposeWindow(window);
+        }
+
+
+
+        result = LevelStatus.PLAYING;
+        while(result != LevelStatus.WON)
+        {
+            FightScreenThree fightScreenThree = new FightScreenThree();
+            window = startLevel(fightScreenThree);
+
+            result = getLevelResult(fightScreenThree);
+            fightScreenThree.endGameThread();
+            disposeWindow(window);
+        }
+
+        /**result = LevelStatus.PLAYING;
+        while(result != LevelStatus.WON)
+        {
+            EndScene endScene = new EndScene();
+            window = startLevel(endScene);
+
+            result = getLevelResult(endScene);
+            endScene.endGameThread();
+            disposeWindow(window);
+        }**/
+
     }
 
     public static LevelStatus getLevelResult(Scene scene)

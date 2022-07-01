@@ -1,15 +1,14 @@
 package ui;
 
-import main.AnimatedBufferedImage;
 import scene.Scene;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class FightUILila extends UI {
+public class FightUI extends UI {
 
-    public FightUILila(Scene gp) {
+    public FightUI(Scene gp) {
 
         super(gp);
 
@@ -18,8 +17,6 @@ public class FightUILila extends UI {
     public void drawUI() {
 
         super.drawUI();
-
-
 
     }
 

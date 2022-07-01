@@ -1,14 +1,12 @@
 package scene;
 
-import entity.Entity;
-import entity.FightEnemy;
-import entity.FightPlayer;
+import entity.*;
 import entity.item.Item;
 import entity.keyhandler.KeyHandlerFightOne;
 import main.Camera;
 import main.ItemHolder;
 import tile.TileManager;
-import ui.FightUILila;
+import ui.FightUI;
 
 import java.awt.*;
 
@@ -32,9 +30,9 @@ public class FightScreenTwo extends Scene {
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        this.addKeyListener(keyH);
+
         tileM = new TileManager(this, "Lila", "lila", "/maps/FightScreen.txt");
-        ui = new FightUILila(this);
+        ui = new FightUI(this);
 
         Camera.instance = new Camera(0, 0);
         Camera.instance.gp = this;
@@ -91,6 +89,9 @@ public class FightScreenTwo extends Scene {
 
     public void setUpGame() {
 
+        keyH = new KeyHandlerFightOne();
+        this.addKeyListener(keyH);
+
         ItemHolder playerInventory = new ItemHolder();
         playerOne = new FightPlayer(this, keyH, "/characterOne/char1_", 9, 500, 675, playerInventory);
         //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
@@ -100,22 +101,30 @@ public class FightScreenTwo extends Scene {
         //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
-        playerInventory.setHP(30);
+        playerInventory.setHP(10);
 
-        //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
-        //entities.add(enemy);
+        HealthBar healthBarThree = new HealthBar("/objects/HP_", 20, -60);
+        healthBarThree.inventory = playerInventory;
+        entities.add(healthBarThree);
 
-        guardian_lila_left = new FightEnemy("/enemies/enemy_lila_left", 410, 85, playerOne,3);
+
+        guardian_lila_left = new FightEnemy("/enemies/enemy_lila_left", 410, 85, playerOne,2);
         guardian_lila_left.image.animationSpeed = 35;
         guardian_lila_left.setSize(1.5);
+        guardian_lila_left.offsetX = 0;
+        guardian_lila_left.offsetY = 0;
+        guardian_lila_left.direction = "left";
         guardian_lila_left.projectileFarbe = "lila";
-        guardian_lila_left.setEnemyHP(50);
+        guardian_lila_left.setEnemyHP(800);
 
-        guardian_lila_right = new FightEnemy("/enemies/enemy_lila_right", 675, 92, playerTwo,3);
+        guardian_lila_right = new FightEnemy("/enemies/enemy_lila_right", 675, 92, playerTwo,2);
         guardian_lila_right.image.animationSpeed = 25;
         guardian_lila_right.setSize(1.4);
+        guardian_lila_right.offsetX = 0;
+        guardian_lila_right.offsetY = 0;
+        guardian_lila_right.direction = "right";
         guardian_lila_right.projectileFarbe = "lila";
-        guardian_lila_right.setEnemyHP(50);
+        guardian_lila_right.setEnemyHP(800);
 
         entities.add(guardian_lila_left);
         entities.add(guardian_lila_right);
@@ -136,11 +145,11 @@ public class FightScreenTwo extends Scene {
         playerTwo.updatePlayerTwo();
 
         shootTimer++;
-        shootTimer %= 240;
-        if (shootTimer == 120) {
+        shootTimer %= 120;
+        if (shootTimer == 80) {
             items.add(guardian_lila_left.shoot());
         }
-        if (shootTimer == 180) {
+        if (shootTimer == 100) {
             items.add(guardian_lila_right.shoot());
         }
 
@@ -153,5 +162,21 @@ public class FightScreenTwo extends Scene {
             if (i.alive)
                 i.updateEntity();
         }
+
+        if (guardian_lila_left.enemyHP <= 0 && guardian_lila_right.enemyHP <= 0) {
+            guardian_lila_left.enemyHP = 0;
+            guardian_lila_right.enemyHP = 0;
+            win();
+        }
     }
+
+    public Enemy[] getEnemies() {
+
+        Enemy[] enemies = new Enemy[2];
+        enemies[0] = guardian_lila_left;
+        enemies[1] = guardian_lila_right;
+        return enemies;
+
+    }
+
 }

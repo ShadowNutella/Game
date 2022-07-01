@@ -28,7 +28,7 @@ public class HealthBar extends Entity {
 
     public void loadImages() {
 
-        image = new AnimatedBufferedImage(resourcePath, 0);
+        image = new AnimatedBufferedImage(resourcePath,0, false);
     }
 
 

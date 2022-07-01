@@ -28,8 +28,6 @@ public class Projectile extends Item {
     public boolean pickUp(Player player) {
 
         if (alive) {
-            UI.instance.showMessage("You got hit, idiot", 30);
-            //UI.instance.startClosing(60, LevelStatus.WON);
             player.inventory.takeDamage(damage);
 
             if (player.inventory.HP <= 0) {

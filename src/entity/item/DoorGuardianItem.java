@@ -12,19 +12,17 @@ public class DoorGuardianItem extends TextInteractionItem {
 
     public boolean pickUp(Player player)
     {
-        if (player.inventory.getKeyCount() < 1)
+        if (player.inventory.getKeyCount() < 10)
         {
-            //UI.instance.showMessage("You need at least 10 keys to open this door.", 240);
+
             this.messageDuration = 240;
-            this.messageText = "You need at least 10 keys to open this door.";
+            this.messageText = "You need 10 keys to open this door.";
             startText();
             return false;
         }
         else
         {
-            //UI.instance.showMessage("You have opened the door.", 240);
             UI.instance.startClosing(60, LevelStatus.WON);
-            // doFightScreenStuff();
             return true;
         }
     }

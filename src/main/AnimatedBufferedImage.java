@@ -21,12 +21,16 @@ public class AnimatedBufferedImage {
 
     }
 
-    public AnimatedBufferedImage(String path)
+    public AnimatedBufferedImage(String path, boolean randomStartFrame)
     {
-        this(path, 1);
+        this(path, 1, randomStartFrame);
     }
 
-    public AnimatedBufferedImage(String path, int startIndex) {
+    public AnimatedBufferedImage(String path) {
+        this(path, 1, false);
+    }
+
+    public AnimatedBufferedImage(String path, int startIndex, boolean randomStartFrame) {
         ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
         int i = startIndex;
         while (true) {
@@ -46,6 +50,14 @@ public class AnimatedBufferedImage {
                 e.printStackTrace();
             }
             i++;
+        }
+        if (randomStartFrame)
+        {
+            currentIndex = (int) (Math.random() * images.size());
+        }
+        else
+        {
+            currentIndex = 0;
         }
         this.images = images.toArray(new BufferedImage[images.size()]);
     }

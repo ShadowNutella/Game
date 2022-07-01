@@ -34,8 +34,6 @@ public class MapLila extends Scene {
         playerTwo.y = getTileSize() * 24;
         playerTwo.speed = 6;
 
-        //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
-        //entities.add(enemy);
 
         Enemy guardian_lila_left = new Enemy("/enemies/enemy_lila_left", 410, 105);
         guardian_lila_left.image.animationSpeed = 35;
@@ -46,7 +44,7 @@ public class MapLila extends Scene {
         entities.add(guardian_lila_left);
         entities.add(guardian_lila_right);
 
-        /*patrolerRight = new PatrolEnemy("/enemies/patrol/patrol_lila_", getTileSize() * 78, getTileSize() * 11);
+        patrolerRight = new PatrolEnemy("/enemies/patrol/patrol_lila_", getTileSize() * 78, getTileSize() * 6);
         patrolerRight.patrolSpeed = 2;
         patrolerRight.imageLeft.animationSpeed = 24;
         patrolerRight.imageRight.animationSpeed = 24;
@@ -54,13 +52,13 @@ public class MapLila extends Scene {
         patrolerRight.setSize(1.7);
         entities.add(patrolerRight);
 
-        patrolerLeft = new PatrolEnemy("/enemies/patrol/patrol_lila_", getTileSize() * 62, getTileSize() * 11);
+        patrolerLeft = new PatrolEnemy("/enemies/patrol/patrol_lila_", getTileSize() * 63, getTileSize() * 6);
         patrolerLeft.patrolSpeed = 2;
         patrolerLeft.imageLeft.animationSpeed = 24;
         patrolerLeft.imageRight.animationSpeed = 24;
         items.add(patrolerLeft.textItem);
         patrolerLeft.setSize(1.7);
-        entities.add(patrolerLeft);*/
+        entities.add(patrolerLeft);
 
     }
 
@@ -68,15 +66,15 @@ public class MapLila extends Scene {
     public void createItems() {
 
         Item i;
-        i = new Item("key", 30 * getTileSize(), 8 * getTileSize(), "lila");
+        i = new Item("key", 77 * getTileSize(), 23 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key",77 * getTileSize() , 24 * getTileSize(), "lila");
+        i = new Item("key",65 * getTileSize() , 4 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 69 * getTileSize(), 18 * getTileSize(), "lila");
+        i = new Item("key", 49 * getTileSize(), 9 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
@@ -84,27 +82,27 @@ public class MapLila extends Scene {
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 55 * getTileSize(), 10 * getTileSize(), "lila");
+        i = new Item("key", 43 * getTileSize(), 10 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 42 * getTileSize(), 4 * getTileSize(), "lila");
+        i = new Item("key", 46 * getTileSize(), 25 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 32 * getTileSize(), 25 * getTileSize(), "lila");
+        i = new Item("key", 23 * getTileSize(), 16 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 15 * getTileSize(), 25 * getTileSize(), "lila");
+        i = new Item("key", 17 * getTileSize(), 25 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 22 * getTileSize(), 13 * getTileSize(), "lila");
+        i = new Item("key", 27 * getTileSize(), 25 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
-        i = new Item("key", 5 * getTileSize(), 10 * getTileSize(), "lila");
+        i = new Item("key", 20 * getTileSize(), 9 * getTileSize(), "lila");
         i.collisionOn = true;
         items.add(i);
 
