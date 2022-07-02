@@ -10,6 +10,8 @@ public class DoorGuardianItem extends TextInteractionItem {
         super(x, y, width, height, null, 0);
     }
 
+    /* Similar to TextinteractionItem. If Player hasn't got enough Keys, a message will be displayed.
+       If Player has enough Keys, LevelStatus will be set to WON.*/
     public boolean pickUp(Player player)
     {
         if (player.inventory.getKeyCount() < 10)

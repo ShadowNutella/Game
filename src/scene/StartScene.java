@@ -1,15 +1,12 @@
 package scene;
 
-import entity.keyhandler.KeyHandler;
 import entity.keyhandler.KeyHandlerMenu;
 import main.Camera;
-import tile.TileManager;
-import ui.MapUIBlau;
 import ui.UI;
 
 import java.awt.*;
 
-public class EndScene extends Scene {
+public class StartScene extends Scene {
 
     //SCREEN SETTINGS
     private int originalTileSize = 32; //32x32 tile
@@ -24,7 +21,7 @@ public class EndScene extends Scene {
 
     KeyHandlerMenu keyH;
 
-    public EndScene() {
+    public StartScene() {
             super();
             keyH = new KeyHandlerMenu();
             this.addKeyListener(keyH);
@@ -42,6 +39,10 @@ public class EndScene extends Scene {
 
     public void update() {
         goNext();
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
     }
 
     public void goNext() {

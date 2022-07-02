@@ -5,8 +5,8 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed, abilityOne;
-    public boolean upPressed2, downPressed2, leftPressed2, rightPressed2, abilityOne2;
+    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed2, downPressed2, leftPressed2, rightPressed2;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -14,11 +14,12 @@ public class KeyHandler implements KeyListener {
     }
 
     @Override
+    // While a Key is Pressed, the boolean for it is set true to trigger an event.
     public void keyPressed(KeyEvent e) {
 
         int code = e.getKeyCode();
 
-        //Spieler 1 Steuerung
+        // Player One Controls
 
         if (code == KeyEvent.VK_W) {
             upPressed = true;
@@ -33,7 +34,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
 
-        //Spieler 2 Steuerung
+        // Player Two Controls
 
         if (code == KeyEvent.VK_UP) {
             upPressed2 = true;
@@ -51,11 +52,12 @@ public class KeyHandler implements KeyListener {
     }
 
     @Override
+    // Same as keyPressed but with releasing a Key.
     public void keyReleased(KeyEvent e) {
 
         int code = e.getKeyCode();
 
-        //Player 1
+        // Player One
         if (code == KeyEvent.VK_W) {
             upPressed = false;
         }
@@ -69,7 +71,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
 
-        //Player 2
+        // Player Two
         if (code == KeyEvent.VK_UP) {
             upPressed2 = false;
         }

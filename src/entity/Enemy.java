@@ -21,11 +21,13 @@ public class Enemy extends Entity {
         super(resourcePath, x, y);
     }
 
+    // Metod to set the HP for every Enemy.
     public void setEnemyHP(int enemyHP) {
 
         this.enemyHP = enemyHP;
     }
 
+    // Method to take Damage for every Enemy by substracting the damage taken from the HP of the Enemy.
     public void takeDamage(int damageTake) {
 
         this.damageTake = damageTake;

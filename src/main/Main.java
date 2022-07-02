@@ -12,100 +12,46 @@ public class Main {
 
         // These methods are used for every level, in order
 
+        window = loopLevelUntilWon(window, new StartScene());
         // Level 1: Blue Level
-        LevelStatus result = LevelStatus.PLAYING;
-        while(result != LevelStatus.WON)
-        {
-            MapBlau mapBlau = new MapBlau();
-            window = startLevel(mapBlau);
+        window = loopLevelUntilWon(window, new MapBlau());
 
-            result = getLevelResult(mapBlau);
-            mapBlau.endGameThread();
-            disposeWindow(window);
-        }
+        // If Blue Level Won, call Fight
+        window = loopLevelUntilWon(window, new FightScreenOne());
 
 
+        window = loopLevelUntilWon(window, new MapLila());
 
-        // Level 1: Fight Scene of Blue Level
-        result = LevelStatus.PLAYING;
-        while(result != LevelStatus.WON)
-        {
-            FightScreenOne fightScreenOne = new FightScreenOne();
-            window = startLevel(fightScreenOne);
-
-            result = getLevelResult(fightScreenOne);
-            fightScreenOne.endGameThread();
-            disposeWindow(window);
-        }
+        window = loopLevelUntilWon(window, new FightScreenTwo());
 
 
+        window = loopLevelUntilWon(window, new MapRosa());
 
-        result = LevelStatus.PLAYING;
-        while(result != LevelStatus.WON)
-        {
-            MapLila mapLila = new MapLila();
-            window = startLevel(mapLila);
+        window = loopLevelUntilWon(window, new FightScreenThree());
 
-            result = getLevelResult(mapLila);
-            mapLila.endGameThread();
-            disposeWindow(window);
-        }
-
-
-
-        result = LevelStatus.PLAYING;
-        while(result != LevelStatus.WON)
-        {
-            FightScreenTwo fightScreenTwo = new FightScreenTwo();
-            window = startLevel(fightScreenTwo);
-
-            result = getLevelResult(fightScreenTwo);
-            fightScreenTwo.endGameThread();
-            disposeWindow(window);
-        }
-
-
-
-        result = LevelStatus.PLAYING;
-        while(result != LevelStatus.WON)
-        {
-            MapRosa mapRosa = new MapRosa();
-            window = startLevel(mapRosa);
-
-            result = getLevelResult(mapRosa);
-            mapRosa.endGameThread();
-            disposeWindow(window);
-        }
-
-
-
-        result = LevelStatus.PLAYING;
-        while(result != LevelStatus.WON)
-        {
-            FightScreenThree fightScreenThree = new FightScreenThree();
-            window = startLevel(fightScreenThree);
-
-            result = getLevelResult(fightScreenThree);
-            fightScreenThree.endGameThread();
-            disposeWindow(window);
-        }
-
-        /**result = LevelStatus.PLAYING;
-        while(result != LevelStatus.WON)
-        {
-            EndScene endScene = new EndScene();
-            window = startLevel(endScene);
-
-            result = getLevelResult(endScene);
-            endScene.endGameThread();
-            disposeWindow(window);
-        }**/
-
+        //window = loopLevelUntilWon(window, new EndScene());
     }
 
+    // Method to start a window with the current Level and swap to next Level if current Level is won.
+    public static JFrame loopLevelUntilWon(JFrame window, Scene scene) {
+
+        LevelStatus result = LevelStatus.PLAYING;
+
+        while(result != LevelStatus.WON) {
+            window = startLevel(scene);
+
+            result = getLevelResult(scene);
+            scene.endGameThread();
+            disposeWindow(window);
+        }
+
+        return window;
+    }
+
+    // Method to get the current LevelStatus.
     public static LevelStatus getLevelResult(Scene scene)
     {
-        // Loop and wait until the level-status is no longer "playing"
+        // Loop and wait until the level-status is no longer "playing".
         while(scene.getLevelStatus() == LevelStatus.PLAYING)
         {
             try {
@@ -118,18 +64,20 @@ public class Main {
         return scene.getLevelStatus();
     }
 
+    // Method to close the window when called.
     public static void disposeWindow(JFrame window)
     {
         window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
     }
 
+    // Sets up the window, Title, etc. when called.
     public static JFrame startLevel(Scene scene)
     {
         JFrame window;
 
         window = new JFrame();
-        //window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // We are re-using the window object, so we cannot exit the application
+
+        // We are re-using the window object, so we cannot exit the application.
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Journey Back Home");

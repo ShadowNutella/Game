@@ -10,6 +10,7 @@ public class PatrolEnemy extends Enemy {
 
     public TextInteractionItem textItem;
 
+    // Same as Enemy but adding a TextInteractionItem to them.
     public PatrolEnemy(String resourcePath, int x, int y) {
         super(resourcePath, x, y);
         textItem = new TextInteractionItem(0, 0, 128, 128, "Make way!", 120);
@@ -21,6 +22,7 @@ public class PatrolEnemy extends Enemy {
         image = imageRight;
     }
 
+    // Method, so the Patroler can walk.
     public void move() {
         if (moveLeft) {
             x -= patrolSpeed;
@@ -29,6 +31,7 @@ public class PatrolEnemy extends Enemy {
             x += patrolSpeed;
             image = imageRight;
         }
+        // TextInteraction Item, which moves with the Patroler.
         textItem.x = x;
         textItem.y = y;
     }

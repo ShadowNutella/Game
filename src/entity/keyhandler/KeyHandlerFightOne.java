@@ -18,7 +18,7 @@ public class KeyHandlerFightOne implements KeyListener {
 
         int code = e.getKeyCode();
 
-        //Spieler 1 Steuerung
+        // Player Two
 
         if (code == KeyEvent.VK_A) {
             leftPressed = true;
@@ -30,7 +30,7 @@ public class KeyHandlerFightOne implements KeyListener {
             abilityOne = true;
         }
 
-        //Spieler 2 Steuerung
+        // Player Two
 
         if (code == KeyEvent.VK_LEFT) {
             leftPressed2 = true;
@@ -49,7 +49,7 @@ public class KeyHandlerFightOne implements KeyListener {
 
         int code = e.getKeyCode();
 
-        //Player 1
+        // Player One
         if (code == KeyEvent.VK_A) {
             leftPressed = false;
         }
@@ -60,7 +60,7 @@ public class KeyHandlerFightOne implements KeyListener {
             abilityOne = false;
         }
 
-        //Player 2
+        // Player Two
 
         if (code == KeyEvent.VK_LEFT) {
             leftPressed2 = false;

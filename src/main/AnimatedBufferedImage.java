@@ -11,11 +11,6 @@ public class AnimatedBufferedImage {
     private int frameCounter = 0;
     public int animationSpeed = 10;
 
-    public AnimatedBufferedImage(BufferedImage[] images) {
-
-        this.images = images;
-    }
-
 
     public AnimatedBufferedImage() {
 
@@ -62,17 +57,6 @@ public class AnimatedBufferedImage {
         this.images = images.toArray(new BufferedImage[images.size()]);
     }
 
-
-    public int getCurrentIndex() {
-
-        return currentIndex;
-    }
-
-
-    public int getLength() {
-
-        return images.length;
-    }
 
 
     public void advance() {

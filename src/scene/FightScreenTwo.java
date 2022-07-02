@@ -1,6 +1,7 @@
 package scene;
 
 import entity.*;
+import entity.item.HealthBar;
 import entity.item.Item;
 import entity.keyhandler.KeyHandlerFightOne;
 import main.Camera;

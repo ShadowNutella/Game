@@ -1,5 +1,6 @@
-package entity;
+package entity.item;
 
+import entity.Player;
 import entity.item.Item;
 import scene.LevelStatus;
 import ui.UI;

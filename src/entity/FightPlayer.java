@@ -12,8 +12,10 @@ import java.awt.*;
 
 public class FightPlayer extends Player {
 
+    // Using different KeyHandler
     KeyHandlerFightOne keyH;
 
+    // Same as Player but different KeyHandler
     public FightPlayer(Scene gp, KeyHandlerFightOne keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
         super();
         this.x = x;
@@ -44,14 +46,13 @@ public class FightPlayer extends Player {
 
     public void updatePlayerOne() {
 
-
+        // If the Key for ability is pressed, call the attack Method.
         if (keyH.abilityOne) {
             attack("dragon");
         }
 
         if (keyH.leftPressed || keyH.rightPressed) {
 
-            //Player 1
             if (keyH.leftPressed) {
                 direction = "left";
             }
@@ -142,7 +143,7 @@ public class FightPlayer extends Player {
         p.drawImage(image.getImage(), x - Camera.getAbsoluteX(), y - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null); //* "Malt" den Charakter an Stelle XY plus dessen "Animation"
     }
 
-
+    // Method used to attack by spawning the textures of the attack on every Enemy on the list and dealing 1 damage to them.
     public void attack(String character) {
 
         Enemy[] enemies = Camera.instance.gp.getEnemies();

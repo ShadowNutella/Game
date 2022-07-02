@@ -75,17 +75,23 @@ public class CollisionChecker {
         }
     }
 
+    // Gives back an Array with all colliding Objects.
     public Item[] checkObjects(Player player) {
+
         ArrayList<Item> colliding = new ArrayList<Item>();
+
         for (Item item : gp.items) {
+
             if(item != null) {
-                if (!item.collisionOn)
+
+                if (!item.collisionOn || !item.alive)
                     continue;
-                // Create two hitboxes to compare them
+
+                // Create two hitboxes to compare them.
                 Rectangle playerHitbox = new Rectangle(player.x + player.solidPart.x, player.y + player.solidPart.y, player.solidPart.width, player.solidPart.height);
                 Rectangle itemHitbox = new Rectangle(item.x + item.solidPart.x, item.y + item.solidPart.y, item.solidPart.width, item.solidPart.height);
 
-                // This switch pretends to move the player by moving the hitbox, therefore checking for collision
+                // This switch pretends to move the player by moving the hitbox, therefore checking for collision.
                 switch (player.direction) {
                     case "back" -> {
                         playerHitbox.y -= player.speed;
