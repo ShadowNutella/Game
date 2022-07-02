@@ -12,32 +12,42 @@ public class Main {
 
         // These methods are used for every level, in order
 
-        window = loopLevelUntilWon(window, new StartScene());
+        window = loopLevelUntilWon(window, StartScene.class);
         // Level 1: Blue Level
-        window = loopLevelUntilWon(window, new MapBlau());
+        window = loopLevelUntilWon(window, MapBlau.class);
 
         // If Blue Level Won, call Fight
-        window = loopLevelUntilWon(window, new FightScreenOne());
+        window = loopLevelUntilWon(window, FightScreenOne.class);
 
 
-        window = loopLevelUntilWon(window, new MapLila());
+        window = loopLevelUntilWon(window, MapLila.class);
 
-        window = loopLevelUntilWon(window, new FightScreenTwo());
+        window = loopLevelUntilWon(window, FightScreenTwo.class);
 
 
-        window = loopLevelUntilWon(window, new MapRosa());
+        window = loopLevelUntilWon(window, MapRosa.class);
 
-        window = loopLevelUntilWon(window, new FightScreenThree());
+        window = loopLevelUntilWon(window, FightScreenThree.class);
 
         //window = loopLevelUntilWon(window, new EndScene());
     }
 
     // Method to start a window with the current Level and swap to next Level if current Level is won.
-    public static JFrame loopLevelUntilWon(JFrame window, Scene scene) {
+    public static JFrame loopLevelUntilWon(JFrame window, Class sceneClass) {
 
         LevelStatus result = LevelStatus.PLAYING;
-
         while(result != LevelStatus.WON) {
+            //Create new object scene of class stored in sceneClass
+            Scene scene = null;
+
+            try {
+                scene = (Scene) sceneClass.newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
             window = startLevel(scene);
 
             result = getLevelResult(scene);

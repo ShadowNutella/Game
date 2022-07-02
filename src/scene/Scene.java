@@ -188,6 +188,10 @@ public class Scene extends JPanel implements Runnable {
         Camera.setPos(cameraX, cameraY);
     }
 
+    public void paintComponentBase(Graphics g)
+    {
+        super.paintComponent(g);
+    }
 
     public void paintComponent(Graphics g) {
 

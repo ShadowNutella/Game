@@ -42,13 +42,19 @@ public class StartScene extends Scene {
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        super.paintComponentBase(g);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+        g.drawString("Press X to doubt", 500, 400);
+
+        ui.graphics = (Graphics2D) g;
+        ui.drawUI();
     }
 
     public void goNext() {
 
         if (keyH.next) {
-            UI.instance.startClosing(60, LevelStatus.WON);
+            UI.instance.startClosing(1, LevelStatus.WON);
+            keyH.next = false;
         }
     }
 
