@@ -1,10 +1,7 @@
 package scene;
 
-import entity.keyhandler.KeyHandler;
 import entity.keyhandler.KeyHandlerMenu;
 import main.Camera;
-import tile.TileManager;
-import ui.MapUIBlau;
 import ui.UI;
 
 import java.awt.*;
@@ -25,13 +22,14 @@ public class EndScene extends Scene {
     KeyHandlerMenu keyH;
 
     public EndScene() {
-            super();
-            keyH = new KeyHandlerMenu();
-            this.addKeyListener(keyH);
 
-            ui = new UI(this);
+        super();
+        keyH = new KeyHandlerMenu();
+        this.addKeyListener(keyH);
 
-            setUpGame();
+        ui = new UI(this);
+
+        setUpGame();
 
     }
 
@@ -44,10 +42,22 @@ public class EndScene extends Scene {
         goNext();
     }
 
+    public void paintComponent(Graphics g) {
+
+        super.paintComponentBase(g);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+        g.drawString("Congratulations! You made it back home ^-^", 310, 400);
+        g.drawString("Press X to Exit", 500, 490);
+
+        ui.graphics = (Graphics2D) g;
+        ui.drawUI();
+    }
+
     public void goNext() {
 
         if (keyH.next) {
-            UI.instance.startClosing(60, LevelStatus.WON);
+            UI.instance.startClosing(1, LevelStatus.WON);
+            keyH.next = false;
         }
     }
 

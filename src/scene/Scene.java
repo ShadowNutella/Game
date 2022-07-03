@@ -15,18 +15,19 @@ import java.util.ArrayList;
 
 public class Scene extends JPanel implements Runnable {
 
-    //SCREEN SETTINGS
+    // Setting for Screen such as Size
     private int originalTileSize = 32; //32x32 tile
-    private int scale = 2; //World * 2 | Fight * 4
+    // Scale for the Tiles, the higher the bigger. -> World * 2 | Fight * 4
+    private int scale = 2;
 
     private int maxScreenCol = 20;
     private int maxScreenRow = 12;
 
-    //World Settings (World 80/30, Fight 20/12)
+    // World/Map Settings (World 80/30, Fight 20/12)
     private int maxWorldCol = 80;
     private int maxWorldRow = 30;
 
-    //FPS
+    // FPS
     int FPS = 60;
 
     public TileManager tileM;
@@ -47,6 +48,7 @@ public class Scene extends JPanel implements Runnable {
     private LevelStatus levelStatus = LevelStatus.PLAYING;
 
 
+    // Sets up the Screen and World Camera
     public Scene() {
 
         this.setPreferredSize(new Dimension(getScreenWidth(), getScreenHeight()));
@@ -54,7 +56,6 @@ public class Scene extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        //tileM = new TileManager(this, "Blau", "blau", "/maps/worldblau.txt");
 
         Camera.instance = new Camera(0, 0);
         Camera.instance.gp = this;
@@ -107,19 +108,21 @@ public class Scene extends JPanel implements Runnable {
         return getTileSize() * getMaxWorldRow();
     }
 
+    // Sets up the Game
     public void setUpGame() {
 
         createItems();
 
         ItemHolder playerInventory = new ItemHolder();
 
+        // Creating both Player Objects.
         playerOne = new Player(this, keyH, "/characterOne/char1_", 5, getTileSize() * 69, getTileSize()  * 24, playerInventory);
-        //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
+
         playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, getTileSize()  * 71, getTileSize()  * 24, playerInventory);
-        //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
+        // Add them to the list.
         entities.add(playerOne);
         entities.add(playerTwo);
 
@@ -143,6 +146,7 @@ public class Scene extends JPanel implements Runnable {
     }
 
 
+    // Starts the Game and determines how often Textures etc. get repaint and updated. (Performance)
     public void run() {
 
         double drawInterval = 1000000000 / FPS;
@@ -168,7 +172,7 @@ public class Scene extends JPanel implements Runnable {
 
     }
 
-
+    // Runs through the entities list and updates them everytime this method is called as well as the Camera.
     public void update() {
 
         for (Entity e : entities) {
@@ -188,6 +192,7 @@ public class Scene extends JPanel implements Runnable {
         Camera.setPos(cameraX, cameraY);
     }
 
+    // Used for the Black background of the Start and End Screen.
     public void paintComponentBase(Graphics g)
     {
         super.paintComponent(g);
@@ -219,7 +224,7 @@ public class Scene extends JPanel implements Runnable {
             }
         }
 
-        //UI
+        // UI
         ui.drawUI();
 
 
@@ -227,6 +232,7 @@ public class Scene extends JPanel implements Runnable {
 
         if (!gameStarted)
         {
+            // Animation for when the game starts.
             UI.instance.startOpening(20);
             gameStarted = true;
         }
@@ -248,11 +254,6 @@ public class Scene extends JPanel implements Runnable {
     public void win()
     {
         ui.startClosing(60, LevelStatus.WON);
-    }
-
-    public void lose()
-    {
-        ui.startClosing(60, LevelStatus.LOST);
     }
 
     public void setLevelStatus(LevelStatus status)

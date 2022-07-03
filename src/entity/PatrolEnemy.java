@@ -11,10 +11,11 @@ public class PatrolEnemy extends Enemy {
     public TextInteractionItem textItem;
 
     // Same as Enemy but adding a TextInteractionItem to them.
-    public PatrolEnemy(String resourcePath, int x, int y) {
+    public PatrolEnemy(String resourcePath, int x, int y, String messageText) {
         super(resourcePath, x, y);
-        textItem = new TextInteractionItem(0, 0, 128, 128, "Make way!", 120);
+        textItem = new TextInteractionItem(x, y, 128, 128, messageText, 120);
     }
+
 
     public void loadImages() {
         imageRight = new AnimatedBufferedImage(resourcePath + "right");

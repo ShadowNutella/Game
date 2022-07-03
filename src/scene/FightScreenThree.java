@@ -3,7 +3,7 @@ package scene;
 import entity.*;
 import entity.item.HealthBar;
 import entity.item.Item;
-import entity.keyhandler.KeyHandlerFightOne;
+import entity.keyhandler.KeyHandlerFight;
 import main.Camera;
 import main.ItemHolder;
 import tile.TileManager;
@@ -13,18 +13,18 @@ import java.awt.*;
 
 public class FightScreenThree extends Scene {
 
-    //SCREEN SETTINGS
+
     private int originalTileSize = 32; //32x32 tile
     private int scale = 4; //World * 2 | Fight * 4
 
     private int maxScreenCol = 20;
     private int maxScreenRow = 12;
 
-    //World Settings (World 80/30, Fight 20/12)
+
     private int maxWorldCol = 11;
     private int maxWorldRow = 6;
 
-    public KeyHandlerFightOne keyH;
+    public KeyHandlerFight keyH;
 
     public FightScreenThree() {
         this.setPreferredSize(new Dimension(getScreenWidth() / 2, getScreenHeight() / 2));
@@ -90,16 +90,14 @@ public class FightScreenThree extends Scene {
 
     public void setUpGame() {
 
-        keyH = new KeyHandlerFightOne();
+        keyH = new KeyHandlerFight();
         this.addKeyListener(keyH);
 
         ItemHolder playerInventory = new ItemHolder();
         playerOne = new FightPlayer(this, keyH, "/characterOne/char1_", 9, 500, 675, playerInventory);
-        //playerOne = new Player(this, keyH, "/characterOne/char1_", 5, 700, 300, playerInventory);
         playerOne.drawPriority = 100;
 
         playerTwo = new FightPlayer(this, keyH, "/characterTwo/char2_", 9, 520, 670, playerInventory);
-        //playerTwo = new Player(this, keyH, "/characterTwo/char2_", 6, 700, 300, playerInventory);
         playerTwo.drawPriority = 99;
 
         playerInventory.setHP(10);

@@ -25,6 +25,7 @@ public class TextInteractionItem extends Item {
 
     public void updateEntity() { }
 
+    // If this method is called, a message appears for a certain time.
     public void draw(Graphics2D p) {
         if (messageText == null || currentDuration <= 0)
             return;
@@ -40,8 +41,9 @@ public class TextInteractionItem extends Item {
         currentDuration = messageDuration;
     }
 
+    // If a Player picks up the TextInteractionItem the method startText will be called.
     public boolean pickUp(Player player) {
-        //UI.instance.showMessage(messageText, messageDuration);
+
         startText();
         return false;
     }

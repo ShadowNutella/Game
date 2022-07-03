@@ -12,6 +12,7 @@ public class Main {
 
         // These methods are used for every level, in order
 
+        // Start Screen
         window = loopLevelUntilWon(window, StartScene.class);
         // Level 1: Blue Level
         window = loopLevelUntilWon(window, MapBlau.class);
@@ -29,7 +30,8 @@ public class Main {
 
         window = loopLevelUntilWon(window, FightScreenThree.class);
 
-        //window = loopLevelUntilWon(window, new EndScene());
+        // End Screen
+        window = loopLevelUntilWon(window, EndScene.class);
     }
 
     // Method to start a window with the current Level and swap to next Level if current Level is won.
@@ -37,6 +39,7 @@ public class Main {
 
         LevelStatus result = LevelStatus.PLAYING;
         while(result != LevelStatus.WON) {
+
             //Create new object scene of class stored in sceneClass
             Scene scene = null;
 

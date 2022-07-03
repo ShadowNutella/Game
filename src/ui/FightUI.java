@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+// Ui for FightScreens
 public class FightUI extends UI {
 
     public FightUI(Scene gp) {
@@ -52,7 +53,7 @@ public class FightUI extends UI {
 
     public void openScene()
     {
-        // Analog to closeScene()
+
         BufferedImage curtain;
         try {
             curtain = ImageIO.read(getClass().getResourceAsStream("/objects/black_tile.png"));

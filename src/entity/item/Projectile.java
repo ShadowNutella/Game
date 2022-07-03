@@ -25,7 +25,7 @@ public class Projectile extends Item {
 
     }
 
-
+    // If a Player picks up a Projectile the Players take Damage in case alive is still true.
     public boolean pickUp(Player player) {
 
         if (alive) {
@@ -48,14 +48,14 @@ public class Projectile extends Item {
 
     public void move()
     {
-        // Calculate angle for movement from own position to target position and move in that direction multiplied by speed
+        // Calculate angle for movement from own position to target position and move in that direction multiplied by speed.
         double angle = Math.atan2(targetY - y, targetX - x);
         x += (int) (Math.cos(angle) * speed);
         y += (int) (Math.sin(angle) * speed);
 
         if (y > targetY - 2)
         {
-            alive = false; // :(
+            alive = false;
         }
     }
 

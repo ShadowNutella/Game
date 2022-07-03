@@ -2,7 +2,7 @@ package entity;
 
 import entity.item.Item;
 import entity.item.Particle;
-import entity.keyhandler.KeyHandlerFightOne;
+import entity.keyhandler.KeyHandlerFight;
 import main.AnimatedBufferedImage;
 import main.Camera;
 import main.ItemHolder;
@@ -13,10 +13,11 @@ import java.awt.*;
 public class FightPlayer extends Player {
 
     // Using different KeyHandler
-    KeyHandlerFightOne keyH;
+    KeyHandlerFight keyH;
+
 
     // Same as Player but different KeyHandler
-    public FightPlayer(Scene gp, KeyHandlerFightOne keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
+    public FightPlayer(Scene gp, KeyHandlerFight keyH, String resourcePath, int speed, int x, int y, ItemHolder inventory) {
         super();
         this.x = x;
         this.y = y;
@@ -34,6 +35,7 @@ public class FightPlayer extends Player {
     public void setAnimationSpeed(int animationSpeed) {
         image.animationSpeed = animationSpeed;
     }
+
 
     public void loadImages() {
         image = new AnimatedBufferedImage(resourcePath + "back");

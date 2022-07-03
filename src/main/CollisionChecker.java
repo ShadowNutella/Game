@@ -17,6 +17,7 @@ public class CollisionChecker {
 
     }
 
+    // Checks the Tile around the Players Hitbox/solidPart and see depending on the direction, if there will be a collision or not.
     public void checkTile(Player player) {
 
         int leftX = player.x + player.solidPart.x;

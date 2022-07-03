@@ -52,6 +52,7 @@ public class Entity {
         image.animationSpeed = animationSpeed;
     }
 
+
     // Calls the advance method
     public void updateEntity() {
         image.advance();

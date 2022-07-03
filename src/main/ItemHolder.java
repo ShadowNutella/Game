@@ -11,21 +11,21 @@ public class ItemHolder {
 
     public ArrayList<Item> items = new ArrayList<Item>();
 
+    // If this method is called, it adds the item to the list.
     public void collectItem(Item item) {
 
         items.add(item);
-        System.out.println("Item collected");
 
     }
 
-
-
+    // Gets the current Number of Keys collected by returning the size of the list.
     public int getKeyCount() {
 
         return items.size();
 
     }
 
+    // Sets the Players HP
     public void setHP(int HP) {
 
         this.HP = HP;

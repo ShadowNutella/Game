@@ -3,6 +3,7 @@ package ui;
 import main.AnimatedBufferedImage;
 import scene.Scene;
 
+// UI for the current Map
 public class MapUIBlau extends UI {
 
     private AnimatedBufferedImage keyImage = new AnimatedBufferedImage("/objects/key_blau");
@@ -13,6 +14,7 @@ public class MapUIBlau extends UI {
 
     }
 
+    // Displays the amount of collected Keys and an Icon of the Keys next to it on the top left corner of the Screen.
     public void drawUI() {
 
         super.drawUI();

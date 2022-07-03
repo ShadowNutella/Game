@@ -29,14 +29,12 @@ public class MapRosa extends Scene {
 
         playerOne.x = getTileSize() * 69;
         playerOne.y = getTileSize() * 24;
-        playerOne.speed = 5;
+        playerOne.speed = 6;
 
         playerTwo.x = getTileSize() * 71;
         playerTwo.y = getTileSize() * 24;
         playerTwo.speed = 6;
 
-        //Entity enemy = new Enemy("/enemies/enemy_blau", 425, 115);
-        //entities.add(enemy);
 
         Enemy guardian_lila_left = new Enemy("/enemies/enemy_rosa_left", 410, 105);
         guardian_lila_left.image.animationSpeed = 35;
@@ -47,7 +45,7 @@ public class MapRosa extends Scene {
         entities.add(guardian_lila_left);
         entities.add(guardian_lila_right);
 
-        /*patrolerRight = new PatrolEnemy("/enemies/patrol/patrol_lila_", getTileSize() * 78, getTileSize() * 11);
+        patrolerRight = new PatrolEnemy("/enemies/patrol/patrol_rosa_", getTileSize() * 77, getTileSize() * 6, "Walking on Spot is also walking!");
         patrolerRight.patrolSpeed = 2;
         patrolerRight.imageLeft.animationSpeed = 24;
         patrolerRight.imageRight.animationSpeed = 24;
@@ -55,13 +53,13 @@ public class MapRosa extends Scene {
         patrolerRight.setSize(1.7);
         entities.add(patrolerRight);
 
-        patrolerLeft = new PatrolEnemy("/enemies/patrol/patrol_lila_", getTileSize() * 62, getTileSize() * 11);
+        patrolerLeft = new PatrolEnemy("/enemies/patrol/patrol_rosa_", getTileSize() * 75, getTileSize() * 6, "This is better than actually walking!");
         patrolerLeft.patrolSpeed = 2;
         patrolerLeft.imageLeft.animationSpeed = 24;
         patrolerLeft.imageRight.animationSpeed = 24;
         items.add(patrolerLeft.textItem);
         patrolerLeft.setSize(1.7);
-        entities.add(patrolerLeft);*/
+        entities.add(patrolerLeft);
 
     }
 
@@ -116,22 +114,11 @@ public class MapRosa extends Scene {
 
     public void update() {
 
-        playerOne.setAnimationSpeed(12);
+        playerOne.setAnimationSpeed(10);
         playerOne.updatePlayerOne();
         playerTwo.setAnimationSpeed(10);
         playerTwo.updatePlayerTwo();
 
-        /*if (patrolerRight.x > getTileSize() * 78)
-            patrolerRight.moveLeft = true;
-        if (patrolerRight.x < getTileSize() * 70 + 32)
-            patrolerRight.moveLeft = false;
-        patrolerRight.move();
-
-        if (patrolerLeft.x > getTileSize() * 70 - 32)
-            patrolerLeft.moveLeft = true;
-        if (patrolerLeft.x < getTileSize() * 62)
-            patrolerLeft.moveLeft = false;
-        patrolerLeft.move();*/
 
         super.update();
     }

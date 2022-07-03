@@ -1,7 +1,6 @@
 package tile;
 
 import main.Camera;
-import scene.FightScreenOne;
 import scene.Scene;
 
 import javax.imageio.ImageIO;
@@ -18,6 +17,7 @@ public class TileManager {
     public int[][] mapTileNum;
 
 
+    // Added Strings farbe to swap the Maps easier since the color is the only different thing in their filepaths.
     public TileManager(Scene gp, String farbe1, String farbe2, String filePath) {
 
         this.gp = gp;
@@ -30,6 +30,7 @@ public class TileManager {
     }
 
 
+    // Assign every tile of the Array an Image of a Tile
     public void getTileImage(String farbe1, String farbe2) {
 
 
@@ -123,6 +124,7 @@ public class TileManager {
         }
     }
 
+    // Calls the filePath of the Map and reads through it.
     public void loadMap(String filePath) {
 
         try {
@@ -146,6 +148,7 @@ public class TileManager {
         }
     }
 
+    // Draws the world Tiles from left to right, top to bottom and pick the right tile image depending on which number was read in the Map File.
     public void drawWorldTiles(Graphics2D w1) {
 
         for (int worldCol = 0; worldCol < gp.getMaxWorldCol(); worldCol++) {

@@ -25,7 +25,8 @@ public class UI {
     public int sceneChangeTimer = 0;
     public int sceneChangeTimerTarget = 60;
 
-    public LevelStatus statusToSet; // Set this status after finished closing
+    // Set this status after finished closing.
+    public LevelStatus statusToSet;
 
     public UI(Scene gp) {
 
@@ -33,11 +34,6 @@ public class UI {
         this.gp = gp;
         arial_30 = new Font("Monospaced", Font.BOLD, 30);
 
-    }
-
-    public void showMessage(String text, int duration) {
-        currentMessage = text;
-        messageTimer = duration;
     }
 
 
@@ -60,6 +56,7 @@ public class UI {
         }
     }
 
+    // If this Method is called, it sets the status to closing which triggers the closeScene Method.
     public void startClosing(int duration, LevelStatus status)
     {
         if (closing)
@@ -81,6 +78,7 @@ public class UI {
         opening = true;
     }
 
+    // Draws a "Ring" of Black Tiles on the Screen which grows bigger until the whole Screen turns black in a nice Animation.
     public void closeScene()
     {
         BufferedImage curtain;
@@ -110,6 +108,7 @@ public class UI {
         }
     }
 
+    // Same as closing but starting in the middle of the Screen and grow bigger on the outside.
     public void openScene()
     {
         // Analog to closeScene()

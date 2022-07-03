@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// Similar to the class BufferedImage, but working with several Frames for one Texture to create an animation.
 public class AnimatedBufferedImage {
     private BufferedImage[] images;
     private int currentIndex;
@@ -16,6 +17,7 @@ public class AnimatedBufferedImage {
 
     }
 
+    // Used for Particle Animations.
     public AnimatedBufferedImage(String path, boolean randomStartFrame)
     {
         this(path, 1, randomStartFrame);
@@ -25,10 +27,12 @@ public class AnimatedBufferedImage {
         this(path, 1, false);
     }
 
+
     public AnimatedBufferedImage(String path, int startIndex, boolean randomStartFrame) {
         ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
         int i = startIndex;
         while (true) {
+            // Depending on the Files name, choose the right one.
             try {
                 images.add(ImageIO.read(getClass().getResourceAsStream(path + i + ".png")));
             } catch (IllegalArgumentException e) {
@@ -36,7 +40,6 @@ public class AnimatedBufferedImage {
                     try {
                         images.add(ImageIO.read(getClass().getResourceAsStream(path + ".png")));
                     } catch (IOException ex) {
-                        System.out.println("No images found in " + path);
                         e.printStackTrace();
                     }
                 }
@@ -44,6 +47,7 @@ public class AnimatedBufferedImage {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            // Increase i to get the next File for the Animation.
             i++;
         }
         if (randomStartFrame)
@@ -58,7 +62,7 @@ public class AnimatedBufferedImage {
     }
 
 
-
+    // Advances to the next frame, if no next frame exists, reset to zero.
     public void advance() {
         if (images == null || animationSpeed == 0)
             return;
@@ -72,28 +76,16 @@ public class AnimatedBufferedImage {
         }
     }
 
-
+    // Gets the right Image for the current Index.
     public BufferedImage getImage() {
 
         return images[currentIndex];
     }
 
+    // Get a specific Frame of an Animation.
     public BufferedImage getFrame(int i) {
 
         return images[i];
     }
 
-
-    public BufferedImage getNext() {
-        if (images.length == 0) {
-            throw new IllegalArgumentException("No images in array");
-            //return null;
-        }
-        BufferedImage image = images[currentIndex];
-
-        currentIndex += 1;
-        if (currentIndex >= images.length)
-            currentIndex = currentIndex - images.length;
-        return image;
-    }
 }

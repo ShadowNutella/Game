@@ -184,4 +184,5 @@ public class Player extends Entity {
         int finalSizeY = (int) (Camera.instance.gp.getTileSize() * sizeY);
         p.drawImage(image, x - Camera.getAbsoluteX(), y - Camera.getAbsoluteY(), finalSizeX, finalSizeY, null); //* "Malt" den Charakter an Stelle XY plus dessen "Animation"
     }
+
 }

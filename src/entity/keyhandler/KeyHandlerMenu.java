@@ -3,6 +3,7 @@ package entity.keyhandler;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+// New Keyhandler only for the Menus
 public class KeyHandlerMenu implements KeyListener {
 
     public boolean next;

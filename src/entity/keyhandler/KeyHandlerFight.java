@@ -3,7 +3,7 @@ package entity.keyhandler;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class KeyHandlerFightOne implements KeyListener {
+public class KeyHandlerFight implements KeyListener {
 
     public boolean leftPressed, rightPressed, abilityOne;
     public boolean leftPressed2, rightPressed2, abilityOne2;
